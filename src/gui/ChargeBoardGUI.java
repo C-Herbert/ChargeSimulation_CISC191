@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 
@@ -40,8 +41,17 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 
 		fieldArrows = new ArrayList<FieldArrow>();
 
-		fieldArrows.add(new FieldArrow(100, 100));
-		fieldArrows.get(0).pointTowardsLocation(width, height);
+		int arrowColumns = 10;
+		int arrowRows = 6;
+		
+		for (int x = 1; x < arrowColumns; x++)
+		{
+			for (int y = 1; y < arrowRows; y++)
+			{
+				fieldArrows.add(new FieldArrow((width / arrowColumns) * x, (height / arrowRows) * y));
+			}
+		}
+		
 		
 		addMouseListener(this);
 	}

@@ -15,7 +15,7 @@ public class ArrowTester
 		
 		frame.add(panel);
 		
-		boardGUI = new ChargeBoardGUI(500,500);
+		boardGUI = new ChargeBoardGUI(1500,1000);
 		panel.add(boardGUI);
 		
 		frame.pack();

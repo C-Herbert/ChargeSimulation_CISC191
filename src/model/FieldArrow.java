@@ -64,6 +64,7 @@ public class FieldArrow
 	{
 		try
 		{
+			//https://docs.oracle.com/javase/tutorial/2d/images/loadimage.html
 			arrowImage = ImageIO.read(new File(ARROW_FILEPATH));
 		}
 		catch (IOException e)
@@ -81,6 +82,7 @@ public class FieldArrow
 		Graphics2D arrowGraphics = newArrow.createGraphics();
 		
 		//Draw the base image and rotate it
+		//https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-
 		arrowGraphics.rotate(direction, newArrow.getWidth() / 2, newArrow.getHeight() / 2);
 		arrowGraphics.drawImage(arrowImage, null, 0, 0);
 		
