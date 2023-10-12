@@ -2,7 +2,7 @@ package testing;
 
 import javax.swing.*;
 
-import gui.ChargeBoardGUI;
+import view.ChargeBoardGUI;
 
 public class ArrowTester
 {

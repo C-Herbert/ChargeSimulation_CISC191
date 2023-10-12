@@ -8,49 +8,23 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class FieldArrow
+import utils.Vec2D;
+
+public class FieldArrow extends Arrow2D
 {
-	private int x, y;
-	private double direction;
-	private double magnitude;
-	
-	public FieldArrow(int x, int y)
+
+	public FieldArrow(int xPos, int yPos, int xMag, int yMag)
 	{
-		this.x = x;
-		this.y = y;
+		super(xPos, yPos, xMag, yMag);
 	}
-	
-	public int getX()
-	{
-		return x;
-	}
-	
-	public int getY()
-	{
-		return y;
-	}
-	
-	public void setDirection(double radians)
-	{
-		this.direction = radians;
-	}
-	
+
 	public void pointTowardsLocation(double targetX, double targetY)
 	{
 		//Calculate target vector
-		double dX = targetX - x;
-		double dY = targetY - y;
+		Vec2D targetVector = new Vec2D(targetX - this.getX(), targetY - this.getY());
 		
-		double targetMagnitude = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
-		
-		//Apply dot product to calculate angle between 'base' direction vector and target vector
-		//'base' vector points straight right, target vector has components dX and dY
-		//Note that the 'base' vector has a magnitude of 1 and no y component
-		
-		direction = Math.acos(dX / targetMagnitude);
-		
-		//If we've exceed 180 degrees, flip the angle
-		if(dY < 0) direction *= -1;
+		//Assign our new direction
+		setDirection(targetVector.angleBetween(new Vec2D(1,0)));
 	}
 	
 	
@@ -83,7 +57,8 @@ public class FieldArrow
 		
 		//Draw the base image and rotate it
 		//https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-
-		arrowGraphics.rotate(direction, newArrow.getWidth() / 2, newArrow.getHeight() / 2);
+		System.out.println(this.getDirection());
+		arrowGraphics.rotate(this.getDirection(), newArrow.getWidth() / 2, newArrow.getHeight() / 2);
 		arrowGraphics.drawImage(arrowImage, null, 0, 0);
 		
 		//Cleanup Graphics object

@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -48,10 +48,9 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 		{
 			for (int y = 1; y < arrowRows; y++)
 			{
-				fieldArrows.add(new FieldArrow((width / arrowColumns) * x, (height / arrowRows) * y));
+				fieldArrows.add(new FieldArrow((width / arrowColumns) * x, (height / arrowRows) * y, 1, 0));
 			}
 		}
-		
 		
 		addMouseListener(this);
 	}
