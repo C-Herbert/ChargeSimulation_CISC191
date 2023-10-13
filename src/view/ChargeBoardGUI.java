@@ -15,11 +15,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import model.FieldArrow;
+import view.elements.FieldArrowView;
 
 /*
  * References (TODO: Cleanup)
  * Using Graphics2D for a custom component:
  * https://docs.oracle.com/javase/tutorial/uiswing/components/jcomponent.html
+ * https://www.oracle.com/java/technologies/painting.html
  */
 
 public class ChargeBoardGUI extends JComponent implements MouseListener
@@ -27,10 +29,10 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 	public final int width;
 	public final int height;
 
-	private BufferedImage board;
-
 	private ArrayList<FieldArrow> fieldArrows;
 
+	private FieldArrowView view;
+	
 	public ChargeBoardGUI(int width, int height)
 	{
 		this.width = width;
@@ -41,6 +43,8 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 
 		fieldArrows = new ArrayList<FieldArrow>();
 
+		view = new FieldArrowView(fieldArrows);
+		
 		int arrowColumns = 10;
 		int arrowRows = 6;
 		
@@ -60,13 +64,7 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 	{
 		super.paintComponent(g);
 
-		Graphics2D graphics = (Graphics2D) g;
-
-		for (FieldArrow arrow : fieldArrows)
-		{
-			FieldArrow.drawArrow(arrow, graphics);
-		}
-
+		view.draw((Graphics2D) g);
 	}
 
 	@Override
@@ -85,8 +83,8 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 			arrow.pointTowardsLocation(e.getX(), e.getY());
 		}
 		
+		//Need to call this after updating the arrows
 		repaint();
-		
 	}
 
 	@Override

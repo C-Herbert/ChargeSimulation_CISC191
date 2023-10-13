@@ -1,7 +1,7 @@
 package model;
 
 /**
- * IGraph element provides an interface for all elements that may be part of a Graph.
+ * IGraphElement provides an interface for all elements that may be part of a Graph.
  * 
  * Graph elements must have a position represented by an integer x and y value.
  * 
