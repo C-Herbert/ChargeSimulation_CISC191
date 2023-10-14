@@ -2,11 +2,14 @@ package testing;
 
 import javax.swing.*;
 
-import view.ChargeBoardGUI;
+import model.ChargeGraph2D;
+import view.ChargeBoardView;
 
 public class ArrowTester
 {
-	ChargeBoardGUI boardGUI;
+	ChargeGraph2D graphModel;
+	
+	ChargeBoardView boardGUI;
 	
 	public void run()
 	{
@@ -15,7 +18,18 @@ public class ArrowTester
 		
 		frame.add(panel);
 		
-		boardGUI = new ChargeBoardGUI(1500,1000);
+		for(int x = 0; x < 15; ++x) 
+		{
+			for(int y = 0; y < 10; ++y)
+			{
+				//TODO: finish tester changes
+			}
+		}
+		
+		
+		graphModel = new ChargeGraph2D(null, null, 1500, 1000);
+		
+		boardGUI = new ChargeBoardView(graphModel);
 		panel.add(boardGUI);
 		
 		frame.pack();

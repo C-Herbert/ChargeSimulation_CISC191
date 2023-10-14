@@ -12,8 +12,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import model.ChargeGraph2D;
 import model.FieldArrow;
 import view.elements.FieldArrowView;
 
@@ -24,47 +26,30 @@ import view.elements.FieldArrowView;
  * https://www.oracle.com/java/technologies/painting.html
  */
 
-public class ChargeBoardGUI extends JComponent implements MouseListener
+public class ChargeBoardView extends JFrame implements MouseListener
 {
-	public final int width;
-	public final int height;
+	private ChargeGraph2D graphReference;
 
-	private ArrayList<FieldArrow> fieldArrows;
-
-	private FieldArrowView view;
+	private FieldArrowView arrowView;
 	
-	public ChargeBoardGUI(int width, int height)
+	public ChargeBoardView(ChargeGraph2D chargeGraph)
 	{
-		this.width = width;
-		this.height = height;
+		this.graphReference = chargeGraph;
 
-		setSize(this.width, this.height);
+		setSize(graphReference.getWidth(), graphReference.getHeight());
 		setPreferredSize(getSize());
 
-		fieldArrows = new ArrayList<FieldArrow>();
+		arrowView = new FieldArrowView(new ArrayList<FieldArrow>());
 
-		view = new FieldArrowView(fieldArrows);
-		
-		int arrowColumns = 10;
-		int arrowRows = 6;
-		
-		for (int x = 1; x < arrowColumns; x++)
-		{
-			for (int y = 1; y < arrowRows; y++)
-			{
-				fieldArrows.add(new FieldArrow((width / arrowColumns) * x, (height / arrowRows) * y, 1, 0));
-			}
-		}
-		
 		addMouseListener(this);
 	}
 
 	@Override
-	protected void paintComponent(Graphics g)
+	public void paint(Graphics g)
 	{
-		super.paintComponent(g);
+		super.paint(g);
 
-		view.draw((Graphics2D) g);
+		arrowView.draw((Graphics2D) g);
 	}
 
 	@Override
@@ -78,7 +63,7 @@ public class ChargeBoardGUI extends JComponent implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		for (FieldArrow arrow : fieldArrows)
+		for (FieldArrow arrow : arrowView.getElements())
 		{
 			arrow.pointTowardsLocation(e.getX(), e.getY());
 		}

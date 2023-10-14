@@ -7,10 +7,12 @@ package model;
  * @author Charlie Herbert
  */
 
-//TODO: Update to fit in inheritance hierarchy
+//Not a graph element, position is a double.
 public class Charge
 {
+	//Charges have an x and y position
 	private double x, y;
+	//Charges have a magnitude
 	private double magnitude;
 	
 	public Charge(double x, double y, double magnitude)

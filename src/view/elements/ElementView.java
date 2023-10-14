@@ -32,10 +32,24 @@ public abstract class ElementView<T extends IGraphElement>
 		this.elements = elements;
 	}
 	
+	/**
+	 * Gets the list of elements contained by this view
+	 * @return list of elements managed by this view
+	 */
 	public List<T> getElements()
 	{
 		//Again, no copy because we want to be able to modify the elements
 		return elements;
+	}
+	
+	/**
+	 * Adds a new element to this view
+	 * @param newElement Element to add to this view
+	 * @return true, same result as List.add()
+	 */
+	public boolean addElement(T newElement)
+	{
+		return elements.add(newElement);
 	}
 	
 	/**
