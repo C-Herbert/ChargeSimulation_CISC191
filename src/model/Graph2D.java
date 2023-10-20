@@ -15,7 +15,7 @@ public class Graph2D
 	//Graph2Ds have a width and height
 	private int width, height;
 	//Graph2Ds have many graph elements
-	List<IGraphElement> graphElements;
+	private List<IGraphElement> graphElements;
 	
 	/**
 	 * Creates a new Graph2D object with its elements initialized.
@@ -25,8 +25,15 @@ public class Graph2D
 	 */
 	public Graph2D(List<IGraphElement> elements, int width, int height)
 	{
-		//No copy because we expect/want other parts of the program to modify these elements
-		this.graphElements = elements;
+		if(elements != null) {
+			//No copy because we expect/want other parts of the program to modify these elements
+			this.graphElements = elements;
+		}
+		else
+		{
+			//Fallback on an empty list if the programmer doesn't provide one
+			this.graphElements = new ArrayList<IGraphElement>();
+		}
 		this.width = width;
 		this.height = height;
 	}
@@ -59,4 +66,23 @@ public class Graph2D
 		return height;
 	}
 	
+	/**
+	 * Adds a specific element to this graph.
+	 * @param element the IGraphElement to add to this graph
+	 */
+	public boolean addElement(IGraphElement element) 
+	{
+		//Again, no deep copy. Graph should be able to handle any state of any element passed in.
+		return graphElements.add(element);
+	}
+	
+	/**
+	 * Removes a specific element from this graph.
+	 * @param element the IGraphElement to remove from this graph
+	 * @return true if the graph contained the parameter element, false otherwise
+	 */
+	public boolean removeElement(IGraphElement element)
+	{
+		return graphElements.remove(element);
+	}
 }

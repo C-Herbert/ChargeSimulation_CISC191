@@ -14,6 +14,7 @@ import java.awt.image.BufferedImageOp;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import model.ChargeGraph2D;
 import model.FieldArrow;
@@ -26,12 +27,12 @@ import view.elements.FieldArrowView;
  * https://www.oracle.com/java/technologies/painting.html
  */
 
-public class ChargeBoardView extends JFrame implements MouseListener
+public class ChargeBoardView extends JPanel implements MouseListener
 {
 	private ChargeGraph2D graphReference;
 
 	private FieldArrowView arrowView;
-	
+
 	public ChargeBoardView(ChargeGraph2D chargeGraph)
 	{
 		this.graphReference = chargeGraph;
@@ -42,6 +43,16 @@ public class ChargeBoardView extends JFrame implements MouseListener
 		arrowView = new FieldArrowView(new ArrayList<FieldArrow>());
 
 		addMouseListener(this);
+	}
+
+	// TODO: Remove
+	// Temporary, will move this functionality over to controller later on
+	public void addArrow(FieldArrow arrow)
+	{
+		if (arrow != null)
+		{
+			arrowView.addElement(arrow);
+		}
 	}
 
 	@Override
@@ -57,9 +68,9 @@ public class ChargeBoardView extends JFrame implements MouseListener
 	{
 
 	}
-	
-	//For Testing Purposes
-	//TODO: Remove
+
+	// For Testing Purposes
+	// TODO: Remove
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
@@ -67,8 +78,8 @@ public class ChargeBoardView extends JFrame implements MouseListener
 		{
 			arrow.pointTowardsLocation(e.getX(), e.getY());
 		}
-		
-		//Need to call this after updating the arrows
+
+		// Need to call this after updating the arrows
 		repaint();
 	}
 
@@ -76,21 +87,21 @@ public class ChargeBoardView extends JFrame implements MouseListener
 	public void mouseReleased(MouseEvent e)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
