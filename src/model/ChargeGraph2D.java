@@ -3,6 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ChargeGraph2D class extends the functionality of Graph2D to manage a list
+ * of charges on a graph.
+ * 
+ * @version 1.0
+ * @author Charlie Herbert
+ */
+
 public class ChargeGraph2D extends Graph2D
 {
 	//A ChargeGraph2D has many charges

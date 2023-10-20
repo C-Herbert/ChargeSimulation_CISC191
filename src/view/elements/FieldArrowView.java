@@ -70,6 +70,7 @@ public class FieldArrowView extends ElementView<FieldArrow>
 		
 		//Draw the base image and rotate it
 		//https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-
+		//Also: https://stackoverflow.com/questions/8639567/java-rotating-images
 		arrowGraphics.rotate(arrow.getDirection(), newArrow.getWidth() / 2, newArrow.getHeight() / 2);
 		arrowGraphics.drawImage(arrowImage, null, 0, 0);
 		

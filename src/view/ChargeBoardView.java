@@ -27,12 +27,24 @@ import view.elements.FieldArrowView;
  * https://www.oracle.com/java/technologies/painting.html
  */
 
+/**
+ * The ChargeBoardView class will be used to draw and maintain a view model
+ * for the ChargeGraph2D class. Currently, its only used for testing.
+ * 
+ * @version 1.0
+ * @author Charlie Herbert
+ */
 public class ChargeBoardView extends JPanel implements MouseListener
 {
+	//ChargeBoardView has a ChargeGraph2D
 	private ChargeGraph2D graphReference;
-
+	//ChargeBoardView has a arrowView (Will be removed)
 	private FieldArrowView arrowView;
 
+	/**
+	 * Creates a new ChargeBoardField using the provided ChargeGraph2D object.
+	 * @param chargeGraph The ChargeGraph2D displayed by this view.
+	 */
 	public ChargeBoardView(ChargeGraph2D chargeGraph)
 	{
 		this.graphReference = chargeGraph;

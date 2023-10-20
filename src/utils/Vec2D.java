@@ -2,6 +2,8 @@ package utils;
 
 /**
  * The Vec2D class is used to represent 2D vector values.
+ * 2D vector values have an x and y component, used to 
+ * represent the overall magnitude of the vector.
  * 
  * @version 1.0
  * @author Charlie Herbert
@@ -14,34 +16,58 @@ public class Vec2D
 	//2D Vectors have a y component
 	private double yComp;
 	
+	/**
+	 * Creates a new Vec2D using the provided component values
+	 * @param xComp Magnitude of this vector's x component
+	 * @param yComp Magnitude of this vector's y component
+	 */
 	public Vec2D(double xComp, double yComp)
 	{
 		this.xComp = xComp;
 		this.yComp = yComp;
 	}
 	
+	/**
+	 * Gets the magnitude of the x component for this vector
+	 * @return magnitude of the vector's x component
+	 */
 	public double getXComp()
 	{
 		return xComp;
 	}
 	
+	/**
+	 * Gets the magnitude of the y component for this vector
+	 * @return magnitude of the vector's y component
+	 */
 	public double getYComp()
 	{
 		return yComp;
 	}
 	
+	/**
+	 * Gets the overall magnitude of  this vector
+	 * @return magnitude of the vector
+	 */
 	public double getMagnitude()
 	{
 		return Math.sqrt(Math.pow(xComp, 2) + Math.pow(yComp, 2));
 	}
 	
-	//Gets direction measured in radians from the positive x-axis
+	/**
+	 * Gets direction of this vector, measured in radians.
+	 * @return the double representation of this vector's direction, measured from the positive x-axis.
+	 */
 	public double getDirection()
 	{
 		return Math.atan2(yComp, xComp);
 	}
 	
 	//TODO: add tests
+	/**
+	 * Changes the direction of this vector while maintaining its magnitude.
+	 * @param radians New direction of the vector, measured from the positive x-axis.
+	 */
 	public void setDirection(double radians)
 	{
 		double mag = getMagnitude();
@@ -49,14 +75,24 @@ public class Vec2D
 		this.yComp = mag * Math.sin(radians);
 	}
 	
+	/**
+	 * Calculates the dot product of two vectors.
+	 * @param other The second vector to be used in this operation.
+	 * @return the dot product of this vector and other.
+	 */
 	public double dotProduct(Vec2D other)
 	{
 		return (this.xComp * other.xComp) + (this.yComp * other.yComp);
 	}
 	
-	//Using dot product to calculate angle between vectors
+	//
 	//Reference: https://en.wikipedia.org/wiki/Dot_product
 	//TODO: add more tests
+	/**
+	 * Calculates the angle between vectors using the dot product.
+	 * @param other The second vector to be used in this operation.
+	 * @return the angle between this vector and other.
+	 */
 	public double angleBetween(Vec2D other)
 	{
 		double absoluteAngle = Math.acos( this.dotProduct(other) / (this.getMagnitude() * other.getMagnitude()) );
