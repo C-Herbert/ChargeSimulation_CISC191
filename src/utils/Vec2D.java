@@ -2,7 +2,7 @@ package utils;
 
 /**
  * The Vec2D class is used to represent 2D vector values.
- * 2D vector values have an x and y component, used to 
+ * 2D vector values have an x and y component, used to
  * represent the overall magnitude of the vector.
  * 
  * @version 1.0
@@ -10,14 +10,15 @@ package utils;
  */
 
 public class Vec2D
-{		
-	//2D Vectors have an x component
+{
+	// 2D Vectors have an x component
 	private double xComp;
-	//2D Vectors have a y component
+	// 2D Vectors have a y component
 	private double yComp;
-	
+
 	/**
 	 * Creates a new Vec2D using the provided component values
+	 * 
 	 * @param xComp Magnitude of this vector's x component
 	 * @param yComp Magnitude of this vector's y component
 	 */
@@ -26,47 +27,54 @@ public class Vec2D
 		this.xComp = xComp;
 		this.yComp = yComp;
 	}
-	
+
 	/**
 	 * Gets the magnitude of the x component for this vector
+	 * 
 	 * @return magnitude of the vector's x component
 	 */
 	public double getXComp()
 	{
 		return xComp;
 	}
-	
+
 	/**
 	 * Gets the magnitude of the y component for this vector
+	 * 
 	 * @return magnitude of the vector's y component
 	 */
 	public double getYComp()
 	{
 		return yComp;
 	}
-	
+
 	/**
-	 * Gets the overall magnitude of  this vector
+	 * Gets the overall magnitude of this vector
+	 * 
 	 * @return magnitude of the vector
 	 */
 	public double getMagnitude()
 	{
 		return Math.sqrt(Math.pow(xComp, 2) + Math.pow(yComp, 2));
 	}
-	
+
 	/**
 	 * Gets direction of this vector, measured in radians.
-	 * @return the double representation of this vector's direction, measured from the positive x-axis.
+	 * 
+	 * @return the double representation of this vector's direction, measured
+	 *         from the positive x-axis.
 	 */
 	public double getDirection()
 	{
 		return Math.atan2(yComp, xComp);
 	}
-	
-	//TODO: add tests
+
+	// TODO: add tests
 	/**
 	 * Changes the direction of this vector while maintaining its magnitude.
-	 * @param radians New direction of the vector, measured from the positive x-axis.
+	 * 
+	 * @param radians New direction of the vector, measured from the positive
+	 *                x-axis.
 	 */
 	public void setDirection(double radians)
 	{
@@ -74,9 +82,10 @@ public class Vec2D
 		this.xComp = mag * Math.cos(radians);
 		this.yComp = mag * Math.sin(radians);
 	}
-	
+
 	/**
 	 * Calculates the dot product of two vectors.
+	 * 
 	 * @param other The second vector to be used in this operation.
 	 * @return the dot product of this vector and other.
 	 */
@@ -84,30 +93,32 @@ public class Vec2D
 	{
 		return (this.xComp * other.xComp) + (this.yComp * other.yComp);
 	}
-	
+
 	//
-	//Reference: https://en.wikipedia.org/wiki/Dot_product
-	//TODO: add more tests
+	// Reference: https://en.wikipedia.org/wiki/Dot_product
+	// TODO: add more tests
 	/**
 	 * Calculates the angle between vectors using the dot product.
+	 * 
 	 * @param other The second vector to be used in this operation.
 	 * @return the angle between this vector and other.
 	 */
 	public double angleBetween(Vec2D other)
 	{
-		double absoluteAngle = Math.acos( this.dotProduct(other) / (this.getMagnitude() * other.getMagnitude()) );
-		
-		//TODO: double check sign/angle stuff
-		if(this.yComp < other.yComp) 
+		double absoluteAngle = Math.acos(this.dotProduct(other)
+				/ (this.getMagnitude() * other.getMagnitude()));
+
+		// TODO: double check sign/angle stuff
+		if (this.yComp < other.yComp)
 		{
-			//If angle exceeds 180 degrees, assign the appropriate sign
+			// If angle exceeds 180 degrees, assign the appropriate sign
 			return -absoluteAngle;
 		}
 		else
 		{
-			//Otherwise, return our value
+			// Otherwise, return our value
 			return absoluteAngle;
 		}
 	}
-	
+
 }

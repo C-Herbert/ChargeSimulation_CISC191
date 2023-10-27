@@ -1,7 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The Graph class is used to store and manage a list of IGraphElements.
@@ -16,8 +19,22 @@ public class Graph2D
 {
 	// Graph2Ds have a width and height
 	private int width, height;
-	// Graph2Ds have many graph elements
-	private List<IGraphElement> graphElements;
+	// Graph2Ds have many unique graph elements (Note: HashSet instead of Map
+	// because key doesn't matter)
+	private HashSet<IGraphElement> graphElements;
+
+	/**
+	 * Creates a new Graph2D with an empty element list
+	 * 
+	 * @param width  integer width to assign to new Graph2D
+	 * @param height integer height to assign to new Graph2D
+	 */
+	public Graph2D(int width, int height)
+	{
+		this.width = width;
+		this.height = height;
+		this.graphElements = new HashSet<IGraphElement>();
+	}
 
 	/**
 	 * Creates a new Graph2D object with its elements initialized.
@@ -28,30 +45,15 @@ public class Graph2D
 	 */
 	public Graph2D(List<IGraphElement> elements, int width, int height)
 	{
-		if (elements != null)
-		{
-			// No copy because we expect/want other parts of the program to
-			// modify these elements
-			this.graphElements = elements;
-		}
-		else
-		{
-			// Fallback on an empty list if the programmer doesn't provide one
-			this.graphElements = new ArrayList<IGraphElement>();
-		}
-		this.width = width;
-		this.height = height;
-	}
+		this(width, height);
 
-	/**
-	 * Creates a new Graph2D with an empty element list
-	 * 
-	 * @param width  integer width to assign to new Graph2D
-	 * @param height integer height to assign to new Graph2D
-	 */
-	public Graph2D(int width, int height)
-	{
-		this(new ArrayList<IGraphElement>(), width, height);
+		// Initialize elements to provided list of IGraphElements
+		for (IGraphElement element : elements)
+		{
+			// Don't copy the element as we want it to be modifiable by other
+			// parts of the program
+			graphElements.add(element);
+		}
 	}
 
 	/**
@@ -81,7 +83,7 @@ public class Graph2D
 	 */
 	public boolean addElement(IGraphElement element)
 	{
-		// Again, no deep copy. Graph should be able to handle any state of any
+		// No deep copy. Graph should be able to handle any state of any
 		// element passed in.
 		return graphElements.add(element);
 	}
@@ -97,4 +99,10 @@ public class Graph2D
 	{
 		return graphElements.remove(element);
 	}
+	
+	public HashSet<IGraphElement> getElements()
+	{
+		return graphElements;
+	}
+	
 }
