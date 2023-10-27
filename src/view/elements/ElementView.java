@@ -35,8 +35,8 @@ public abstract class ElementView<T extends IGraphElement>
 	public abstract boolean canDraw(IGraphElement element);
 
 	/**
-	 * Attempts to draw an element. Only
-	 * elements that can be drawn by this view will be displayed.
+	 * Attempts to draw an element. Only elements that can be drawn by this view
+	 * will be displayed.
 	 * 
 	 * Suppression is intentional as canDraw is used to check each element
 	 * before casting.
