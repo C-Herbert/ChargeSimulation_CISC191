@@ -8,10 +8,10 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import model.ChargeGraph2D;
-import model.FieldArrow;
 import model.IGraphElement;
 import view.elements.ElementView;
 import view.elements.FieldArrowView;
+import view.elements.ChargeView;
 
 /*
  * References (TODO: Cleanup)
@@ -46,8 +46,10 @@ public class ChargeGraphView extends JPanel
 
 		// Create a new view list
 		this.views = new ArrayList<ElementView<?>>();
-		// Add a field arrow view to it
+		// Add a field arrow view
 		views.add(new FieldArrowView());
+		// Add a charge view
+		views.add(new ChargeView());
 
 		setSize(graphReference.getWidth(), graphReference.getHeight());
 		setPreferredSize(getSize());

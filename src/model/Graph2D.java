@@ -1,10 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * The Graph class is used to store and manage a list of IGraphElements.
@@ -100,9 +99,17 @@ public class Graph2D
 		return graphElements.remove(element);
 	}
 	
-	public HashSet<IGraphElement> getElements()
+	public List<IGraphElement> getElements()
 	{
-		return graphElements;
+		ArrayList<IGraphElement> elements = new ArrayList<IGraphElement>(graphElements.size());		
+		
+		//Only need to make a deep copy of the list, external modification of the elements themselves is okay
+		for(IGraphElement e : graphElements)
+		{
+			elements.add(e);
+		}
+
+		return elements;
 	}
 	
 }

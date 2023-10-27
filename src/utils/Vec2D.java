@@ -17,10 +17,10 @@ public class Vec2D
 	private double yComp;
 
 	/**
-	 * Creates a new Vec2D using the provided component values
+	 * Creates a new Vec2D using the provided component values.
 	 * 
-	 * @param xComp Magnitude of this vector's x component
-	 * @param yComp Magnitude of this vector's y component
+	 * @param xComp Magnitude of this vector's x component.
+	 * @param yComp Magnitude of this vector's y component.
 	 */
 	public Vec2D(double xComp, double yComp)
 	{
@@ -29,9 +29,9 @@ public class Vec2D
 	}
 
 	/**
-	 * Gets the magnitude of the x component for this vector
+	 * Gets the magnitude of the x component for this vector.
 	 * 
-	 * @return magnitude of the vector's x component
+	 * @return magnitude of the vector's x component.
 	 */
 	public double getXComp()
 	{
@@ -39,9 +39,9 @@ public class Vec2D
 	}
 
 	/**
-	 * Gets the magnitude of the y component for this vector
+	 * Gets the magnitude of the y component for this vector.
 	 * 
-	 * @return magnitude of the vector's y component
+	 * @return magnitude of the vector's y component.
 	 */
 	public double getYComp()
 	{
@@ -49,13 +49,30 @@ public class Vec2D
 	}
 
 	/**
-	 * Gets the overall magnitude of this vector
+	 * Gets the overall magnitude of this vector.
 	 * 
-	 * @return magnitude of the vector
+	 * @return magnitude of the vector.
 	 */
 	public double getMagnitude()
 	{
 		return Math.sqrt(Math.pow(xComp, 2) + Math.pow(yComp, 2));
+	}
+
+	/**
+	 * Sets the magnitude of this vector, maintaining its current direction.
+	 * 
+	 * @param newMagnitude The magnitude to assign to this vector.
+	 * @return a reference to this vector.
+	 */
+	public Vec2D setMagnitude(double newMagnitude)
+	{
+		double currentMagnitude = getMagnitude();
+
+		xComp = (xComp / currentMagnitude) * newMagnitude;
+		yComp = (yComp / currentMagnitude) * newMagnitude;
+
+		// Return this in case we want to chain operations
+		return this;
 	}
 
 	/**
@@ -81,6 +98,20 @@ public class Vec2D
 		double mag = getMagnitude();
 		this.xComp = mag * Math.cos(radians);
 		this.yComp = mag * Math.sin(radians);
+	}
+
+	/**
+	 * Adds another vector to this vector.
+	 * 
+	 * @param other The second vector to be used in this operation.
+	 * @return a reference to this vector.
+	 */
+	public Vec2D add(Vec2D other)
+	{
+		this.xComp += other.xComp;
+		this.yComp += other.yComp;
+		// Return this in case we want to chain operations
+		return this;
 	}
 
 	/**

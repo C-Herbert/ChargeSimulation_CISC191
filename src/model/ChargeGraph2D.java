@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Vec2D;
+
 /**
  * The ChargeGraph2D class extends the functionality of Graph2D to manage a list
  * of charges on a graph.
@@ -14,58 +16,93 @@ import java.util.List;
 public class ChargeGraph2D extends Graph2D
 {
 	// A ChargeGraph2D has many charges
-	List<Charge> chargeList;
+	ArrayList<Charge> chargeList;
 
 	/**
-	 * Creates a new ChargeGraph2D object with its elements and charges
-	 * initialized.
+	 * Creates a new ChargeGraph2D object with its elements initialized.
 	 * 
 	 * @param elements list of IGraphElements to initialize this ChargeGraph2D
 	 *                 with
-	 * @param charges  list of charges to assign to new ChargeGraph2D
 	 * @param width    integer width to assign to new ChargeGraph2D
 	 * @param height   integer height to assign to new ChargeGraph2D
 	 */
-	public ChargeGraph2D(List<IGraphElement> elements, List<Charge> charges,
-			int width, int height)
+	public ChargeGraph2D(List<IGraphElement> elements, int width, int height)
 	{
 		super(elements, width, height);
 
-		if (elements != null)
-		{
-			this.chargeList = charges;
-		}
-		else
-		{
-			// Fallback on an empty list if the programmer doesn't provide one
-			this.chargeList = new ArrayList<Charge>();
-		}
+		this.chargeList = new ArrayList<Charge>();
 
+		// Initialize chargeList to include any charges in the elements list
+		for (IGraphElement e : elements)
+		{
+			if (e instanceof Charge)
+			{
+				this.chargeList.add((Charge) e);
+			}
+		}
 	}
 
 	/**
-	 * Creates a new ChargeGraph2D with an initialized charge list and empty
-	 * element list
+	 * Creates a new ChargeGraph2D.
 	 * 
-	 * @param charges list of charges to assign to new ChargeGraph2D
-	 * @param width   integer width to assign to new ChargeGraph2D
-	 * @param height  integer height to assign to new ChargeGraph2D
+	 * @param width  integer width to assign to new ChargeGraph2D
+	 * @param height integer height to assign to new ChargeGraph2D
 	 */
-	public ChargeGraph2D(List<Charge> charges, int width, int height)
+	public ChargeGraph2D(int width, int height)
 	{
 		super(width, height);
-		this.chargeList = charges;
+		this.chargeList = new ArrayList<Charge>();
+	}
+
+	@Override
+	public boolean addElement(IGraphElement element)
+	{
+		// Perform add operation like parent class
+		boolean output = super.addElement(element);
+
+		// Ensure chargeList stays up to date with main element list
+		if (element instanceof Charge)
+		{
+			chargeList.add((Charge) element);
+		}
+
+		// Same output as parent
+		return output;
+	}
+
+	@Override
+	public boolean removeElement(IGraphElement element)
+	{
+		// Perform add operation like parent class
+		boolean output = super.removeElement(element);
+
+		// Ensure chargeList stays up to date with main element list
+		if (chargeList.contains(element))
+		{
+			chargeList.remove(element);
+		}
+
+		// Same output as parent
+		return output;
 	}
 
 	/**
-	 * Gets the list of Charges associated with this graph.
+	 * Calculates and returns the net electric field vector at a point.
 	 * 
-	 * @return The list of Charge objects contained by this ChargeGraph2D
+	 * @param x The x position of the point.
+	 * @param y The y position of the point.
+	 * @return The vector representing the net field at the given point.
 	 */
-	public List<Charge> getChargeList()
+	public Vec2D getNetFieldAtPoint(double x, double y)
 	{
-		// TODO: maybe deep copy?
-		return chargeList;
+		Vec2D netVector = new Vec2D(0, 0);
+
+		for (Charge c : chargeList)
+		{
+			netVector.add(c.getFieldAtPoint(x, y));
+		}
+
+		return netVector;
 	}
 
 }

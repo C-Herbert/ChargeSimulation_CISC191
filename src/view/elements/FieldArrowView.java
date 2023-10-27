@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 
 import model.FieldArrow;
@@ -77,8 +75,9 @@ public class FieldArrowView extends ElementView<FieldArrow>
 		arrowGraphics.dispose();
 
 		// Draw the image we just made
-		g.drawImage(newArrow, null, arrow.getX() - (newArrow.getWidth() / 2),
-				arrow.getY() - (newArrow.getHeight() / 2));
+		int xCenter = (int) (arrow.getX() - (newArrow.getWidth() / 2));
+		int yCenter = (int) (arrow.getY() - (newArrow.getHeight() / 2));
+		g.drawImage(newArrow, null, xCenter, yCenter);
 	}
 
 

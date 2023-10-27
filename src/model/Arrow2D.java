@@ -14,9 +14,9 @@ import utils.Vec2D;
 public class Arrow2D extends Vec2D implements IGraphElement
 {
 	// Arrows have an x position
-	private int xPos;
+	private double xPos;
 	// Arrows have a y position
-	private int yPos;
+	private double yPos;
 
 	/**
 	 * Constructs a new Arrow2D object with the given position and component
@@ -27,7 +27,7 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	 * @param xMag the magnitude of this arrow's vector x component
 	 * @param yMag the magnitude of this arrow's vector y component
 	 */
-	public Arrow2D(int xPos, int yPos, int xMag, int yMag)
+	public Arrow2D(double xPos, double yPos, double xMag, double yMag)
 	{
 		super(xMag, yMag);
 		this.xPos = xPos;
@@ -35,13 +35,13 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	}
 
 	@Override
-	public int getX()
+	public double getX()
 	{
 		return this.xPos;
 	}
 
 	@Override
-	public int getY()
+	public double getY()
 	{
 		return this.yPos;
 	}

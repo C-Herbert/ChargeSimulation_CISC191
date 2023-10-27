@@ -15,16 +15,16 @@ public interface IGraphElement
 	/**
 	 * Gets the x position of this graph element.
 	 * 
-	 * @return the integer value representing this element's x position on the
+	 * @return the double value representing this element's x position on the
 	 *         graph.
 	 */
-	int getX();
+	double getX();
 
 	/**
 	 * Gets the y position of this graph element.
 	 * 
-	 * @return the integer value representing this element's y position on the
+	 * @return the double value representing this element's y position on the
 	 *         graph.
 	 */
-	int getY();
+	double getY();
 }

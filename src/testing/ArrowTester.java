@@ -3,6 +3,7 @@ package testing;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import model.Charge;
 import model.ChargeGraph2D;
 import model.FieldArrow;
 import model.IGraphElement;
@@ -10,16 +11,18 @@ import view.ProgramView;
 
 public class ArrowTester
 {
-	//Instance variables to hold view and graph, circumventing need for a model.
+	// Instance variables to hold view and graph, circumventing need for a
+	// model.
 	ProgramView view;
 	ChargeGraph2D testGraph;
 
+	// Run function for test program
 	public void run()
 	{
 		view = new ProgramView();
 		testGraph = new ChargeGraph2D(null, 1000, 700);
 
-		//Add a 10 x 6 grid of arrows to the graph
+		// Add a 10 x 6 grid of arrows to the graph
 		for (int x = 1; x < 10; ++x)
 		{
 			for (int y = 1; y < 6; ++y)
@@ -30,10 +33,13 @@ public class ArrowTester
 			}
 		}
 
+		// Initialize the view to use the charge board we just setup
 		view.initializeChargeBoard(testGraph);
+		// Add a mouse listener to the graph view
 		view.addGraphMouseListener(new ArrowPointTowardsListener());
 	}
 
+	// Small action listener class to handle mouse inputs
 	private class ArrowPointTowardsListener implements MouseListener
 	{
 		// Unused
@@ -76,7 +82,7 @@ public class ArrowTester
 		}
 	}
 
-	//Main method to run tester
+	// Main method to run tester
 	public static void main(String[] args)
 	{
 		new ArrowTester().run();

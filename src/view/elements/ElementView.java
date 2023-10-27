@@ -1,8 +1,6 @@
 package view.elements;
 
 import java.awt.Graphics2D;
-import java.util.List;
-
 import model.IGraphElement;
 
 /**
@@ -48,14 +46,25 @@ public abstract class ElementView<T extends IGraphElement>
 	@SuppressWarnings("unchecked")
 	public boolean tryDrawElement(IGraphElement element, Graphics2D graphics)
 	{
-		if (canDraw(element))
+		try
 		{
-			// Draw element and return true
-			drawElement((T) element, graphics);
-			return true;
+			if (canDraw(element))
+			{
+				// Draw element and return true
+				drawElement((T) element, graphics);
+				return true;
+			}
+			else
+			{
+				// Failed to draw
+				return false;
+			}
 		}
-
-		// Failed to draw
-		return false;
+		catch (ClassCastException e)
+		{
+			//ClassCastException will only be thrown if an invalid object managed to slip by canDraw()
+			throw new ClassCastException(
+					"Invalid class passed to tryDrawElement, ensure canDraw implementation is functioning properly");
+		}
 	}
 }
