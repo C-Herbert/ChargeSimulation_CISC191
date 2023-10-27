@@ -14,7 +14,7 @@ import model.ChargeGraph2D;
 public class ProgramView
 {
 	JFrame mainFrame;
-	//ProgramView has a panel to hold the model display
+	// ProgramView has a panel to hold the model display
 	JPanel mainPanel;
 
 	public ProgramView()
@@ -33,7 +33,7 @@ public class ProgramView
 		mainFrame.setVisible(true);
 	}
 
-	//ProgramView has a panel to hold toolbar elements
+	// ProgramView has a panel to hold toolbar elements
 	JPanel toolbarPanel;
 
 	private void createToolbar()
@@ -57,7 +57,7 @@ public class ProgramView
 		toolbarPanel.setBackground(Color.WHITE);
 	}
 
-	//ProgramView has a GraphView 
+	// ProgramView has a GraphView
 	ChargeGraphView graphView;
 
 	public void initializeChargeBoard(ChargeGraph2D model)
@@ -66,12 +66,12 @@ public class ProgramView
 		mainPanel.add(graphView, BorderLayout.CENTER);
 		mainFrame.pack();
 	}
-	
+
 	public void repaintGraph()
 	{
 		graphView.repaint();
 	}
-	
+
 	public void addGraphMouseListener(MouseListener listener)
 	{
 		graphView.addMouseListener(listener);

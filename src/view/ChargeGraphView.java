@@ -64,7 +64,7 @@ public class ChargeGraphView extends JPanel
 
 		for (IGraphElement element : graphReference.getElements())
 		{
-			//Find a view that can draw the element
+			// Find a view that can draw the element
 			for (ElementView<?> view : views)
 			{
 				// Once we find a view that can draw the element, exit

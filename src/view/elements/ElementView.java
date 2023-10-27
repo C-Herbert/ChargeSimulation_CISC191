@@ -62,7 +62,8 @@ public abstract class ElementView<T extends IGraphElement>
 		}
 		catch (ClassCastException e)
 		{
-			//ClassCastException will only be thrown if an invalid object managed to slip by canDraw()
+			// ClassCastException will only be thrown if an invalid object
+			// managed to slip by canDraw()
 			throw new ClassCastException(
 					"Invalid class passed to tryDrawElement, ensure canDraw implementation is functioning properly");
 		}

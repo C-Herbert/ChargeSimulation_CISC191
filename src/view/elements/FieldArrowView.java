@@ -35,13 +35,13 @@ public class FieldArrowView extends ElementView<FieldArrow>
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void drawElement(FieldArrow arrow, Graphics2D graphics)
 	{
 		drawArrow(arrow, graphics);
 	}
-	
+
 	@Override
 	public boolean canDraw(IGraphElement element)
 	{
@@ -79,6 +79,5 @@ public class FieldArrowView extends ElementView<FieldArrow>
 		int yCenter = (int) (arrow.getY() - (newArrow.getHeight() / 2));
 		g.drawImage(newArrow, null, xCenter, yCenter);
 	}
-
 
 }

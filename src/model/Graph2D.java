@@ -98,18 +98,29 @@ public class Graph2D
 	{
 		return graphElements.remove(element);
 	}
-	
+
+	/**
+	 * Gets a copy of the list of elements contained by this graph.
+	 * 
+	 * Note that the elements are not copies, only the list itself. This
+	 * prevents unexpected adding/removing of elements but still allows element
+	 * manipulation.
+	 * 
+	 * @return A copy of the list of elements managed by this graph.
+	 */
 	public List<IGraphElement> getElements()
 	{
-		ArrayList<IGraphElement> elements = new ArrayList<IGraphElement>(graphElements.size());		
-		
-		//Only need to make a deep copy of the list, external modification of the elements themselves is okay
-		for(IGraphElement e : graphElements)
+		ArrayList<IGraphElement> elements = new ArrayList<IGraphElement>(
+				graphElements.size());
+
+		// Only need to make a deep copy of the list, external modification of
+		// the elements themselves is okay
+		for (IGraphElement e : graphElements)
 		{
 			elements.add(e);
 		}
 
 		return elements;
 	}
-	
+
 }
