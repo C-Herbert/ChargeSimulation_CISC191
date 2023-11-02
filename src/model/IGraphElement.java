@@ -27,4 +27,8 @@ public interface IGraphElement
 	 *         graph.
 	 */
 	double getY();
+	
+	String toSaveString();
+	
+	IGraphElement fromSaveString(String saveString);
 }

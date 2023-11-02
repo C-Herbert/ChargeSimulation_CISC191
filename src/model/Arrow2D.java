@@ -45,4 +45,17 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	{
 		return this.yPos;
 	}
+
+	@Override
+	public String toSaveString()
+	{
+		return String.format("%s,%f,%f,%f,%f", this.getClass().getSimpleName(), getX(), getY(), getXComp(), getYComp());
+	}
+
+	@Override
+	public IGraphElement fromSaveString(String saveString)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
