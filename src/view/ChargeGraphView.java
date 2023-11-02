@@ -47,29 +47,69 @@ public class ChargeGraphView extends JPanel
 		// Create a new view list
 		this.views = new ArrayList<ElementView<?>>();
 		// Add a field arrow view
-		views.add(new FieldArrowView());
+		addView(new FieldArrowView(-100));
 		// Add a charge view
-		views.add(new ChargeView());
+		addView(new ChargeView(0));
 
 		setSize(graphReference.getWidth(), graphReference.getHeight());
 		setPreferredSize(getSize());
 	}
 
+	private boolean addView(ElementView<?> view)
+	{
+		// Check that parameter is not null
+		if (view == null) return false;
+
+		if (views.size() == 0)
+		{
+			// Special case for empty view list
+			return views.add(view);
+		}
+		else
+		{
+			// Iterate through the views, comparing our sort order against all
+			// existing views.
+			for (int i = 0; i < views.size(); ++i)
+			{
+				if (view.getSortOrder() < views.get(i).getSortOrder())
+				{
+					// Found our position, add the view.
+					views.add(i, view);
+					return true;
+				}
+			}
+
+			// Reached end of list without finding a higher sort order, append
+			// view to end of list.
+			return views.add(view);
+		}
+
+	}
+
 	@Override
+	//TODO: Cache element states so full draw routine isn't necessary on every repaint.
 	public void paint(Graphics g)
 	{
 		super.paint(g);
 
 		Graphics2D graphics = (Graphics2D) g;
 
+		// First, cache all elements to their respective views.
 		for (IGraphElement element : graphReference.getElements())
 		{
 			// Find a view that can draw the element
 			for (ElementView<?> view : views)
 			{
 				// Once we find a view that can draw the element, exit
-				if (view.tryDrawElement(element, graphics)) break;
+				if (view.tryCacheElement(element)) break;
 			}
+		}
+
+		// Next, draw all elements according to their sort order. Note that the
+		// views list is already sorted.
+		for (ElementView<?> view : views)
+		{
+			view.draw(graphics);
 		}
 	}
 }

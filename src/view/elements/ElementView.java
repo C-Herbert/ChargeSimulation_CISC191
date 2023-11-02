@@ -1,6 +1,8 @@
 package view.elements;
 
 import java.awt.Graphics2D;
+import java.util.LinkedList;
+
 import model.IGraphElement;
 
 /**
@@ -17,8 +19,31 @@ import model.IGraphElement;
 // Generic allows subclasses to work on only specific types of graph elements
 public abstract class ElementView<T extends IGraphElement>
 {
+	private int sortOrder;
+
+	/*
+	 * ElementViews maintain a cache of elements. This cache is cleared upon
+	 * drawing. Clearing the cache ensures all data is kept in sync with the
+	 * model.
+	 * While simply making the draw function a part of the IGraphElement
+	 * interface to remove the need to cache or type check each element is
+	 * appealing, I'm trying to keep the model and view as separate as possible.
+	 */
+	private LinkedList<T> cachedElements;
+
 	/**
-	 * Draws the elements included in this view using the provided graphics
+	 * Creates a new element view with an initialized sort order.
+	 * 
+	 * @param sortOrder The sorting order of this view object.
+	 */
+	public ElementView(int sortOrder)
+	{
+		this.sortOrder = sortOrder;
+		cachedElements = new LinkedList<>();
+	}
+
+	/**
+	 * Draws an element using the provided graphics
 	 * 
 	 * @param graphics Graphics2D object to be used for drawing the elements
 	 */
@@ -44,19 +69,19 @@ public abstract class ElementView<T extends IGraphElement>
 	 * @return true if element could be drawn, false otherwise
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean tryDrawElement(IGraphElement element, Graphics2D graphics)
+	public boolean tryCacheElement(IGraphElement element)
 	{
 		try
 		{
 			if (canDraw(element))
 			{
-				// Draw element and return true
-				drawElement((T) element, graphics);
+				// Cache the element and return true.
+				cachedElements.add((T) element);
 				return true;
 			}
 			else
 			{
-				// Failed to draw
+				// Failed to cache.
 				return false;
 			}
 		}
@@ -67,5 +92,42 @@ public abstract class ElementView<T extends IGraphElement>
 			throw new ClassCastException(
 					"Invalid class passed to tryDrawElement, ensure canDraw implementation is functioning properly");
 		}
+	}
+
+	/**
+	 * Draws all elements cached in this view using the provided graphics. The
+	 * cache is cleared after drawing.
+	 * 
+	 * @param graphics
+	 * @return true if any elements were drawn, false otherwise.
+	 */
+	public boolean draw(Graphics2D graphics)
+	{
+		// Check if we have any elements to draw, return false if not.
+		if (cachedElements.size() == 0) return false;
+
+		// Draw all elements.
+		for (T element : cachedElements)
+		{
+			drawElement(element, graphics);
+		}
+
+		// Clear the cache
+		cachedElements.clear();
+		
+		return true;
+		
+	}
+
+	/**
+	 * Gets this view's sort order. Used to determine how elements should be
+	 * drawn. A higher value means that this view will be drawn on top of the
+	 * others.
+	 * 
+	 * @return the numerical value of this view's sort order.
+	 */
+	public int getSortOrder()
+	{
+		return sortOrder;
 	}
 }

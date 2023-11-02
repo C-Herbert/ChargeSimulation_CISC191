@@ -12,6 +12,11 @@ import model.IGraphElement;
 
 public class ChargeView extends ElementView<Charge>
 {
+	public ChargeView(int sortOrder)
+	{
+		super(sortOrder);
+	}
+
 	// File path to positive charge image.
 	private static final String POSITIVE_CHARGE_FILEPATH = "src/assets/positive_charge.png";
 	// Static field for positive charge image once loaded.

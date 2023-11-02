@@ -17,6 +17,11 @@ import model.IGraphElement;
  */
 public class FieldArrowView extends ElementView<FieldArrow>
 {
+	public FieldArrowView(int sortOrder)
+	{
+		super(sortOrder);
+	}
+
 	// File path to field arrow image.
 	private static final String ARROW_FILEPATH = "src/assets/arrow.png";
 	// Static field for arrow image once loaded.

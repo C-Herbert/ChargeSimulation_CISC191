@@ -24,20 +24,20 @@ public class ChargeTester
 		testGraph = new ChargeGraph2D(1000, 700);
 
 		// Add a 10 x 6 grid of arrows to the graph
-		for (int x = 1; x < 10; ++x)
+		for (int x = 1; x < 20; ++x)
 		{
-			for (int y = 1; y < 6; ++y)
+			for (int y = 1; y < 12; ++y)
 			{
 				testGraph.addElement(
-						new FieldArrow((testGraph.getWidth() / 10) * x,
-								(testGraph.getHeight() / 6) * y, 1, 0));
+						new FieldArrow((testGraph.getWidth() / 20) * x,
+								(testGraph.getHeight() / 12) * y, 1, 0));
 			}
 		}
 
 		// Add two charges, one positive, one negative
-		testGraph.addElement(new Charge(150, 150, 50));
+		testGraph.addElement(new Charge(100, 100, 50));
 
-		testGraph.addElement(new Charge(850, 550, -50));
+		testGraph.addElement(new Charge(850, 350, -50));
 
 		// Iterate through graph elements, updating arrow directions to match
 		// their local net fields
