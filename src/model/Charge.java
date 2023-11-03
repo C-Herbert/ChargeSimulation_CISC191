@@ -89,16 +89,6 @@ public class Charge implements IGraphElement
 	@Override
 	public String toSaveString()
 	{
-		return String.format("%s,%f,%f,%f", this.getClass().getSimpleName(), getX(), getY(), getMagnitude());
-	}
-
-	@Override
-	public IGraphElement fromSaveString(String saveString)
-	{
-		String className = saveString.substring(0, saveString.indexOf(','));
-		
-		//TODO: Move to separate io system.
-		
-		return null;
+		return String.format("000 %f %f %f", getX(), getY(), getMagnitude());
 	}
 }

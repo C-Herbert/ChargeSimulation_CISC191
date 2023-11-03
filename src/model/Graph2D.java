@@ -123,4 +123,24 @@ public class Graph2D
 		return elements;
 	}
 
+	/**
+	 * Clears all graph elements contained in this graph.
+	 */
+	public void clearElements()
+	{
+		this.graphElements.clear();
+	}
+
+	/**
+	 * Adds a list of elements to this graph.
+	 * 
+	 * @param elements List of elements to add to graph
+	 */
+	public void addElements(List<IGraphElement> elements)
+	{
+		for (IGraphElement element : elements)
+		{
+			addElement(element);
+		}
+	}
 }

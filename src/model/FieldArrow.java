@@ -13,7 +13,7 @@ import utils.Vec2D;
 // beyond being a distinction for the view model
 public class FieldArrow extends Arrow2D
 {
-	public FieldArrow(int xPos, int yPos, int xMag, int yMag)
+	public FieldArrow(double xPos, double yPos, double xMag, double yMag)
 	{
 		super(xPos, yPos, xMag, yMag);
 	}

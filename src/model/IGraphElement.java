@@ -29,6 +29,4 @@ public interface IGraphElement
 	double getY();
 	
 	String toSaveString();
-	
-	IGraphElement fromSaveString(String saveString);
 }

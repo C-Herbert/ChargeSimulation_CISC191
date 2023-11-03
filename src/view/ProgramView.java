@@ -3,9 +3,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,12 +15,16 @@ import model.ChargeGraph2D;
 
 public class ProgramView
 {
-	JFrame mainFrame;
+	// ProgramView has a frame to hold the UI
+	private JFrame mainFrame;
 	// ProgramView has a panel to hold the model display
-	JPanel mainPanel;
+	private JPanel mainPanel;
+	// ProgramView shares a file selector
+	private JFileChooser fileSelector;
 
 	public ProgramView()
 	{
+		//Initialize fields
 		mainFrame = new JFrame("CISC_191 Charge Project");
 
 		mainPanel = new JPanel();
@@ -27,6 +33,8 @@ public class ProgramView
 
 		createToolbar();
 		mainPanel.add(toolbarPanel, BorderLayout.NORTH);
+		
+		fileSelector = new JFileChooser();
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.pack();
@@ -34,7 +42,10 @@ public class ProgramView
 	}
 
 	// ProgramView has a panel to hold toolbar elements
-	JPanel toolbarPanel;
+	private JPanel toolbarPanel;
+	// ProgramView has buttons to control file io
+	private JButton fileSaveButton;
+	private JButton fileOpenButton;
 
 	private void createToolbar()
 	{
@@ -48,10 +59,12 @@ public class ProgramView
 		layout.setVgap(0);
 		toolbarPanel.setLayout(layout);
 
-		// Temporary example buttons to match diagram
-		toolbarPanel.add(new JButton("File"));
-		toolbarPanel.add(new JButton("Board"));
-		toolbarPanel.add(new JButton("Settings"));
+		//Add toolbar buttons
+		fileSaveButton = new JButton("Save File");
+		toolbarPanel.add(fileSaveButton);
+
+		fileOpenButton = new JButton("Open File");
+		toolbarPanel.add(fileOpenButton);
 
 		// Blend in with the window's own toolbar
 		toolbarPanel.setBackground(Color.WHITE);
@@ -72,9 +85,24 @@ public class ProgramView
 		graphView.repaint();
 	}
 
+	public JFileChooser getFileSelector()
+	{
+		return fileSelector;
+	}
+	
 	public void addGraphMouseListener(MouseListener listener)
 	{
 		graphView.addMouseListener(listener);
+	}
+
+	public void addFileSaveListener(ActionListener listener)
+	{
+		fileSaveButton.addActionListener(listener);
+	}
+
+	public void addFileOpenListener(ActionListener listener)
+	{
+		fileOpenButton.addActionListener(listener);
 	}
 
 }

@@ -3,13 +3,22 @@ package testing;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import model.Charge;
 import model.ChargeGraph2D;
 import model.FieldArrow;
 import model.IGraphElement;
+import utils.io.GraphReader;
 import utils.io.GraphWriter;
 import view.ProgramView;
+
+/**
+ * A test class used to demonstrate charge functionality.
+ * 
+ * @version 1.0
+ * @author Charlie Herbert
+ */
 
 public class ChargeTester
 {
@@ -54,9 +63,6 @@ public class ChargeTester
 
 		// Initialize the view to use the charge board we just setup
 		view.initializeChargeBoard(testGraph);
-		
-		//Test the IO system as well
-		GraphWriter.writeGraphToFile(new File("src/testing/TestGraph.csv"),testGraph);
 	}
 
 	// Main method to run tester

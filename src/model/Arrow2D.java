@@ -49,13 +49,6 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	@Override
 	public String toSaveString()
 	{
-		return String.format("%s,%f,%f,%f,%f", this.getClass().getSimpleName(), getX(), getY(), getXComp(), getYComp());
-	}
-
-	@Override
-	public IGraphElement fromSaveString(String saveString)
-	{
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("001 %f %f %f %f", getX(), getY(), getXComp(), getYComp());
 	}
 }

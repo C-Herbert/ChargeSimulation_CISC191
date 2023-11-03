@@ -9,6 +9,13 @@ import model.FieldArrow;
 import model.IGraphElement;
 import view.ProgramView;
 
+/**
+ * A test class used to demonstrate Arrow functionality.
+ * 
+ * @version 1.0
+ * @author Charlie Herbert
+ */
+
 public class ArrowTester
 {
 	// Instance variables to hold view and graph, circumventing need for a

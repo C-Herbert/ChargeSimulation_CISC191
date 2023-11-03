@@ -86,6 +86,14 @@ public class ChargeGraph2D extends Graph2D
 		return output;
 	}
 
+	@Override
+	public void clearElements()
+	{
+		super.clearElements();
+		// Clear our charge list to keep data in sync
+		chargeList.clear();
+	}
+
 	/**
 	 * Calculates and returns the net electric field vector at a point.
 	 * 
