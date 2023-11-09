@@ -27,7 +27,7 @@ public class ArrowTester
 	public void run()
 	{
 		view = new ProgramView();
-		testGraph = new ChargeGraph2D(null, 1000, 700);
+		testGraph = new ChargeGraph2D(1000, 700);
 
 		// Add a 10 x 6 grid of arrows to the graph
 		for (int x = 1; x < 10; ++x)

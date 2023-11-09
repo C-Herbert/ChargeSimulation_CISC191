@@ -1,9 +1,12 @@
 package view.elements;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import model.Graph2D;
 import model.IGraphElement;
+import view.ChargeGraphView;
 
 /**
  * Subclasses of ElementView allow a given IGraphElementType to be displayed on
@@ -17,8 +20,10 @@ import model.IGraphElement;
 // https://en.wikipedia.org/wiki/Model-view-controller
 
 // Generic allows subclasses to work on only specific types of graph elements
-public abstract class ElementView<T extends IGraphElement>
+public abstract class ElementView<T extends IGraphElement> implements Runnable
 {
+	private Graph2D graph;
+	private BufferedImage viewOutput;
 	private int sortOrder;
 
 	/*
@@ -30,14 +35,15 @@ public abstract class ElementView<T extends IGraphElement>
 	 * appealing, I'm trying to keep the model and view as separate as possible.
 	 */
 	private LinkedList<T> cachedElements;
-
+	
 	/**
 	 * Creates a new element view with an initialized sort order.
 	 * 
 	 * @param sortOrder The sorting order of this view object.
 	 */
-	public ElementView(int sortOrder)
+	public ElementView(Graph2D graph, int sortOrder)
 	{
+		this.graph = graph;
 		this.sortOrder = sortOrder;
 		cachedElements = new LinkedList<>();
 	}
@@ -94,6 +100,24 @@ public abstract class ElementView<T extends IGraphElement>
 		}
 	}
 
+	//TODO
+	@Override
+	public void run()
+	{
+		viewOutput = new BufferedImage(graph.getWidth(),graph.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+		
+		Graphics2D viewGraphics = viewOutput.createGraphics();
+		
+		this.draw(viewGraphics);
+		
+		viewGraphics.dispose();
+	}
+	
+	public BufferedImage getOutput()
+	{
+		return viewOutput;
+	}
+	
 	/**
 	 * Draws all elements cached in this view using the provided graphics. The
 	 * cache is cleared after drawing.

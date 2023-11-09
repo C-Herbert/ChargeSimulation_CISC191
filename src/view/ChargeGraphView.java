@@ -47,9 +47,9 @@ public class ChargeGraphView extends JPanel
 		// Create a new view list
 		this.views = new ArrayList<ElementView<?>>();
 		// Add a field arrow view
-		addView(new FieldArrowView(-100));
+		addView(new FieldArrowView(chargeGraph, -100));
 		// Add a charge view
-		addView(new ChargeView(0));
+		addView(new ChargeView(chargeGraph, 0));
 
 		setSize(graphReference.getWidth(), graphReference.getHeight());
 		setPreferredSize(getSize());

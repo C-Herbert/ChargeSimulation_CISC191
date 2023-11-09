@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Vec2D;
 
 /**
@@ -11,8 +13,14 @@ import utils.Vec2D;
  */
 // TODO: May consolidate this class into Arrow2D, doesn't seem to be useful
 // beyond being a distinction for the view model
-public class FieldArrow extends Arrow2D
+public class FieldArrow extends Arrow2D implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5712325659933162475L;
+
 	public FieldArrow(double xPos, double yPos, double xMag, double yMag)
 	{
 		super(xPos, yPos, xMag, yMag);

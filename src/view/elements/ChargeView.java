@@ -8,13 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import model.Charge;
+import model.Graph2D;
 import model.IGraphElement;
 
 public class ChargeView extends ElementView<Charge>
 {
-	public ChargeView(int sortOrder)
+	public ChargeView(Graph2D graph, int sortOrder)
 	{
-		super(sortOrder);
+		super(graph, sortOrder);
 	}
 
 	// File path to positive charge image.
@@ -66,5 +67,4 @@ public class ChargeView extends ElementView<Charge>
 	{
 		return element instanceof Charge;
 	}
-
 }

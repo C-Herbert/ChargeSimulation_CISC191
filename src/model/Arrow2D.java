@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Vec2D;
 
 /**
@@ -44,11 +46,5 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	public double getY()
 	{
 		return this.yPos;
-	}
-
-	@Override
-	public String toSaveString()
-	{
-		return String.format("001 %f %f %f %f", getX(), getY(), getXComp(), getYComp());
 	}
 }

@@ -14,8 +14,7 @@ import model.ChargeGraph2D;
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
-import utils.io.GraphReader;
-import utils.io.GraphWriter;
+import utils.io.GraphIO;
 import view.ProgramView;
 
 /**
@@ -37,22 +36,23 @@ public class FileIOTester
 	{
 		// Initialize the view to use the charge board we just setup
 		view = new ProgramView();
-		Graph2D fileGraph = null;
+		testGraph = new ChargeGraph2D(1000, 700);
 
-		// TODO: Better error handling
-		try
+		// Add a 10 x 6 grid of arrows to the graph
+		for (int x = 1; x < 20; ++x)
 		{
-			fileGraph = GraphReader
-					.readGraphFromFile(new File("src/testing/TestGraph.txt"));
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
+			for (int y = 1; y < 12; ++y)
+			{
+				testGraph.addElement(
+						new FieldArrow((testGraph.getWidth() / 20) * x,
+								(testGraph.getHeight() / 12) * y, 1, 0));
+			}
 		}
 
-		// Create a charge graph from the Graph2D we loaded in
-		testGraph = new ChargeGraph2D(fileGraph.getElements(),
-				fileGraph.getWidth(), fileGraph.getHeight());
+		// Add two charges, one positive, one negative
+		testGraph.addElement(new Charge(100, 100, 50));
+
+		testGraph.addElement(new Charge(850, 350, -50));
 
 		// Iterate through graph elements, updating arrow directions to match
 		// their local net fields
@@ -87,7 +87,7 @@ public class FileIOTester
 				// TODO: Better error handling
 				try
 				{
-					GraphWriter.writeGraphToFile(f, testGraph);
+					GraphIO.writeGraphToFile(f, testGraph);
 				}
 				catch (IOException e1)
 				{
@@ -112,7 +112,7 @@ public class FileIOTester
 				// TODO: Better error handling
 				try
 				{
-					Graph2D fileGraph = GraphReader.readGraphFromFile(f);
+					Graph2D fileGraph = GraphIO.readGraphFromFile(f);
 
 					// Update testGraph with the file graph.
 					testGraph.clearElements();

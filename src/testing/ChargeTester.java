@@ -9,8 +9,7 @@ import model.Charge;
 import model.ChargeGraph2D;
 import model.FieldArrow;
 import model.IGraphElement;
-import utils.io.GraphReader;
-import utils.io.GraphWriter;
+import utils.io.GraphIO;
 import view.ProgramView;
 
 /**

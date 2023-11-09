@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import model.FieldArrow;
+import model.Graph2D;
 import model.IGraphElement;
 
 /**
@@ -17,9 +18,9 @@ import model.IGraphElement;
  */
 public class FieldArrowView extends ElementView<FieldArrow>
 {
-	public FieldArrowView(int sortOrder)
+	public FieldArrowView(Graph2D graph, int sortOrder)
 	{
-		super(sortOrder);
+		super(graph, sortOrder);
 	}
 
 	// File path to field arrow image.

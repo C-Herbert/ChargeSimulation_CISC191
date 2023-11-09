@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Vec2D;
 
 /**
@@ -7,10 +9,16 @@ import utils.Vec2D;
  * 
  * @version 1.0
  * @author Charlie Herbert
+ * 
+ *         References: Java, Java, Java 3rd Edition, Chapter 11
  */
 
-public class Charge implements IGraphElement
+public class Charge implements IGraphElement, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8055174990777812535L;
 	// Charges have an x and y position
 	private double x, y;
 	// Charges have a magnitude
@@ -84,11 +92,5 @@ public class Charge implements IGraphElement
 	public double getMagnitude()
 	{
 		return this.magnitude;
-	}
-
-	@Override
-	public String toSaveString()
-	{
-		return String.format("000 %f %f %f", getX(), getY(), getMagnitude());
 	}
 }
