@@ -13,6 +13,17 @@ import javax.swing.JPanel;
 
 import model.ChargeGraph2D;
 
+/**
+ * The ProgramView class is responsible for managing all view components of the
+ * program. All controller/view interactions should be done through an instance
+ * of this class.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
+
+// TODO: Java Java Java citation
+
 public class ProgramView
 {
 	// ProgramView has a frame to hold the UI
@@ -20,11 +31,11 @@ public class ProgramView
 	// ProgramView has a panel to hold the model display
 	private JPanel mainPanel;
 	// ProgramView shares a file selector
-	private JFileChooser fileSelector;
+	private JFileChooser fileChooser;
 
 	public ProgramView()
 	{
-		//Initialize fields
+		// Initialize fields
 		mainFrame = new JFrame("CISC_191 Charge Project");
 
 		mainPanel = new JPanel();
@@ -33,8 +44,8 @@ public class ProgramView
 
 		createToolbar();
 		mainPanel.add(toolbarPanel, BorderLayout.NORTH);
-		
-		fileSelector = new JFileChooser();
+
+		fileChooser = new JFileChooser();
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.pack();
@@ -59,7 +70,7 @@ public class ProgramView
 		layout.setVgap(0);
 		toolbarPanel.setLayout(layout);
 
-		//Add toolbar buttons
+		// Add toolbar buttons
 		fileSaveButton = new JButton("Save File");
 		toolbarPanel.add(fileSaveButton);
 
@@ -73,33 +84,63 @@ public class ProgramView
 	// ProgramView has a GraphView
 	ChargeGraphView graphView;
 
-	public void initializeChargeBoard(ChargeGraph2D model)
+	/**
+	 * Initializes the graph field of this view. Note that any existing graph
+	 * will be overwritten.
+	 * 
+	 * @param model The graph to assign to this view.
+	 */
+	public void initializeGraph(ChargeGraph2D model)
 	{
 		graphView = new ChargeGraphView(model);
 		mainPanel.add(graphView, BorderLayout.CENTER);
 		mainFrame.pack();
 	}
 
+	/**
+	 * Repaints the main graph associated with this view
+	 */
 	public void repaintGraph()
 	{
 		graphView.repaint();
 	}
 
-	public JFileChooser getFileSelector()
+	/**
+	 * Gets the file chooser associated with this view. Use this to maintain a
+	 * consistent file path when requesting file selections.
+	 * 
+	 * @return The JFileChooser associated with this view.
+	 */
+	public JFileChooser getFileChooser()
 	{
-		return fileSelector;
+		return fileChooser;
 	}
-	
+
+	/**
+	 * Adds a mouse listener to this view's associated graph.
+	 * 
+	 * @param listener The listener to add.
+	 */
 	public void addGraphMouseListener(MouseListener listener)
 	{
 		graphView.addMouseListener(listener);
 	}
 
+	/**
+	 * Adds an action listener to this view's associated save button.
+	 * 
+	 * @param listener The listener to add.
+	 */
 	public void addFileSaveListener(ActionListener listener)
 	{
 		fileSaveButton.addActionListener(listener);
 	}
 
+	/**
+	 * Adds an action listener to this view's associated open button.
+	 * 
+	 * @param listener The listener to add.
+	 */
 	public void addFileOpenListener(ActionListener listener)
 	{
 		fileOpenButton.addActionListener(listener);

@@ -206,13 +206,14 @@ public class Graph2D implements Serializable
 		for (Entry<Class<? extends IGraphElement>, List<IGraphElement>> entry : graphElements
 				.entrySet())
 		{
-			System.out.print("Entry \'" + entry.getKey().getName() + "\' contains: ");
+			System.out.print(
+					"Entry \'" + entry.getKey().getName() + "\' contains: ");
 
 			for (IGraphElement e : entry.getValue())
 			{
 				System.out.print(e + ", ");
 			}
-			
+
 			System.out.println();
 		}
 	}

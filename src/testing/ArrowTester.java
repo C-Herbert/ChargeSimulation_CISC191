@@ -41,7 +41,7 @@ public class ArrowTester
 		}
 
 		// Initialize the view to use the charge board we just setup
-		view.initializeChargeBoard(testGraph);
+		view.initializeGraph(testGraph);
 		// Add a mouse listener to the graph view
 		view.addGraphMouseListener(new ArrowPointTowardsListener());
 	}

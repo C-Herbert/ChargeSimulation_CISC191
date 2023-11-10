@@ -40,44 +40,45 @@ public final class GraphIO
 	 * 
 	 * @param file The file to read, should be a text file.
 	 * @return The Graph2D that was read from the file parameter
-	 * @throws  
+	 * @throws
 	 * @throws FileNotFoundException
 	 */
-	public static Graph2D readGraphFromFile(File file) throws IOException
+	public static Graph2D readGraphFromFile(File file)
+			throws GraphFileFormatException, IOException
 	{
 		// Open a new Scanner
 		try (DataInputStream fileInput = new DataInputStream(
 				new FileInputStream(file)))
 		{
 			// First two ints of file should be Graph's width and height.
-//			int width = fileInput.readInt();
-//			int height = fileInput.readInt();
-//
-//			// Create a new graph with the previous width and height.
-//			Graph2D graph = new Graph2D(width, height);
+			// int width = fileInput.readInt();
+			// int height = fileInput.readInt();
+			//
+			// // Create a new graph with the previous width and height.
+			// Graph2D graph = new Graph2D(width, height);
 
 			// While we have another ID to read, continue adding elements
 			ObjectInputStream objectStream = new ObjectInputStream(fileInput);
-//			try
-//			{
-//				while (true)
-//				{
-//					Object o = objectStream.readObject();
-//
-//					if (o instanceof IGraphElement)
-//					{
-//						graph.addElement((IGraphElement)o);
-//					}
-//				}
-//			}
-//			catch (EOFException e)
-//			{
-//
-//			}
-//			catch (ClassNotFoundException e)
-//			{
-//				e.printStackTrace();
-//			}
+			// try
+			// {
+			// while (true)
+			// {
+			// Object o = objectStream.readObject();
+			//
+			// if (o instanceof IGraphElement)
+			// {
+			// graph.addElement((IGraphElement)o);
+			// }
+			// }
+			// }
+			// catch (EOFException e)
+			// {
+			//
+			// }
+			// catch (ClassNotFoundException e)
+			// {
+			// e.printStackTrace();
+			// }
 
 			return (Graph2D) objectStream.readObject();
 		}
@@ -85,6 +86,11 @@ public final class GraphIO
 		{
 			// Rethrow.
 			throw e;
+		}
+		catch (InvalidClassException e)
+		{
+			// Rethrow as a graph file format exception
+			throw new GraphFileFormatException(e.getMessage());
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -112,24 +118,24 @@ public final class GraphIO
 		try (DataOutputStream fileOutput = new DataOutputStream(
 				new FileOutputStream(file, false)))
 		{
-//			// Write the width and height of the graph as the first line.
-//			fileOutput.writeInt(graph.getWidth());
-//			fileOutput.writeInt(graph.getHeight());
+			// // Write the width and height of the graph as the first line.
+			// fileOutput.writeInt(graph.getWidth());
+			// fileOutput.writeInt(graph.getHeight());
 
 			// Write each element's save string.
 			ObjectOutputStream objectStream = new ObjectOutputStream(
 					fileOutput);
-			
+
 			objectStream.writeObject(graph);
-			
-//			for (IGraphElement e : elements)
-//			{
-//				if (e instanceof Serializable)
-//				{
-//					objectStream.writeObject(e);
-//					objectStream.flush();
-//				}
-//			}
+
+			// for (IGraphElement e : elements)
+			// {
+			// if (e instanceof Serializable)
+			// {
+			// objectStream.writeObject(e);
+			// objectStream.flush();
+			// }
+			// }
 		}
 	}
 

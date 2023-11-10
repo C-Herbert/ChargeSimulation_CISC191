@@ -32,7 +32,7 @@ public class ChargeTester
 		// Initialize the view to use the charge board we just setup
 		view = new ProgramView();
 		testGraph = new ChargeGraph2D(1000, 700);
-
+		
 		// Add a 10 x 6 grid of arrows to the graph
 		for (int x = 1; x < 20; ++x)
 		{
@@ -61,7 +61,7 @@ public class ChargeTester
 		}
 
 		// Initialize the view to use the charge board we just setup
-		view.initializeChargeBoard(testGraph);
+		view.initializeGraph(testGraph);
 		
 		testGraph.printElements();
 	}

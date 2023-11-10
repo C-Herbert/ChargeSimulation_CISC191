@@ -12,7 +12,7 @@ import view.ChargeGraphView;
  * Subclasses of ElementView allow a given IGraphElementType to be displayed on
  * a Graph.
  * 
- * @version 1.0
+ * @version 1.1
  * @author Charlie Herbert
  */
 
@@ -20,10 +20,9 @@ import view.ChargeGraphView;
 // https://en.wikipedia.org/wiki/Model-view-controller
 
 // Generic allows subclasses to work on only specific types of graph elements
-public abstract class ElementView<T extends IGraphElement> implements Runnable
+public abstract class ElementView<T extends IGraphElement>
 {
 	private Graph2D graph;
-	private BufferedImage viewOutput;
 	private int sortOrder;
 
 	/**
@@ -67,25 +66,6 @@ public abstract class ElementView<T extends IGraphElement> implements Runnable
 		{
 			drawElement((T) e, graphics);
 		}
-	}
-
-	// TODO
-	@Override
-	public void run()
-	{
-		viewOutput = new BufferedImage(graph.getWidth(), graph.getHeight(),
-				BufferedImage.TYPE_4BYTE_ABGR);
-
-		Graphics2D viewGraphics = viewOutput.createGraphics();
-
-		this.draw(viewGraphics);
-
-		viewGraphics.dispose();
-	}
-
-	public BufferedImage getOutput()
-	{
-		return viewOutput;
 	}
 
 	/**
