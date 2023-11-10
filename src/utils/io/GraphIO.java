@@ -40,6 +40,7 @@ public final class GraphIO
 	 * 
 	 * @param file The file to read, should be a text file.
 	 * @return The Graph2D that was read from the file parameter
+	 * @throws  
 	 * @throws FileNotFoundException
 	 */
 	public static Graph2D readGraphFromFile(File file) throws IOException
@@ -49,41 +50,47 @@ public final class GraphIO
 				new FileInputStream(file)))
 		{
 			// First two ints of file should be Graph's width and height.
-			int width = fileInput.readInt();
-			int height = fileInput.readInt();
-
-			// Create a new graph with the previous width and height.
-			Graph2D graph = new Graph2D(width, height);
+//			int width = fileInput.readInt();
+//			int height = fileInput.readInt();
+//
+//			// Create a new graph with the previous width and height.
+//			Graph2D graph = new Graph2D(width, height);
 
 			// While we have another ID to read, continue adding elements
 			ObjectInputStream objectStream = new ObjectInputStream(fileInput);
-			try
-			{
-				while (true)
-				{
-					Object o = objectStream.readObject();
+//			try
+//			{
+//				while (true)
+//				{
+//					Object o = objectStream.readObject();
+//
+//					if (o instanceof IGraphElement)
+//					{
+//						graph.addElement((IGraphElement)o);
+//					}
+//				}
+//			}
+//			catch (EOFException e)
+//			{
+//
+//			}
+//			catch (ClassNotFoundException e)
+//			{
+//				e.printStackTrace();
+//			}
 
-					if (o instanceof IGraphElement)
-					{
-						graph.addElement((IGraphElement)o);
-					}
-				}
-			}
-			catch (EOFException e)
-			{
-
-			}
-			catch (ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-
-			return graph;
+			return (Graph2D) objectStream.readObject();
 		}
 		catch (FileNotFoundException e)
 		{
 			// Rethrow.
 			throw e;
+		}
+		catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -105,20 +112,24 @@ public final class GraphIO
 		try (DataOutputStream fileOutput = new DataOutputStream(
 				new FileOutputStream(file, false)))
 		{
-			// Write the width and height of the graph as the first line.
-			fileOutput.writeInt(graph.getWidth());
-			fileOutput.writeInt(graph.getHeight());
+//			// Write the width and height of the graph as the first line.
+//			fileOutput.writeInt(graph.getWidth());
+//			fileOutput.writeInt(graph.getHeight());
 
 			// Write each element's save string.
 			ObjectOutputStream objectStream = new ObjectOutputStream(
 					fileOutput);
-			for (IGraphElement e : elements)
-			{
-				if (e instanceof Serializable)
-				{
-					objectStream.writeObject(e);
-				}
-			}
+			
+			objectStream.writeObject(graph);
+			
+//			for (IGraphElement e : elements)
+//			{
+//				if (e instanceof Serializable)
+//				{
+//					objectStream.writeObject(e);
+//					objectStream.flush();
+//				}
+//			}
 		}
 	}
 

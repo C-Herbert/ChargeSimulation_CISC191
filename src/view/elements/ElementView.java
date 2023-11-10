@@ -26,16 +26,6 @@ public abstract class ElementView<T extends IGraphElement> implements Runnable
 	private BufferedImage viewOutput;
 	private int sortOrder;
 
-	/*
-	 * ElementViews maintain a cache of elements. This cache is cleared upon
-	 * drawing. Clearing the cache ensures all data is kept in sync with the
-	 * model.
-	 * While simply making the draw function a part of the IGraphElement
-	 * interface to remove the need to cache or type check each element is
-	 * appealing, I'm trying to keep the model and view as separate as possible.
-	 */
-	private LinkedList<T> cachedElements;
-	
 	/**
 	 * Creates a new element view with an initialized sort order.
 	 * 
@@ -45,7 +35,6 @@ public abstract class ElementView<T extends IGraphElement> implements Runnable
 	{
 		this.graph = graph;
 		this.sortOrder = sortOrder;
-		cachedElements = new LinkedList<>();
 	}
 
 	/**
@@ -56,91 +45,47 @@ public abstract class ElementView<T extends IGraphElement> implements Runnable
 	public abstract void drawElement(T graphElement, Graphics2D graphics);
 
 	/**
-	 * Checks if an IGraphElement can be drawn by this view.
+	 * Checks if a type of IGraphElement can be drawn by this view.
 	 * 
-	 * @param element Element to check.
-	 * @return true if the element can be drawn, false otherwise.
+	 * @param type Type to check.
+	 * @return true if the type can be drawn, false otherwise.
 	 */
-	public abstract boolean canDraw(IGraphElement element);
+	public abstract Class<? extends IGraphElement> getDrawableType();
 
 	/**
-	 * Attempts to draw an element. Only elements that can be drawn by this view
-	 * will be displayed.
+	 * Draws all elements of this view's graph field that match getDrawableType
+	 * using the provided graphics.
 	 * 
-	 * Suppression is intentional as canDraw is used to check each element
-	 * before casting.
-	 * 
-	 * @param element  IGraphElement to attempt to draw.
-	 * @param graphics Graphics to use when drawing element.
-	 * @return true if element could be drawn, false otherwise
+	 * @param graphics The graphics to use when drawing each element.
 	 */
+	// Suppress is okay because getDrawableType should prevent any invalid
+	// casts.
 	@SuppressWarnings("unchecked")
-	public boolean tryCacheElement(IGraphElement element)
+	public void draw(Graphics2D graphics)
 	{
-		try
+		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
 		{
-			if (canDraw(element))
-			{
-				// Cache the element and return true.
-				cachedElements.add((T) element);
-				return true;
-			}
-			else
-			{
-				// Failed to cache.
-				return false;
-			}
-		}
-		catch (ClassCastException e)
-		{
-			// ClassCastException will only be thrown if an invalid object
-			// managed to slip by canDraw()
-			throw new ClassCastException(
-					"Invalid class passed to tryDrawElement, ensure canDraw implementation is functioning properly");
+			drawElement((T) e, graphics);
 		}
 	}
 
-	//TODO
+	// TODO
 	@Override
 	public void run()
 	{
-		viewOutput = new BufferedImage(graph.getWidth(),graph.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-		
+		viewOutput = new BufferedImage(graph.getWidth(), graph.getHeight(),
+				BufferedImage.TYPE_4BYTE_ABGR);
+
 		Graphics2D viewGraphics = viewOutput.createGraphics();
-		
+
 		this.draw(viewGraphics);
-		
+
 		viewGraphics.dispose();
 	}
-	
+
 	public BufferedImage getOutput()
 	{
 		return viewOutput;
-	}
-	
-	/**
-	 * Draws all elements cached in this view using the provided graphics. The
-	 * cache is cleared after drawing.
-	 * 
-	 * @param graphics
-	 * @return true if any elements were drawn, false otherwise.
-	 */
-	public boolean draw(Graphics2D graphics)
-	{
-		// Check if we have any elements to draw, return false if not.
-		if (cachedElements.size() == 0) return false;
-
-		// Draw all elements.
-		for (T element : cachedElements)
-		{
-			drawElement(element, graphics);
-		}
-
-		// Clear the cache
-		cachedElements.clear();
-		
-		return true;
-		
 	}
 
 	/**

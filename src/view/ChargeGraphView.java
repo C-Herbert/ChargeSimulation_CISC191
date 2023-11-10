@@ -87,26 +87,14 @@ public class ChargeGraphView extends JPanel
 	}
 
 	@Override
-	//TODO: Cache element states so full draw routine isn't necessary on every repaint.
 	public void paint(Graphics g)
 	{
 		super.paint(g);
 
 		Graphics2D graphics = (Graphics2D) g;
 
-		// First, cache all elements to their respective views.
-		for (IGraphElement element : graphReference.getElements())
-		{
-			// Find a view that can draw the element
-			for (ElementView<?> view : views)
-			{
-				// Once we find a view that can draw the element, exit
-				if (view.tryCacheElement(element)) break;
-			}
-		}
-
-		// Next, draw all elements according to their sort order. Note that the
-		// views list is already sorted.
+		// Draw all elements according to their sort order. Note that the views
+		// list is already sorted.
 		for (ElementView<?> view : views)
 		{
 			view.draw(graphics);

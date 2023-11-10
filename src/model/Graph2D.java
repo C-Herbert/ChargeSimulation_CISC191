@@ -1,9 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * The Graph class is used to store and manage a list of IGraphElements.
@@ -14,13 +17,12 @@ import java.util.List;
  * @author Charlie Herbert
  */
 
-public class Graph2D
+public class Graph2D implements Serializable
 {
 	// Graph2Ds have a width and height
 	private int width, height;
-	// Graph2Ds have many unique graph elements (Note: HashSet instead of Map
-	// because key doesn't matter)
-	private HashSet<IGraphElement> graphElements;
+	// Graph2Ds have many unique graph elements
+	private HashMap<Class<? extends IGraphElement>, List<IGraphElement>> graphElements;
 
 	/**
 	 * Creates a new Graph2D with an empty element list
@@ -32,27 +34,7 @@ public class Graph2D
 	{
 		this.width = width;
 		this.height = height;
-		this.graphElements = new HashSet<IGraphElement>();
-	}
-
-	/**
-	 * Creates a new Graph2D object with its elements initialized.
-	 * 
-	 * @param elements list of IGraphElements to initialize this Graph2D with
-	 * @param width    integer width to assign to new Graph2D
-	 * @param height   integer height to assign to new Graph2D
-	 */
-	public Graph2D(List<IGraphElement> elements, int width, int height)
-	{
-		this(width, height);
-
-		// Initialize elements to provided list of IGraphElements
-		for (IGraphElement element : elements)
-		{
-			// Don't copy the element as we want it to be modifiable by other
-			// parts of the program
-			graphElements.add(element);
-		}
+		this.graphElements = new HashMap<>();
 	}
 
 	/**
@@ -80,11 +62,26 @@ public class Graph2D
 	 * 
 	 * @param element the IGraphElement to add to this graph
 	 */
-	public boolean addElement(IGraphElement element)
+	public void addElement(IGraphElement element)
 	{
-		// No deep copy. Graph should be able to handle any state of any
-		// element passed in.
-		return graphElements.add(element);
+		// No deep copy for element. Graph should be able to handle any state
+		// of any element passed in.
+
+		// Check if we already have a list that could hold element.
+		if (graphElements.containsKey(element.getClass()))
+		{
+			// Add the element if we found a suitable list.
+			graphElements.get(element.getClass()).add(element);
+		}
+		else
+		{
+			// If we don't, create a new list and pair it with the appropriate
+			// key in graphElements.
+			ArrayList<IGraphElement> newElementList = new ArrayList<IGraphElement>();
+			newElementList.add(element);
+
+			graphElements.put(element.getClass(), newElementList);
+		}
 	}
 
 	/**
@@ -96,26 +93,83 @@ public class Graph2D
 	 */
 	public boolean removeElement(IGraphElement element)
 	{
-		return graphElements.remove(element);
+		// Check if the elements list even contains a matching type.
+		if (graphElements.containsKey(element.getClass()))
+		{
+			// Reference to the appropriate list
+			List<IGraphElement> elementList = graphElements
+					.get(element.getClass());
+
+			// Check if list contains desired element
+			if (elementList.contains(element))
+			{
+				// Successfully found element, remove it and return true
+				elementList.remove(element);
+				return true;
+			}
+			else
+			{
+				// The list in graphElements matching the type of element does
+				// not contain element, thus it could not be removed.
+				return false;
+			}
+		}
+		else
+		{
+			// graphElements doesn't even contain a list for the passed type
+			return false;
+		}
 	}
 
 	/**
-	 * Gets a copy of the list of elements contained by this graph.
+	 * Gets a list of the elements contained by this graph.
 	 * 
 	 * Note that the elements are not copies, only the list itself. This
 	 * prevents unexpected adding/removing of elements but still allows element
 	 * manipulation.
 	 * 
-	 * @return A copy of the list of elements managed by this graph.
+	 * @return A list of the elements managed by this graph.
 	 */
 	public List<IGraphElement> getElements()
 	{
-		ArrayList<IGraphElement> elements = new ArrayList<IGraphElement>(
-				graphElements.size());
+		List<IGraphElement> totalElements = new ArrayList<IGraphElement>();
 
-		// Only need to make a deep copy of the list, external modification of
-		// the elements themselves is okay
-		for (IGraphElement e : graphElements)
+		for (List<IGraphElement> list : graphElements.values())
+		{
+			totalElements.addAll(list);
+		}
+
+		return totalElements;
+	}
+
+	/**
+	 * Gets all elements contained by this graph that are of a specific type.
+	 * 
+	 * @return A list of elements matching the type parameter that are managed
+	 *         by this graph.
+	 */
+	public List<IGraphElement> getElementsOfType(
+			Class<? extends IGraphElement> type)
+	{
+		// First, we gather all elements that match the type
+		List<IGraphElement> matchingElements = new ArrayList<>();
+
+		// Iterate through all sub-lists of graphElements.
+		for (Class<? extends IGraphElement> c : graphElements.keySet())
+		{
+			// Check if the sub-list's type matches the type parameter.
+			if (type.isAssignableFrom(c))
+			{
+				// If so, add the sub-list's elements to our matching list
+				matchingElements.addAll(graphElements.get(c));
+			}
+		}
+
+		// Only need to make a deep copy of the matching elements list, external
+		// modification of the elements themselves is okay
+		List<IGraphElement> elements = new ArrayList<>();
+
+		for (IGraphElement e : matchingElements)
 		{
 			elements.add(e);
 		}
@@ -141,6 +195,25 @@ public class Graph2D
 		for (IGraphElement element : elements)
 		{
 			addElement(element);
+		}
+	}
+
+	/**
+	 * Prints the elements of this graph in a readable format.
+	 */
+	public void printElements()
+	{
+		for (Entry<Class<? extends IGraphElement>, List<IGraphElement>> entry : graphElements
+				.entrySet())
+		{
+			System.out.print("Entry \'" + entry.getKey().getName() + "\' contains: ");
+
+			for (IGraphElement e : entry.getValue())
+			{
+				System.out.print(e + ", ");
+			}
+			
+			System.out.println();
 		}
 	}
 }

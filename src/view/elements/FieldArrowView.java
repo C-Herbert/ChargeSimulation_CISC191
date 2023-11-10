@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import model.Charge;
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
@@ -49,9 +50,9 @@ public class FieldArrowView extends ElementView<FieldArrow>
 	}
 
 	@Override
-	public boolean canDraw(IGraphElement element)
+	public Class<FieldArrow> getDrawableType()
 	{
-		return element instanceof FieldArrow;
+		return FieldArrow.class;
 	}
 
 	/**

@@ -19,30 +19,6 @@ public class ChargeGraph2D extends Graph2D
 	ArrayList<Charge> chargeList;
 
 	/**
-	 * Creates a new ChargeGraph2D object with its elements initialized.
-	 * 
-	 * @param elements list of IGraphElements to initialize this ChargeGraph2D
-	 *                 with
-	 * @param width    integer width to assign to new ChargeGraph2D
-	 * @param height   integer height to assign to new ChargeGraph2D
-	 */
-	public ChargeGraph2D(List<IGraphElement> elements, int width, int height)
-	{
-		super(elements, width, height);
-
-		this.chargeList = new ArrayList<Charge>();
-
-		// Initialize chargeList to include any charges in the elements list
-		for (IGraphElement e : elements)
-		{
-			if (e instanceof Charge)
-			{
-				this.chargeList.add((Charge) e);
-			}
-		}
-	}
-
-	/**
 	 * Creates a new ChargeGraph2D.
 	 * 
 	 * @param width  integer width to assign to new ChargeGraph2D
@@ -55,19 +31,16 @@ public class ChargeGraph2D extends Graph2D
 	}
 
 	@Override
-	public boolean addElement(IGraphElement element)
+	public void addElement(IGraphElement element)
 	{
 		// Perform add operation like parent class
-		boolean output = super.addElement(element);
+		super.addElement(element);
 
 		// Ensure chargeList stays up to date with main element list
 		if (element instanceof Charge)
 		{
 			chargeList.add((Charge) element);
 		}
-
-		// Same output as parent
-		return output;
 	}
 
 	@Override

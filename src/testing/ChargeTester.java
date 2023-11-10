@@ -62,6 +62,8 @@ public class ChargeTester
 
 		// Initialize the view to use the charge board we just setup
 		view.initializeChargeBoard(testGraph);
+		
+		testGraph.printElements();
 	}
 
 	// Main method to run tester

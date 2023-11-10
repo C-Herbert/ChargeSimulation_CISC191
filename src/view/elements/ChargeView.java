@@ -63,8 +63,8 @@ public class ChargeView extends ElementView<Charge>
 	}
 
 	@Override
-	public boolean canDraw(IGraphElement element)
+	public Class<Charge> getDrawableType()
 	{
-		return element instanceof Charge;
+		return Charge.class;
 	}
 }
