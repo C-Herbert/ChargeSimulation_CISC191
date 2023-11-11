@@ -42,10 +42,16 @@ public class ProgramView
 		mainPanel.setLayout(new BorderLayout());
 		mainFrame.add(mainPanel);
 
+		// Initialize the fileChooser
+		fileChooser = new JFileChooser();
+
+		// Create the upper toolbar
 		createToolbar();
 		mainPanel.add(toolbarPanel, BorderLayout.NORTH);
 
-		fileChooser = new JFileChooser();
+		// Create the side toolbox
+		toolbox = new ToolboxView();
+		mainPanel.add(toolbox, BorderLayout.EAST);
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.pack();
@@ -79,6 +85,26 @@ public class ProgramView
 
 		// Blend in with the window's own toolbar
 		toolbarPanel.setBackground(Color.WHITE);
+	}
+
+	/**
+	 * Returns the main frame of this view. Note that this function should only
+	 * be used to assign parent components for dialog options. Do not modify the
+	 * frame.
+	 * 
+	 * @return The JFrame representing the main frame of the program.
+	 */
+	public JFrame getFrame()
+	{
+		return mainFrame;
+	}
+
+	// ProgramView has a toolbox
+	private ToolboxView toolbox;
+
+	public ToolboxView getToolbox()
+	{
+		return toolbox;
 	}
 
 	// ProgramView has a GraphView

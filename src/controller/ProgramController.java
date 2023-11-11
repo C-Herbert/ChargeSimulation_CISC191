@@ -1,5 +1,6 @@
 package controller;
 
+import controller.listeners.AddChargeListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
 import model.ChargeGraph2D;
@@ -41,6 +42,10 @@ public class ProgramController
 				new FileOpenListener(programGraph, programView));
 		programView.addFileSaveListener(
 				new FileSaveListener(programGraph, programView));
+
+		// Add Toolbox Listeners
+		programView.getToolbox().addCreateChargeListener(
+				new AddChargeListener(programGraph, programView));
 
 	}
 }
