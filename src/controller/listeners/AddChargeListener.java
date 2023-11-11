@@ -2,10 +2,12 @@ package controller.listeners;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,6 +54,7 @@ public class AddChargeListener extends GraphActionListener
 		creationDialogPanel.add(decisionPanel, BorderLayout.SOUTH);
 
 		creationDialogFrame.add(creationDialogPanel);
+		creationDialogFrame.setAlwaysOnTop(true);
 		creationDialogFrame.pack();
 	}
 
@@ -72,7 +75,7 @@ public class AddChargeListener extends GraphActionListener
 				double x = Double.parseDouble(xPositionField.getText());
 				double y = Double.parseDouble(yPositionField.getText());
 				double mag = Double.parseDouble(magnitudeField.getText());
-				
+
 				// If inputs were successfully gathered, add a new charge to the
 				// graph.
 				Charge c = new Charge(x, y, mag);
@@ -92,6 +95,20 @@ public class AddChargeListener extends GraphActionListener
 		else
 		{
 			// User hit a button that should open the frame (Any other source).
+
+			// If the source was a JComponent, position the window such that
+			// it is adjacent to the source.
+			if (e.getSource() instanceof JComponent)
+			{
+				Point sourcePoint = ((JComponent) e.getSource())
+						.getLocationOnScreen();
+
+				creationDialogFrame.setLocation(
+						sourcePoint.x - creationDialogFrame.getWidth(),
+						sourcePoint.y);
+			}
+
+			// Display the frame.
 			creationDialogFrame.setVisible(true);
 		}
 	}
