@@ -7,6 +7,7 @@ package controller;
  * @author Charlie Herbert
  * @version 1.0
  */
+
 public class ChargeSimulation
 {
 	public static void main(String[] args)

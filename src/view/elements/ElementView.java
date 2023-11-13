@@ -2,6 +2,7 @@ package view.elements;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import model.Graph2D;
@@ -37,11 +38,16 @@ public abstract class ElementView<T extends IGraphElement>
 	}
 
 	/**
-	 * Draws an element using the provided graphics
+	 * Gets this view's sort order. Used to determine how elements should be
+	 * drawn. A higher value means that this view will be drawn on top of the
+	 * others.
 	 * 
-	 * @param graphics Graphics2D object to be used for drawing the elements
+	 * @return the numerical value of this view's sort order.
 	 */
-	public abstract void drawElement(T graphElement, Graphics2D graphics);
+	public int getSortOrder()
+	{
+		return sortOrder;
+	}
 
 	/**
 	 * Checks if a type of IGraphElement can be drawn by this view.
@@ -50,6 +56,13 @@ public abstract class ElementView<T extends IGraphElement>
 	 * @return true if the type can be drawn, false otherwise.
 	 */
 	public abstract Class<? extends IGraphElement> getDrawableType();
+
+	/**
+	 * Draws an element using the provided graphics
+	 * 
+	 * @param graphics Graphics2D object to be used for drawing the elements
+	 */
+	public abstract void drawElement(T graphElement, Graphics2D graphics);
 
 	/**
 	 * Draws all elements of this view's graph field that match getDrawableType
@@ -69,14 +82,27 @@ public abstract class ElementView<T extends IGraphElement>
 	}
 
 	/**
-	 * Gets this view's sort order. Used to determine how elements should be
-	 * drawn. A higher value means that this view will be drawn on top of the
-	 * others.
+	 * Gets all potential interactables managed by this view at a point.
 	 * 
-	 * @return the numerical value of this view's sort order.
+	 * @param x the x position to consider.
+	 * @param y the y position to consider.
+	 * @return A list of IGraphElements that have bounds containing the passed
+	 *         point.
 	 */
-	public int getSortOrder()
+	public ArrayList<IGraphElement> getInteractablesAtPoint(double x, double y)
 	{
-		return sortOrder;
+		ArrayList<IGraphElement> interactables = new ArrayList<IGraphElement>();
+
+		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
+		{
+			// Remember, x and y must be relative to the element itself.
+			if (e.getInteractionBounds().isPointInBounds(x - e.getX(),
+					y - e.getY()))
+			{
+				interactables.add(e);
+			}
+		}
+		
+		return interactables;
 	}
 }

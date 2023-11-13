@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import model.bounds.Bound;
+import model.bounds.RectangleBound;
 import utils.Vec2D;
 
 /**
@@ -19,6 +21,7 @@ public class Charge implements IGraphElement, Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 8055174990777812535L;
+
 	// Charges have an x and y position
 	private double x, y;
 	// Charges have a magnitude
@@ -85,6 +88,24 @@ public class Charge implements IGraphElement, Serializable
 	}
 
 	/**
+	 * Sets the x position of this charge.
+	 */
+	@Override
+	public void setX(double newX)
+	{
+		this.x = newX;
+	}
+
+	/**
+	 * Sets the y position of this charge.
+	 */
+	@Override
+	public void setY(double newY)
+	{
+		this.y = newY;
+	}
+
+	/**
 	 * Gets the magnitude of this charge.
 	 * 
 	 * @return The magnitude of this charge.
@@ -92,5 +113,13 @@ public class Charge implements IGraphElement, Serializable
 	public double getMagnitude()
 	{
 		return this.magnitude;
+	}
+
+	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
+
+	@Override
+	public Bound getInteractionBounds()
+	{
+		return BOUNDS;
 	}
 }

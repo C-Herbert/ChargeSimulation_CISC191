@@ -1,6 +1,7 @@
 package controller;
 
 import controller.listeners.AddChargeListener;
+import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
 import model.ChargeGraph2D;
@@ -36,6 +37,10 @@ public class ProgramController
 		// Initialize the programView field.
 		programView = new ProgramView();
 		programView.initializeGraph(programGraph);
+
+		// Add Graph Listeners
+		programView.addGraphMouseListener(
+				new ElementDragListener(programGraph, programView));
 
 		// Add IO listeners
 		programView.addFileOpenListener(

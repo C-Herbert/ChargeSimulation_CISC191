@@ -108,7 +108,17 @@ public class ProgramView
 	}
 
 	// ProgramView has a GraphView
-	ChargeGraphView graphView;
+	private ChargeGraphView graphView;
+
+	/**
+	 * Gets the graph view managed by this program.
+	 * 
+	 * @return the ChargeGraphView managed by this program.
+	 */
+	public ChargeGraphView getGraphView()
+	{
+		return graphView;
+	}
 
 	/**
 	 * Initializes the graph field of this view. Note that any existing graph

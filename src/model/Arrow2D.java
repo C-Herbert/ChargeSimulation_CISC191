@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import model.bounds.Bound;
+import model.bounds.RectangleBound;
 import utils.Vec2D;
 
 /**
@@ -46,5 +48,31 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	public double getY()
 	{
 		return this.yPos;
+	}
+
+	/**
+	 * Sets the x position of this charge.
+	 */
+	@Override
+	public void setX(double newX)
+	{
+		this.xPos = newX;
+	}
+
+	/**
+	 * Sets the y position of this charge.
+	 */
+	@Override
+	public void setY(double newY)
+	{
+		this.yPos = newY;
+	}
+
+	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
+
+	@Override
+	public Bound getInteractionBounds()
+	{
+		return BOUNDS;
 	}
 }

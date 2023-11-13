@@ -60,7 +60,7 @@ public class AddChargeListener extends GraphActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{
+	{	
 		// There are 3 possible cases
 		if (e.getSource().equals(cancelButton))
 		{

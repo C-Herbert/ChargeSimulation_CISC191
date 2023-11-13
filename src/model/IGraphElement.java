@@ -1,5 +1,7 @@
 package model;
 
+import model.bounds.Bound;
+
 /**
  * IGraphElement provides an interface for all elements that may be part of a
  * Graph.
@@ -27,4 +29,22 @@ public interface IGraphElement
 	 *         graph.
 	 */
 	double getY();
+
+	/**
+	 * Sets the x position of this graph element.
+	 */
+	void setX(double newX);
+
+	/**
+	 * Sets the x position of this graph element.
+	 */
+	void setY(double newY);
+
+	/**
+	 * Returns the interaction bounds associated with this graph element.
+	 * 
+	 * @return the Bounds object representing this graph element's interaction
+	 *         bounds.
+	 */
+	Bound getInteractionBounds();
 }

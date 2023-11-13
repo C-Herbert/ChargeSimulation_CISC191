@@ -83,7 +83,6 @@ public class ChargeGraphView extends JPanel
 			// view to end of list.
 			return views.add(view);
 		}
-
 	}
 
 	@Override
@@ -99,5 +98,40 @@ public class ChargeGraphView extends JPanel
 		{
 			view.draw(graphics);
 		}
+	}
+
+	/**
+	 * Find the first interactable on the graph located at the position
+	 * argument. Elements from views with a higher sort order will be selected
+	 * first, though order with a view is not guaranteed.
+	 * 
+	 * @param x the x position to consider.
+	 * @param y the y position to consider
+	 * @return The first IGraphElement with bounds containing x and y.
+	 */
+	public IGraphElement getInteractableAtPoint(double x, double y)
+	{
+		// Define a temporary variable for the loop
+		ArrayList<IGraphElement> elements;
+
+		// Iterate through views, searching for any interactable at the defined
+		// point. Note that views list is already sorted according to
+		// sortingOrder.
+		for (ElementView<?> view : views)
+		{
+			// Gather all interactables managed by the view at the defined
+			// point.
+			elements = view.getInteractablesAtPoint(x, y);
+
+			if (!elements.isEmpty())
+			{
+				// We're only interested in a single interactable, thus return
+				// the first we come across.
+				return elements.get(0);
+			}
+		}
+
+		// No elements found
+		return null;
 	}
 }
