@@ -86,4 +86,13 @@ public class ChargeGraph2D extends Graph2D
 		return netVector;
 	}
 
+	public void updateFieldArrows()
+	{
+		for (IGraphElement arrow : getElementsOfType(FieldArrow.class))
+		{
+			((FieldArrow) arrow)
+					.setDirection(getNetFieldAtPoint(arrow.getX(), arrow.getY())
+							.getDirection());
+		}
+	}
 }

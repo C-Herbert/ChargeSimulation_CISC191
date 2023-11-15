@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -15,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Charge;
-import model.Graph2D;
+import model.ChargeGraph2D;
 import view.ProgramView;
 
 public class AddChargeListener extends GraphActionListener
@@ -31,7 +30,7 @@ public class AddChargeListener extends GraphActionListener
 	JButton cancelButton = new JButton("Cancel");
 	JButton createButton = new JButton("Add Charge");
 
-	public AddChargeListener(Graph2D graph, ProgramView view)
+	public AddChargeListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
 

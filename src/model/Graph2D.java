@@ -20,9 +20,9 @@ import java.util.Map.Entry;
 public class Graph2D implements Serializable
 {
 	// Graph2Ds have a width and height
-	private int width, height;
+	protected int width, height;
 	// Graph2Ds have many unique graph elements
-	private HashMap<Class<? extends IGraphElement>, List<IGraphElement>> graphElements;
+	protected HashMap<Class<? extends IGraphElement>, List<IGraphElement>> graphElements;
 
 	/**
 	 * Creates a new Graph2D with an empty element list

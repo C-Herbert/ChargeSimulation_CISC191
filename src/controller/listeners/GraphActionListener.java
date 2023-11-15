@@ -2,6 +2,7 @@ package controller.listeners;
 
 import java.awt.event.ActionListener;
 
+import model.ChargeGraph2D;
 import model.Graph2D;
 import view.ProgramView;
 
@@ -21,7 +22,7 @@ public abstract class GraphActionListener implements ActionListener
 	// GraphActionListener has a program view.
 	protected ProgramView view;
 
-	public GraphActionListener(Graph2D graph, ProgramView view)
+	public GraphActionListener(ChargeGraph2D graph, ProgramView view)
 	{
 		this.graph = graph;
 		this.view = view;

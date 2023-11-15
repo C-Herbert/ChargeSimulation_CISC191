@@ -5,6 +5,7 @@ import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
 import model.ChargeGraph2D;
+import utils.ArrowPatterns;
 import view.ProgramView;
 
 /**
@@ -52,5 +53,7 @@ public class ProgramController
 		programView.getToolbox().addCreateChargeListener(
 				new AddChargeListener(programGraph, programView));
 
+		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
+		
 	}
 }

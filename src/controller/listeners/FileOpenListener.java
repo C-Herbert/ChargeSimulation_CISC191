@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import model.ChargeGraph2D;
 import model.Graph2D;
 import utils.io.GraphFileFormatException;
 import utils.io.GraphIO;
@@ -26,7 +27,7 @@ import view.ProgramView;
 
 public class FileOpenListener extends GraphActionListener
 {
-	public FileOpenListener(Graph2D graph, ProgramView view)
+	public FileOpenListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
 		// TODO Auto-generated constructor stub

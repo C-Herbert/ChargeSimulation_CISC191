@@ -1,12 +1,10 @@
 package controller.listeners;
 
-import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.event.MouseEvent;
-import java.lang.Thread.State;
 
-import model.Graph2D;
+import model.Charge;
+import model.ChargeGraph2D;
 import model.IGraphElement;
 import view.ProgramView;
 
@@ -22,12 +20,15 @@ import view.ProgramView;
  */
 public class ElementDragListener extends GraphMouseListener
 {
+	// All ElementDragListeners share a list of types that can be dragged.
+	private static final Class[] DRAGGABLE_TYPES = { Charge.class };
+
 	// ElementDragListener tracks an IGraphElement.
 	private IGraphElement draggingElement = null;
 	// ElementDragListener has a thread for updating the element's position.
 	private Thread dragThread;
 
-	public ElementDragListener(Graph2D graph, ProgramView view)
+	public ElementDragListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
 	}
@@ -52,8 +53,17 @@ public class ElementDragListener extends GraphMouseListener
 		// If we found an element, start dragging it.
 		if (draggingElement != null)
 		{
-			dragThread = new Thread(new DragElement());
-			dragThread.start();
+			// Check that the element is a draggable type.
+			for (Class<?> c : DRAGGABLE_TYPES)
+			{
+				if (draggingElement.getClass().equals(c))
+				{
+					dragThread = new Thread(new DragElement());
+					dragThread.start();
+
+					return;
+				}
+			}
 		}
 	}
 
@@ -113,6 +123,7 @@ public class ElementDragListener extends GraphMouseListener
 						draggingElement.setX(lastPoint.getX());
 						draggingElement.setY(lastPoint.getY());
 						view.repaintGraph();
+						graph.updateFieldArrows();
 
 						// Sleep before executing again.
 						Thread.sleep(10);

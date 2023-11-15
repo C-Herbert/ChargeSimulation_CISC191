@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 
+import model.ChargeGraph2D;
 import model.Graph2D;
 import utils.io.GraphIO;
 import view.ProgramView;
@@ -24,7 +25,7 @@ import view.ProgramView;
 
 public class FileSaveListener extends GraphActionListener
 {
-	public FileSaveListener(Graph2D graph, ProgramView view)
+	public FileSaveListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
 	}

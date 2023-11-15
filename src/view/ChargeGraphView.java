@@ -115,13 +115,13 @@ public class ChargeGraphView extends JPanel
 		ArrayList<IGraphElement> elements;
 
 		// Iterate through views, searching for any interactable at the defined
-		// point. Note that views list is already sorted according to
-		// sortingOrder.
-		for (ElementView<?> view : views)
+		// point. Note that the views list is sorted from lowest to highest
+		// sort order, thus we iterate in reverse here.
+		for (int i = views.size() - 1; i >= 0; --i)
 		{
 			// Gather all interactables managed by the view at the defined
 			// point.
-			elements = view.getInteractablesAtPoint(x, y);
+			elements = views.get(i).getInteractablesAtPoint(x, y);
 
 			if (!elements.isEmpty())
 			{
