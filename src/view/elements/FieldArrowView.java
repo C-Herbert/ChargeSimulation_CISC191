@@ -6,41 +6,35 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import assets.ProgramAssets;
 import model.Charge;
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
 
 /**
- * Responsible for drawing FieldArrows on a Graph
+ * The FieldArrowView class is an ElementView responsible for drawing all
+ * FieldArrows on a graph using a provided Graphics object.
  * 
- * @version 1.0
  * @author Charlie Herbert
+ * @version 1.1
  */
 public class FieldArrowView extends ElementView<FieldArrow>
 {
+	// Static field for arrow image.
+	private static BufferedImage arrowImage = ProgramAssets
+			.getAsset("field_arrow");
+
+	/**
+	 * Constructs a new FieldArrowView using the provided graph and assigns it
+	 * the passed sortOrder.
+	 * 
+	 * @param graph     the graph to associate this view with.
+	 * @param sortOrder the sortOrder to assign to this view.
+	 */
 	public FieldArrowView(Graph2D graph, int sortOrder)
 	{
 		super(graph, sortOrder);
-	}
-
-	// File path to field arrow image.
-	private static final String ARROW_FILEPATH = "src/assets/arrow.png";
-	// Static field for arrow image once loaded.
-	private static BufferedImage arrowImage;
-
-	// TODO: better alternative?
-	static
-	{
-		try
-		{
-			// https://docs.oracle.com/javase/tutorial/2d/images/loadimage.html
-			arrowImage = ImageIO.read(new File(ARROW_FILEPATH));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	@Override

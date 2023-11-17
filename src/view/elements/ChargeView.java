@@ -7,42 +7,37 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import assets.ProgramAssets;
 import model.Charge;
 import model.Graph2D;
 import model.IGraphElement;
 
+/**
+ * The ChargeView class is an ElementView responsible for drawing all Charges on
+ * a graph using a provided Graphics object.
+ * 
+ * @author Charlie Herbert
+ * @version 1.1
+ */
 public class ChargeView extends ElementView<Charge>
 {
+	// Static field for positive charge image.
+	private static BufferedImage positiveChargeImage = ProgramAssets
+			.getAsset("positive_charge");
+	// Static field for positive charge image.
+	private static BufferedImage negativeChargeImage = ProgramAssets
+			.getAsset("negative_charge");
+
+	/**
+	 * Constructs a new ChargeView using the provided graph and assigns it
+	 * the passed sortOrder.
+	 * 
+	 * @param graph     the graph to associate this view with.
+	 * @param sortOrder the sortOrder to assign to this view.
+	 */
 	public ChargeView(Graph2D graph, int sortOrder)
 	{
 		super(graph, sortOrder);
-	}
-
-	// File path to positive charge image.
-	private static final String POSITIVE_CHARGE_FILEPATH = "src/assets/positive_charge.png";
-	// Static field for positive charge image once loaded.
-	private static BufferedImage positiveChargeImage;
-
-	// File path to positive charge image.
-	private static final String NEGATIVE_CHARGE_FILEPATH = "src/assets/negative_charge.png";
-	// Static field for positive charge image once loaded.
-	private static BufferedImage negativeChargeImage;
-
-	// TODO: better alternative?
-	static
-	{
-		try
-		{
-			// https://docs.oracle.com/javase/tutorial/2d/images/loadimage.html
-			positiveChargeImage = ImageIO
-					.read(new File(POSITIVE_CHARGE_FILEPATH));
-			negativeChargeImage = ImageIO
-					.read(new File(NEGATIVE_CHARGE_FILEPATH));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	@Override
