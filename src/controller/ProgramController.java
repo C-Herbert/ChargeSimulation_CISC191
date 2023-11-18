@@ -1,6 +1,7 @@
 package controller;
 
 import controller.listeners.AddChargeListener;
+import controller.listeners.ArrowLayoutListener;
 import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
@@ -44,16 +45,20 @@ public class ProgramController
 				new ElementDragListener(programGraph, programView));
 
 		// Add IO listeners
-		programView.addFileOpenListener(
+		programView.getToolbar().addFileOpenListener(
 				new FileOpenListener(programGraph, programView));
-		programView.addFileSaveListener(
+		programView.getToolbar().addFileSaveListener(
 				new FileSaveListener(programGraph, programView));
+
+		// Add Arrow Listener
+		programView.getToolbar().addArrowPatternListener(
+				new ArrowLayoutListener(programGraph, programView));
 
 		// Add Toolbox Listeners
 		programView.getToolbox().addCreateChargeListener(
 				new AddChargeListener(programGraph, programView));
 
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
-		
+
 	}
 }

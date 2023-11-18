@@ -46,8 +46,8 @@ public class ProgramView
 		fileChooser = new JFileChooser();
 
 		// Create the upper toolbar
-		createToolbar();
-		mainPanel.add(toolbarPanel, BorderLayout.NORTH);
+		toolbar = new ToolbarView();
+		mainPanel.add(toolbar, BorderLayout.NORTH);
 
 		// Create the side toolbox
 		toolbox = new ToolboxView();
@@ -56,35 +56,6 @@ public class ProgramView
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
-	}
-
-	// ProgramView has a panel to hold toolbar elements
-	private JPanel toolbarPanel;
-	// ProgramView has buttons to control file io
-	private JButton fileSaveButton;
-	private JButton fileOpenButton;
-
-	private void createToolbar()
-	{
-		toolbarPanel = new JPanel();
-		toolbarPanel.setPreferredSize(null);
-
-		// Setup panel's layout
-		FlowLayout layout = new FlowLayout();
-		layout.setAlignment(FlowLayout.LEFT);
-		layout.setHgap(0);
-		layout.setVgap(0);
-		toolbarPanel.setLayout(layout);
-
-		// Add toolbar buttons
-		fileSaveButton = new JButton("Save File");
-		toolbarPanel.add(fileSaveButton);
-
-		fileOpenButton = new JButton("Open File");
-		toolbarPanel.add(fileOpenButton);
-
-		// Blend in with the window's own toolbar
-		toolbarPanel.setBackground(Color.WHITE);
 	}
 
 	/**
@@ -99,9 +70,27 @@ public class ProgramView
 		return mainFrame;
 	}
 
+	// ProgramView has a toolbar
+	private ToolbarView toolbar;
+
+	/**
+	 * Gets the ToolbarView associated with this ProgramView.
+	 * 
+	 * @return the ToolbarView associated with this ProgramView.
+	 */
+	public ToolbarView getToolbar()
+	{
+		return toolbar;
+	}
+
 	// ProgramView has a toolbox
 	private ToolboxView toolbox;
 
+	/**
+	 * Gets the ToolboxView associated with this ProgramView.
+	 * 
+	 * @return the ToolboxView associated with this ProgramView.
+	 */
 	public ToolboxView getToolbox()
 	{
 		return toolbox;
@@ -161,25 +150,4 @@ public class ProgramView
 	{
 		graphView.addMouseListener(listener);
 	}
-
-	/**
-	 * Adds an action listener to this view's associated save button.
-	 * 
-	 * @param listener The listener to add.
-	 */
-	public void addFileSaveListener(ActionListener listener)
-	{
-		fileSaveButton.addActionListener(listener);
-	}
-
-	/**
-	 * Adds an action listener to this view's associated open button.
-	 * 
-	 * @param listener The listener to add.
-	 */
-	public void addFileOpenListener(ActionListener listener)
-	{
-		fileOpenButton.addActionListener(listener);
-	}
-
 }

@@ -1,7 +1,10 @@
 package utils;
 
+import java.util.Iterator;
+
 import model.FieldArrow;
 import model.Graph2D;
+import model.IGraphElement;
 
 /**
  * ArrowPatterns is a utility class used to generate various patterns of
@@ -42,6 +45,7 @@ public final class ArrowPatterns
 		double yPos = 0.0;
 		FieldArrow fArrow = null;
 
+		// Add the arrows
 		for (int y = 0; y < yCount; ++y)
 		{
 			yPos = (yInterval * y) + (ARROW_SIZE / 2);
@@ -51,9 +55,23 @@ public final class ArrowPatterns
 				xPos = (xInterval * x) + (ARROW_SIZE / 2);
 
 				fArrow = new FieldArrow(xPos, yPos, 1, 0);
-				
+
 				graph.addElement(fArrow);
 			}
+		}
+	}
+
+	/**
+	 * Helper function to clear a graph of FieldArrows.
+	 * 
+	 * @param graph the graph to remove FieldArrows from.
+	 */
+	public static void clearGraphArrows(Graph2D graph)
+	{
+		// Gather all field arrows, then remove them from the graph.
+		for (IGraphElement fArrow : graph.getElementsOfType(FieldArrow.class))
+		{
+			graph.removeElement(fArrow);
 		}
 	}
 }

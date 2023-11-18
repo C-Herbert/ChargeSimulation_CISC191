@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import assets.ProgramAssets;
 
 // References:
 // https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
@@ -30,6 +33,8 @@ public class ToolboxView extends JPanel
 
 		JLabel headerLabel = new JLabel("Toolbox:");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		createChargeButton.setIcon(new ImageIcon(ProgramAssets.getAsset("positive_charge")));
 
 		this.add(headerLabel);
 

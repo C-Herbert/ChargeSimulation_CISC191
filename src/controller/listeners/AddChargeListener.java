@@ -79,6 +79,7 @@ public class AddChargeListener extends GraphActionListener
 				// graph.
 				Charge c = new Charge(x, y, mag);
 				graph.addElement(c);
+				graph.updateFieldArrows();
 				view.repaintGraph();
 			}
 			catch (NumberFormatException e1)

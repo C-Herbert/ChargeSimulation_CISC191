@@ -18,7 +18,7 @@ import view.ProgramView;
 public abstract class GraphActionListener implements ActionListener
 {
 	// GraphActionListener has a graph.
-	protected Graph2D graph;
+	protected ChargeGraph2D graph;
 	// GraphActionListener has a program view.
 	protected ProgramView view;
 
