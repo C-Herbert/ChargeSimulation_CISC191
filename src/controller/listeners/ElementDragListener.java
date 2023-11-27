@@ -42,6 +42,9 @@ public class ElementDragListener extends GraphMouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
+		// Check that input is a left mouse press. If not, exit.
+		if (e.getButton() != MouseEvent.BUTTON1) return;
+
 		// Early exit if we're already dragging something. (This shouldn't
 		// happen)
 		if (draggingElement != null) return;
@@ -102,6 +105,7 @@ public class ElementDragListener extends GraphMouseListener
 		@Override
 		public void run()
 		{
+			System.out.println("Drag Start");
 			try
 			{
 				// Continue execution until we're interrupted
@@ -126,7 +130,8 @@ public class ElementDragListener extends GraphMouseListener
 						graph.updateFieldArrows();
 
 						// Sleep before executing again.
-						Thread.sleep(10);
+						// ~1/60th of a second, should be smooth enough.
+						Thread.sleep(17);
 					}
 					else
 					{

@@ -12,11 +12,15 @@ import java.io.IOException;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import model.Charge;
+import model.ChargeGraph2D;
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
@@ -36,67 +40,78 @@ import model.IGraphElement;
 public final class GraphIO
 {
 	/**
-	 * Reads a text file and produces a Graph2D from properly formatted data.
+	 * Reads a text file and produces a ChargeGraph2D from properly formatted
+	 * data.
 	 * 
 	 * @param file The file to read, should be a text file.
-	 * @return The Graph2D that was read from the file parameter
+	 * @return The ChargeGraph2D that was read from the file parameter
 	 * @throws
 	 * @throws FileNotFoundException
 	 */
-	public static Graph2D readGraphFromFile(File file)
+	public static ChargeGraph2D readGraphFromFile(File file)
 			throws GraphFileFormatException, IOException
 	{
 		// Open a new Scanner
-		try (DataInputStream fileInput = new DataInputStream(
-				new FileInputStream(file)))
+		try (Scanner fileInput = new Scanner(new FileInputStream(file)))
 		{
 			// First two ints of file should be Graph's width and height.
-			// int width = fileInput.readInt();
-			// int height = fileInput.readInt();
-			//
-			// // Create a new graph with the previous width and height.
-			// Graph2D graph = new Graph2D(width, height);
+			int width = fileInput.nextInt();
+			int height = fileInput.nextInt();
+
+			// Create a new graph with the previous width and height.
+			ChargeGraph2D graph = new ChargeGraph2D(width, height);
+
+			// Temporary loop variables;
+			int inputID;
+			double inputX;
+			double inputY;
 
 			// While we have another ID to read, continue adding elements
-			ObjectInputStream objectStream = new ObjectInputStream(fileInput);
-			// try
-			// {
-			// while (true)
-			// {
-			// Object o = objectStream.readObject();
-			//
-			// if (o instanceof IGraphElement)
-			// {
-			// graph.addElement((IGraphElement)o);
-			// }
-			// }
-			// }
-			// catch (EOFException e)
-			// {
-			//
-			// }
-			// catch (ClassNotFoundException e)
-			// {
-			// e.printStackTrace();
-			// }
+			while (fileInput.hasNextInt())
+			{
+				inputID = fileInput.nextInt();
 
-			return (Graph2D) objectStream.readObject();
+				// First two inputs should always be x then y, regardless of
+				// element type.
+				inputX = fileInput.nextDouble();
+				inputY = fileInput.nextDouble();
+
+				switch (inputID)
+				{
+					case 1: // Charge
+						// If we're reading a charge, there should be another
+						// double available.
+						graph.addElement(new Charge(inputX, inputY,
+								fileInput.nextDouble()));
+						break;
+					case 2: // Arrow
+						// If we're reading an arrow, we can ignore the
+						// magnitude.
+						graph.addElement(new FieldArrow(inputX, inputY, 1, 0));
+						break;
+					default:
+						throw new GraphFileFormatException(
+								"Invalid element id in file.");
+				}
+			}
+
+			graph.updateFieldArrows();
+
+			return graph;
 		}
 		catch (FileNotFoundException e)
 		{
 			// Rethrow.
 			throw e;
 		}
-		catch (InvalidClassException e)
+		catch (InputMismatchException e)
 		{
-			// Rethrow as a graph file format exception
-			throw new GraphFileFormatException(e.getMessage());
+			throw new GraphFileFormatException("Unexpected data type in file.");
 		}
-		catch (ClassNotFoundException e)
+		catch (NoSuchElementException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+			throw new GraphFileFormatException(
+					"File missing critical elements.");
 		}
 	}
 
@@ -115,27 +130,31 @@ public final class GraphIO
 
 		// Open a new data output stream. Note that we do not append to the
 		// file.
-		try (DataOutputStream fileOutput = new DataOutputStream(
-				new FileOutputStream(file, false)))
+		try (PrintWriter fileOutput = new PrintWriter(file))
 		{
 			// // Write the width and height of the graph as the first line.
-			// fileOutput.writeInt(graph.getWidth());
-			// fileOutput.writeInt(graph.getHeight());
+			fileOutput.print(graph.getWidth() + " ");
+			fileOutput.println(graph.getHeight());
 
-			// Write each element's save string.
-			ObjectOutputStream objectStream = new ObjectOutputStream(
-					fileOutput);
-
-			objectStream.writeObject(graph);
-
-			// for (IGraphElement e : elements)
-			// {
-			// if (e instanceof Serializable)
-			// {
-			// objectStream.writeObject(e);
-			// objectStream.flush();
-			// }
-			// }
+			// Write each element's save data.
+			for (IGraphElement element : elements)
+			{
+				// Not the most elegant, though I'd rather avoid reflection for
+				// now.
+				if (element instanceof Charge)
+				{
+					fileOutput.print(1 + " ");
+					fileOutput.print(element.getX() + " ");
+					fileOutput.print(element.getY() + " ");
+					fileOutput.println(((Charge) element).getMagnitude());
+				}
+				else if (element instanceof FieldArrow)
+				{
+					fileOutput.print(2 + " ");
+					fileOutput.print(element.getX() + " ");
+					fileOutput.println(element.getY());
+				}
+			}
 		}
 	}
 
