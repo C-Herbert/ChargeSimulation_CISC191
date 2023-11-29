@@ -25,6 +25,13 @@ import view.ProgramView;
 
 public class FileSaveListener extends GraphActionListener
 {
+	/**
+	 * Creates a new FileSaveListener using the provided graph and view
+	 * objects.
+	 * 
+	 * @param graph The graph to assign to this listener.
+	 * @param view  The view to assign to this listener.
+	 */
 	public FileSaveListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);

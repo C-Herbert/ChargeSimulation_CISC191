@@ -16,6 +16,15 @@ import model.ChargeGraph2D;
 import utils.ArrowPatterns;
 import view.ProgramView;
 
+/**
+ * The ArrowLayoutListener is a GraphActionListener responsible for handling
+ * field arrow creation and patterning. It manages a submenu which allows the
+ * user to specify an arrow density and select from circular and rectangular
+ * patterns.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 public class ArrowLayoutListener extends GraphActionListener
 {
 	JFrame inputFrame = new JFrame("Arrow Layout");
@@ -28,6 +37,13 @@ public class ArrowLayoutListener extends GraphActionListener
 	JButton createCirclePatternButton = new JButton("Create Circular Pattern");
 	JButton clearPatternButton = new JButton("Clear Arrows");
 
+	/**
+	 * Creates a new ArrowLayoutListener using the provided graph and view
+	 * objects.
+	 * 
+	 * @param graph The graph to assign to this listener.
+	 * @param view  The view to assign to this listener.
+	 */
 	public ArrowLayoutListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
@@ -42,7 +58,8 @@ public class ArrowLayoutListener extends GraphActionListener
 
 		inputPanel.setLayout(new BorderLayout());
 
-		inputPanel.add(new JLabel("Layout Density (% Spacing):"), BorderLayout.NORTH);
+		inputPanel.add(new JLabel("Layout Density (% Spacing):"),
+				BorderLayout.NORTH);
 		inputPanel.add(densitySlider, BorderLayout.CENTER);
 
 		optionPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

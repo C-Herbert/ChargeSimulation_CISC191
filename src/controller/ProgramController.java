@@ -2,6 +2,7 @@ package controller;
 
 import controller.listeners.AddChargeListener;
 import controller.listeners.ArrowLayoutListener;
+import controller.listeners.ChargeEditListener;
 import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
@@ -43,6 +44,8 @@ public class ProgramController
 		// Add Graph Listeners
 		programView.addGraphMouseListener(
 				new ElementDragListener(programGraph, programView));
+		programView.addGraphMouseListener(
+				new ChargeEditListener(programGraph, programView));
 
 		// Add IO listeners
 		programView.getToolbar().addFileOpenListener(

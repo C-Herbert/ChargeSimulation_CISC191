@@ -27,6 +27,13 @@ import view.ProgramView;
 
 public class FileOpenListener extends GraphActionListener
 {
+	/**
+	 * Creates a new FileOpenListener using the provided graph and view
+	 * objects.
+	 * 
+	 * @param graph The graph to assign to this listener.
+	 * @param view  The view to assign to this listener.
+	 */
 	public FileOpenListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);

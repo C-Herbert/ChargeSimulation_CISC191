@@ -27,7 +27,14 @@ public class ElementDragListener extends GraphMouseListener
 	private IGraphElement draggingElement = null;
 	// ElementDragListener has a thread for updating the element's position.
 	private Thread dragThread;
-
+	
+	/**
+	 * Creates a new ElementDragListener using the provided graph and view
+	 * objects.
+	 * 
+	 * @param graph The graph to assign to this listener.
+	 * @param view The view to assign to this listener.
+	 */
 	public ElementDragListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);

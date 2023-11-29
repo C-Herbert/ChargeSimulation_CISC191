@@ -11,16 +11,8 @@ import utils.Vec2D;
  * @version 1.0
  * @author Charlie Herbert
  */
-// TODO: May consolidate this class into Arrow2D, doesn't seem to be useful
-// beyond being a distinction for the view model
-public class FieldArrow extends Arrow2D implements Serializable
+public class FieldArrow extends Arrow2D
 {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5712325659933162475L;
-
 	public FieldArrow(double xPos, double yPos, double xMag, double yMag)
 	{
 		super(xPos, yPos, xMag, yMag);

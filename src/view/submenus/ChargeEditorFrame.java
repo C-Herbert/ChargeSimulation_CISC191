@@ -29,7 +29,7 @@ public class ChargeEditorFrame extends JFrame
 		super(title);
 
 		creationDialogPanel.setLayout(new BorderLayout());
-		
+
 		inputPanel.setLayout(new GridLayout(0, 2));
 		inputPanel.add(new JLabel("X Position: "));
 		inputPanel.add(xPositionField);
@@ -133,5 +133,17 @@ public class ChargeEditorFrame extends JFrame
 	public JButton getConfirmButton()
 	{
 		return confirmButton;
+	}
+
+	/**
+	 * Populates the editor frame with the passed Charge's information.
+	 * 
+	 * @param c the Charge to load information from.
+	 */
+	public void loadChargeInfo(Charge c)
+	{
+		xPositionField.setText("" + c.getX());
+		yPositionField.setText("" + c.getY());
+		magnitudeField.setText("" + c.getMagnitude());
 	}
 }

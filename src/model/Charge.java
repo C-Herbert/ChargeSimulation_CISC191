@@ -15,17 +15,14 @@ import utils.Vec2D;
  *         References: Java, Java, Java 3rd Edition, Chapter 11
  */
 
-public class Charge implements IGraphElement, Serializable
+public class Charge implements IGraphElement
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8055174990777812535L;
-
 	// Charges have an x and y position
 	private double x, y;
 	// Charges have a magnitude
 	private double magnitude;
+	// Charges have an interaction boundary
+	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
 
 	/**
 	 * Creates a new charge object with x, y, and magnitude values.
@@ -88,6 +85,16 @@ public class Charge implements IGraphElement, Serializable
 	}
 
 	/**
+	 * Gets the magnitude of this charge.
+	 * 
+	 * @return The magnitude of this charge.
+	 */
+	public double getMagnitude()
+	{
+		return this.magnitude;
+	}
+
+	/**
 	 * Sets the x position of this charge.
 	 */
 	@Override
@@ -106,16 +113,12 @@ public class Charge implements IGraphElement, Serializable
 	}
 
 	/**
-	 * Gets the magnitude of this charge.
-	 * 
-	 * @return The magnitude of this charge.
+	 * Sets the magnitude of this charge.
 	 */
-	public double getMagnitude()
+	public void setMagnitude(double newMag)
 	{
-		return this.magnitude;
+		this.magnitude = newMag;
 	}
-
-	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
 
 	@Override
 	public Bound getInteractionBounds()
