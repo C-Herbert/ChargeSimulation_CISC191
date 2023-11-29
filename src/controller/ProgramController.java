@@ -62,6 +62,6 @@ public class ProgramController
 				new AddChargeListener(programGraph, programView));
 
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
-
+		programView.repaintGraph();
 	}
 }

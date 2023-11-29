@@ -90,6 +90,14 @@ public class ArrowLayoutListener extends GraphActionListener
 			graph.updateFieldArrows();
 			view.repaintGraph();
 		}
+		else if (e.getSource().equals(createCirclePatternButton))
+		{
+			ArrowPatterns.clearGraphArrows(graph);
+			ArrowPatterns.createCircularPattern(graph,
+					(double) (densitySlider.getValue()) / 100.0);
+			graph.updateFieldArrows();
+			view.repaintGraph();
+		}
 		else
 		{
 			// If the source was a JComponent, position the window such that
