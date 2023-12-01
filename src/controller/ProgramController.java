@@ -1,11 +1,13 @@
 package controller;
 
+import controller.listeners.AddArrowListener;
 import controller.listeners.AddChargeListener;
 import controller.listeners.ArrowLayoutListener;
 import controller.listeners.ChargeEditListener;
 import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
+import controller.listeners.HelpPanelListener;
 import model.ChargeGraph2D;
 import utils.ArrowPatterns;
 import view.ProgramView;
@@ -60,7 +62,13 @@ public class ProgramController
 		// Add Toolbox Listeners
 		programView.getToolbox().addCreateChargeListener(
 				new AddChargeListener(programGraph, programView));
+		programView.getToolbox().addCreateArrowListener(
+				new AddArrowListener(programGraph, programView));
 
+		// Add Help Listener
+		programView.getToolbar().addHelpPanelListener(new HelpPanelListener());
+
+		// Setup a basic field arrow pattern.
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
 		programView.repaintGraph();
 	}

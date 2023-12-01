@@ -16,6 +16,9 @@ public class ToolbarView extends JPanel
 	// ToolbarView has a button to open the arrow pattern menu.
 	private JButton arrowPatternButton;
 
+	// ToolbarView has a button to open the help menu.
+	private JButton helpButton;
+	
 	public ToolbarView()
 	{
 		// Setup panel's layout
@@ -34,6 +37,9 @@ public class ToolbarView extends JPanel
 
 		arrowPatternButton = new JButton("Arrow Layout");
 		add(arrowPatternButton);
+		
+		helpButton = new JButton("Help");
+		add(helpButton);
 
 		// Blend in with the window's own toolbar
 		setBackground(Color.WHITE);
@@ -67,5 +73,15 @@ public class ToolbarView extends JPanel
 	public void addArrowPatternListener(ActionListener listener)
 	{
 		arrowPatternButton.addActionListener(listener);
+	}
+	
+	/**
+	 * Adds an action listener to this view's associated save button.
+	 * 
+	 * @param listener The listener to add.
+	 */
+	public void addHelpPanelListener(ActionListener listener)
+	{
+		helpButton.addActionListener(listener);
 	}
 }

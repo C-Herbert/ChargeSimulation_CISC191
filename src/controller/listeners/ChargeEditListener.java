@@ -27,13 +27,13 @@ public class ChargeEditListener extends GraphMouseListener
 	private EditorInputListener inputListener = new EditorInputListener();
 
 	private Charge targetedElement;
-	
+
 	/**
 	 * Creates a new ChargeEditListener using the provided graph and view
 	 * objects.
 	 * 
 	 * @param graph The graph to assign to this listener.
-	 * @param view The view to assign to this listener.
+	 * @param view  The view to assign to this listener.
 	 */
 	public ChargeEditListener(ChargeGraph2D graph, ProgramView view)
 	{
@@ -51,20 +51,24 @@ public class ChargeEditListener extends GraphMouseListener
 		// Clear any previous target.
 		targetedElement = null;
 
-		IGraphElement potentialTarget = view.getGraphView()
-				.getInteractableAtPoint(e.getX(), e.getY());
+		List<IGraphElement> potentialTargets = view.getGraphView()
+				.getInteractablesAtPoint(e.getX(), e.getY());
 
-		if (potentialTarget instanceof Charge)
+		// Find the first charge interactable on the graph.
+		for (IGraphElement element : potentialTargets)
 		{
-			targetedElement = (Charge) potentialTarget;
-			inputFrame.loadChargeInfo(targetedElement);
-			inputFrame.setLocation(e.getXOnScreen(), e.getYOnScreen());
-			inputFrame.setVisible(true);
+			if (element instanceof Charge)
+			{
+				targetedElement = (Charge) element;
+				inputFrame.loadChargeInfo(targetedElement);
+				inputFrame.setLocation(e.getXOnScreen(), e.getYOnScreen());
+				inputFrame.setVisible(true);
+				return;
+			}
 		}
-		else
-		{
-			inputFrame.setVisible(false);
-		}
+
+		// If no charge could be found, ensure the frame stays hidden.
+		inputFrame.setVisible(false);
 	}
 
 	@Override

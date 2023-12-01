@@ -35,7 +35,8 @@ public class ToolboxView extends JPanel
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		createChargeButton.setIcon(new ImageIcon(ProgramAssets.getAsset("positive_charge")));
-
+		createArrowButton.setIcon(new ImageIcon(ProgramAssets.getAsset("green_arrow")));
+		
 		this.add(headerLabel);
 
 		this.add(createChargeButton);

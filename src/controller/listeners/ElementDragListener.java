@@ -2,9 +2,11 @@ package controller.listeners;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import model.Charge;
 import model.ChargeGraph2D;
+import model.DraggableFieldArrow;
 import model.IGraphElement;
 import view.ProgramView;
 
@@ -21,19 +23,20 @@ import view.ProgramView;
 public class ElementDragListener extends GraphMouseListener
 {
 	// All ElementDragListeners share a list of types that can be dragged.
-	private static final Class[] DRAGGABLE_TYPES = { Charge.class };
+	private static final Class[] DRAGGABLE_TYPES = { Charge.class,
+			DraggableFieldArrow.class };
 
 	// ElementDragListener tracks an IGraphElement.
 	private IGraphElement draggingElement = null;
 	// ElementDragListener has a thread for updating the element's position.
 	private Thread dragThread;
-	
+
 	/**
 	 * Creates a new ElementDragListener using the provided graph and view
 	 * objects.
 	 * 
 	 * @param graph The graph to assign to this listener.
-	 * @param view The view to assign to this listener.
+	 * @param view  The view to assign to this listener.
 	 */
 	public ElementDragListener(ChargeGraph2D graph, ProgramView view)
 	{
@@ -56,21 +59,25 @@ public class ElementDragListener extends GraphMouseListener
 		// happen)
 		if (draggingElement != null) return;
 
-		// Get the first element under the mouse.
-		draggingElement = view.getGraphView().getInteractableAtPoint(e.getX(),
-				e.getY());
+		// Get all elements under the mouse.
+		List<IGraphElement> potentialElements = view.getGraphView()
+				.getInteractablesAtPoint(e.getX(), e.getY());
 
-		// If we found an element, start dragging it.
-		if (draggingElement != null)
+		// Find the first draggable element.
+		for (IGraphElement element : potentialElements)
 		{
 			// Check that the element is a draggable type.
 			for (Class<?> c : DRAGGABLE_TYPES)
 			{
-				if (draggingElement.getClass().equals(c))
+				if (element.getClass().equals(c))
 				{
+					// Found a draggable element, start the thread.
+					System.out.println("Started drag");
+					draggingElement = element;
 					dragThread = new Thread(new DragElement());
 					dragThread.start();
 
+					// Don't drag any other elements.
 					return;
 				}
 			}
@@ -112,13 +119,14 @@ public class ElementDragListener extends GraphMouseListener
 		@Override
 		public void run()
 		{
-			System.out.println("Drag Start");
 			try
 			{
 				// Continue execution until we're interrupted
 				while (true)
 				{
 					// Double check that draggingElement hasn't been unassigned.
+					// Note that we also handle NullPointerExceptions in case
+					// this field gets un-assigned during execution.
 					if (draggingElement == null)
 					{
 						// If so, exit the thread.
@@ -152,8 +160,16 @@ public class ElementDragListener extends GraphMouseListener
 				// Interrupt guarantees exit.
 				return;
 			}
-		}
+			catch (NullPointerException e)
+			{
+				// In case the draggingElement gets un-assigned before we are
+				// done with it.
 
+				// Since new threads are created for each drag operation,
+				// returning on a null pointer doesn't present any real issues.
+				return;
+			}
+		}
 	}
 
 }

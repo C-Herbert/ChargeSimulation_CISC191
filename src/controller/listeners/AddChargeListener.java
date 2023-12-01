@@ -18,6 +18,13 @@ import model.ChargeGraph2D;
 import view.ProgramView;
 import view.submenus.ChargeEditorFrame;
 
+/**
+ * AddChargeListener is an GraphActionListener responsible for handling
+ * adding charges to the graph.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 public class AddChargeListener extends GraphActionListener
 {
 	// AddChargeListener has a ChargeEditorFrame, which is used to gather user

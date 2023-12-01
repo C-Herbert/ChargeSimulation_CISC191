@@ -27,8 +27,9 @@ public class ProgramAssets
 	public static final String POSITIVE_CHARGE_FILEPATH = "src/assets/positive_charge.png";
 	public static final String NEGATIVE_CHARGE_FILEPATH = "src/assets/negative_charge.png";
 
-	// Arrow Image
+	// Arrow Images
 	public static final String ARROW_FILEPATH = "src/assets/arrow.png";
+	public static final String GREEN_ARROW_FILEPATH = "src/assets/green_arrow.png";
 
 	// Static initializer to setup asset map.
 	static
@@ -39,6 +40,7 @@ public class ProgramAssets
 
 		// Arrows
 		addEntry("field_arrow", ARROW_FILEPATH);
+		addEntry("green_arrow", GREEN_ARROW_FILEPATH);
 	}
 
 	/**
@@ -61,6 +63,8 @@ public class ProgramAssets
 		catch (IOException e)
 		{
 			// Failed to load image, return false.
+			System.out.println(
+					"Warning: Asset failed to load. Some images might not display");
 			return false;
 		}
 

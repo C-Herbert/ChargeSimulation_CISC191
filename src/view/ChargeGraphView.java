@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import model.ChargeGraph2D;
 import model.IGraphElement;
 import view.elements.ElementView;
-import view.elements.FieldArrowView;
+import view.elements.ArrowView;
 import view.elements.ChargeView;
 
 /*
@@ -47,7 +47,7 @@ public class ChargeGraphView extends JPanel
 		// Create a new view list
 		this.views = new ArrayList<ElementView<?>>();
 		// Add a field arrow view
-		addView(new FieldArrowView(chargeGraph, -100));
+		addView(new ArrowView(chargeGraph, -100));
 		// Add a charge view
 		addView(new ChargeView(chargeGraph, 0));
 
@@ -101,18 +101,18 @@ public class ChargeGraphView extends JPanel
 	}
 
 	/**
-	 * Find the first interactable on the graph located at the position
-	 * argument. Elements from views with a higher sort order will be selected
-	 * first, though order with a view is not guaranteed.
+	 * Find all interactables on the graph located at the position
+	 * argument. Elements from views with a higher sort order will be sorted
+	 * first, though order within a view is not guaranteed.
 	 * 
 	 * @param x the x position to consider.
 	 * @param y the y position to consider
-	 * @return The first IGraphElement with bounds containing x and y.
+	 * @return A list of IGraphElements with bounds containing x and y.
 	 */
-	public IGraphElement getInteractableAtPoint(double x, double y)
+	public List<IGraphElement> getInteractablesAtPoint(double x, double y)
 	{
-		// Define a temporary variable for the loop
-		ArrayList<IGraphElement> elements;
+		// Define variable to hold the return value.
+		ArrayList<IGraphElement> elements = new ArrayList<IGraphElement>();
 
 		// Iterate through views, searching for any interactable at the defined
 		// point. Note that the views list is sorted from lowest to highest
@@ -121,17 +121,36 @@ public class ChargeGraphView extends JPanel
 		{
 			// Gather all interactables managed by the view at the defined
 			// point.
-			elements = views.get(i).getInteractablesAtPoint(x, y);
-
-			if (!elements.isEmpty())
-			{
-				// We're only interested in a single interactable, thus return
-				// the first we come across.
-				return elements.get(0);
-			}
+			elements.addAll(views.get(i).getInteractablesAtPoint(x, y));
 		}
 
-		// No elements found
-		return null;
+		return elements;
+	}
+
+	/**
+	 * Find the first interactable on the graph located at the position
+	 * argument. Elements from views with a higher sort order will be selected
+	 * first, though order within a view is not guaranteed.
+	 * 
+	 * @param x the x position to consider.
+	 * @param y the y position to consider
+	 * @return The first IGraphElement with bounds containing x and y, or null
+	 *         if no interactable could be found.
+	 */
+	public IGraphElement getInteractableAtPoint(double x, double y)
+	{
+		// Gather all interactables at x and y.
+		List<IGraphElement> interactables = getInteractablesAtPoint(x, y);
+
+		if (interactables.size() > 0)
+		{
+			// If we found interactables, return the first.
+			return interactables.get(0);
+		}
+		else
+		{
+			// If not, return null;
+			return null;
+		}
 	}
 }

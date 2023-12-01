@@ -67,12 +67,29 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	{
 		this.yPos = newY;
 	}
+	
+	/**
+	 * Sets the direction of this arrow to point towards a given point on the
+	 * graph.
+	 * 
+	 * @param targetX X position of the target point.
+	 * @param targetY Y position of the target point.
+	 */
+	public void pointTowardsLocation(double targetX, double targetY)
+	{
+		// Calculate target vector
+		Vec2D targetVector = new Vec2D(targetX - this.getX(),
+				targetY - this.getY());
 
-	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
+		// Assign our new direction
+		setDirection(targetVector.angleBetween(new Vec2D(1, 0)));
+	}
+
+	private static final RectangleBound ARROW_BOUNDS = new RectangleBound(64, 64);
 
 	@Override
 	public Bound getInteractionBounds()
 	{
-		return BOUNDS;
+		return ARROW_BOUNDS;
 	}
 }

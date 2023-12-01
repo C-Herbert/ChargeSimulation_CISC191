@@ -17,8 +17,9 @@ import view.ChargeGraphView;
  * @author Charlie Herbert
  */
 
-// Trying to follow the model-view-controller approach,
+// References
 // https://en.wikipedia.org/wiki/Model-view-controller
+// https://www.baeldung.com/java-generics-type-parameter-vs-wildcard
 
 // Generic allows subclasses to work on only specific types of graph elements
 public abstract class ElementView<T extends IGraphElement>
