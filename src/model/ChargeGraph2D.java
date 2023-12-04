@@ -16,6 +16,7 @@ import utils.Vec2D;
 public class ChargeGraph2D extends Graph2D
 {
 	// A ChargeGraph2D has many charges
+	//TODO: Remove. Redundant after changes to Graph2D.
 	ArrayList<Charge> chargeList;
 
 	/**

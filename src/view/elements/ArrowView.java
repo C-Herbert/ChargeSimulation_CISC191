@@ -57,23 +57,24 @@ public class ArrowView extends ElementView<Arrow2D>
 	{
 		ArrayList<Arrow2D> arrows = new ArrayList<>();
 		
-		double maxAbsMagnitude = 0;
-		double minAbsMagnitude = Double.MAX_VALUE;
 		Arrow2D currentArrow = null;
 		
 		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
 		{
 			currentArrow = (Arrow2D) e;
 			arrows.add(currentArrow);
+		}
+		
+		double maxAbsMagnitude = 0.0;
+		double localMax = 0.0;
+		
+		for(IGraphElement c : graph.getElementsOfType(Charge.class))
+		{
+			localMax = ((Charge)c).getFieldAtPoint(c.getX(), c.getY() + 100).getMagnitude();
 			
-			if(Math.abs(currentArrow.getMagnitude()) > maxAbsMagnitude)
+			if(localMax > maxAbsMagnitude)
 			{
-				maxAbsMagnitude = Math.abs(currentArrow.getMagnitude());
-			}
-			
-			if(Math.abs(currentArrow.getMagnitude()) < minAbsMagnitude)
-			{
-				minAbsMagnitude = Math.abs(currentArrow.getMagnitude());
+				maxAbsMagnitude = localMax;
 			}
 		}
 		
@@ -83,7 +84,7 @@ public class ArrowView extends ElementView<Arrow2D>
 		for(Arrow2D arrow : arrows)
 		{
 			//Note that the alpha value is a fraction of the maximum magnitude present.
-			alphaValue = (Math.cbrt(arrow.getMagnitude()) / Math.cbrt(maxAbsMagnitude));
+			alphaValue = (Math.sqrt(arrow.getMagnitude()) / Math.sqrt(maxAbsMagnitude));
 			drawArrow(arrow, graphics, alphaValue);
 		}
 		
