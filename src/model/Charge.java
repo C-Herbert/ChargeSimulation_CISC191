@@ -50,9 +50,14 @@ public class Charge implements IGraphElement
 	{
 		// Calculate the delta x/y between this charge and the point being
 		// considered.
-		double dX = pointX - x;
-		double dY = pointY - y;
-
+		// Use a scale of 100pixels = 1cm
+		double dX = (pointX - x) / Math.pow(10, 4);
+		double dY = (pointY - y) / Math.pow(10, 4);
+		
+		
+		
+		
+		
 		// Calculate the magnitude of the field per Coulomb's law.
 		double fieldMagnitude = (8.99 * Math.pow(10, 9) * magnitude)
 				/ (Math.pow(dX, 2) + Math.pow(dY, 2));

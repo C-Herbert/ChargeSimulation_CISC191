@@ -88,11 +88,14 @@ public class ChargeGraph2D extends Graph2D
 
 	public void updateFieldArrows()
 	{
+		Vec2D localField = null;
+
 		for (IGraphElement arrow : getElementsOfType(FieldArrow.class))
 		{
-			((FieldArrow) arrow)
-					.setDirection(getNetFieldAtPoint(arrow.getX(), arrow.getY())
-							.getDirection());
+			localField = getNetFieldAtPoint(arrow.getX(), arrow.getY());
+
+			((FieldArrow) arrow).setMagnitude(localField.getMagnitude());
+			((FieldArrow) arrow).setDirection(localField.getDirection());
 		}
 	}
 }

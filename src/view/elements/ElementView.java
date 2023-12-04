@@ -24,8 +24,8 @@ import view.ChargeGraphView;
 // Generic allows subclasses to work on only specific types of graph elements
 public abstract class ElementView<T extends IGraphElement>
 {
-	private Graph2D graph;
-	private int sortOrder;
+	protected Graph2D graph;
+	protected int sortOrder;
 
 	/**
 	 * Creates a new element view with an initialized sort order.

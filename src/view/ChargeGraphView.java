@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class ChargeGraphView extends JPanel
 		addView(new ChargeView(chargeGraph, 0));
 
 		setSize(graphReference.getWidth(), graphReference.getHeight());
+		setBackground(Color.black);
 		setPreferredSize(getSize());
 	}
 

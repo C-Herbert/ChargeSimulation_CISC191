@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import assets.ProgramAssets;
@@ -30,7 +32,7 @@ public class ArrowView extends ElementView<Arrow2D>
 	
 	private static BufferedImage draggableArrowImage = ProgramAssets
 			.getAsset("green_arrow");
-
+	
 	/**
 	 * Constructs a new FieldArrowView using the provided graph and assigns it
 	 * the passed sortOrder.
@@ -44,9 +46,47 @@ public class ArrowView extends ElementView<Arrow2D>
 	}
 
 	@Override
+	//Not used by this view
 	public void drawElement(Arrow2D arrow, Graphics2D graphics)
 	{
-		drawArrow(arrow, graphics);
+		drawArrow(arrow, graphics, 1);
+	}
+	
+	@Override
+	public void draw(Graphics2D graphics)
+	{
+		ArrayList<Arrow2D> arrows = new ArrayList<>();
+		
+		double maxAbsMagnitude = 0;
+		double minAbsMagnitude = Double.MAX_VALUE;
+		Arrow2D currentArrow = null;
+		
+		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
+		{
+			currentArrow = (Arrow2D) e;
+			arrows.add(currentArrow);
+			
+			if(Math.abs(currentArrow.getMagnitude()) > maxAbsMagnitude)
+			{
+				maxAbsMagnitude = Math.abs(currentArrow.getMagnitude());
+			}
+			
+			if(Math.abs(currentArrow.getMagnitude()) < minAbsMagnitude)
+			{
+				minAbsMagnitude = Math.abs(currentArrow.getMagnitude());
+			}
+		}
+		
+		double alphaValue = 0;
+		
+		//Finally, draw the arrows.
+		for(Arrow2D arrow : arrows)
+		{
+			//Note that the alpha value is a fraction of the maximum magnitude present.
+			alphaValue = (Math.cbrt(arrow.getMagnitude()) / Math.cbrt(maxAbsMagnitude));
+			drawArrow(arrow, graphics, alphaValue);
+		}
+		
 	}
 
 	@Override
@@ -61,16 +101,16 @@ public class ArrowView extends ElementView<Arrow2D>
 	 * @param arrow Arrow model data to display
 	 * @param g     Graphics to use for drawing
 	 */
-	private static void drawArrow(Arrow2D arrow, Graphics2D g)
+	private static void drawArrow(Arrow2D arrow, Graphics2D g, double alpha)
 	{
 		//Draw a rotated arrow.
 		if(arrow instanceof DraggableFieldArrow) 
 		{
-			GraphicsUtils.drawRotatedImage(draggableArrowImage, arrow.getX(), arrow.getY(), arrow.getDirection(), g);
+			GraphicsUtils.drawAlphaRotatedImage(draggableArrowImage, g, arrow.getX(), arrow.getY(), 1, arrow.getDirection());
 		}
 		else if(arrow instanceof FieldArrow) 
 		{
-			GraphicsUtils.drawRotatedImage(arrowImage, arrow.getX(), arrow.getY(), arrow.getDirection(), g);
+			GraphicsUtils.drawAlphaRotatedImage(arrowImage, g, arrow.getX(), arrow.getY(), alpha, arrow.getDirection());
 		}
 	}
 

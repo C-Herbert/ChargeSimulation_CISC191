@@ -2,11 +2,29 @@ package utils;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.WritableRaster;
 
 public class GraphicsUtils
 {
-	public static void drawRotatedImage(BufferedImage baseImage, double x,
-			double y, double rotation, Graphics2D g)
+	public static void adjustImageAlpha(BufferedImage img, double alphaPercent)
+	{
+		if(alphaPercent >= 1) return;
+		
+		WritableRaster alphaChannel = img.getAlphaRaster();
+
+		if (alphaChannel == null) return;
+
+		DataBuffer alphaBuffer = alphaChannel.getDataBuffer();
+
+		for (int i = 0; i < alphaBuffer.getSize(); ++i)
+		{
+			alphaBuffer.setElemDouble(i, alphaBuffer.getElem(i) * alphaPercent);
+		}
+	}
+
+	public static void drawAlphaRotatedImage(BufferedImage baseImage,
+			Graphics2D g, double x, double y, double alpha, double rotation)
 	{
 		// New image to hold rotated instance
 		BufferedImage newImage = new BufferedImage(baseImage.getWidth(),
@@ -25,6 +43,9 @@ public class GraphicsUtils
 
 		// Cleanup Graphics object
 		newGraphics.dispose();
+
+		// Adjust the image's overall alpha value.
+		adjustImageAlpha(newImage, alpha);
 
 		// Draw the image we just made
 		int xCenter = (int) (x - (newImage.getWidth() / 2));
