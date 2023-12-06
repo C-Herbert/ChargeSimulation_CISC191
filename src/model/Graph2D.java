@@ -46,7 +46,7 @@ public class Graph2D implements Serializable
 	{
 		return width;
 	}
-
+	
 	/**
 	 * Gets this Graph2D object's height field
 	 * 
@@ -157,7 +157,7 @@ public class Graph2D implements Serializable
 		// Iterate through all sub-lists of graphElements.
 		for (Class<? extends IGraphElement> c : graphElements.keySet())
 		{
-			// Check if the sub-list's type matches the type parameter.
+			// Check if the sub-list's type matches or is a superclass of the type parameter.
 			if (type.isAssignableFrom(c))
 			{
 				// If so, add the sub-list's elements to our matching list
@@ -165,16 +165,7 @@ public class Graph2D implements Serializable
 			}
 		}
 
-		// Only need to make a deep copy of the matching elements list, external
-		// modification of the elements themselves is okay
-		List<IGraphElement> elements = new ArrayList<>();
-
-		for (IGraphElement e : matchingElements)
-		{
-			elements.add(e);
-		}
-
-		return elements;
+		return matchingElements;
 	}
 
 	/**

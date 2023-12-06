@@ -53,14 +53,23 @@ public class Charge implements IGraphElement
 		// Use a scale of 100pixels = 1cm
 		double dX = (pointX - x) / Math.pow(10, 4);
 		double dY = (pointY - y) / Math.pow(10, 4);
-		
+
+		// If our magnitude is less than zero, we need to flip the direction
+		// vectors. (positive = repel, negative = attract)
+		if (magnitude < 0)
+		{
+			dX *= -1;
+			dY *= -1;
+		}
+
 		// Calculate the magnitude of the field per Coulomb's law.
-		double fieldMagnitude = (8.99 * Math.pow(10, 9) * magnitude)
+		double fieldMagnitude = (8.99 * Math.pow(10, 9) * Math.abs(magnitude))
 				/ (Math.pow(dX, 2) + Math.pow(dY, 2));
-		
+
 		// Return a vector pointing along (dX, dY), with the appropriate
 		// magnitude.
 		return new Vec2D(dX, dY).setMagnitude(fieldMagnitude);
+
 	}
 
 	/**

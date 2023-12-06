@@ -2,12 +2,6 @@ package view.elements;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
 import assets.ProgramAssets;
 import model.Arrow2D;
 import model.Charge;
@@ -16,6 +10,7 @@ import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
 import utils.GraphicsUtils;
+import utils.Vec2D;
 
 /**
  * The FieldArrowView class is an ElementView responsible for drawing all
@@ -29,10 +24,10 @@ public class ArrowView extends ElementView<Arrow2D>
 	// Static fields for arrow images.
 	private static BufferedImage arrowImage = ProgramAssets
 			.getAsset("field_arrow");
-	
+
 	private static BufferedImage draggableArrowImage = ProgramAssets
 			.getAsset("green_arrow");
-	
+
 	/**
 	 * Constructs a new FieldArrowView using the provided graph and assigns it
 	 * the passed sortOrder.
@@ -46,48 +41,55 @@ public class ArrowView extends ElementView<Arrow2D>
 	}
 
 	@Override
-	//Not used by this view
+	// Not used by this view
 	public void drawElement(Arrow2D arrow, Graphics2D graphics)
 	{
 		drawArrow(arrow, graphics, 1);
 	}
-	
+
+	/**
+	 * Draws all Arrow2Ds that are contained in this view's associated graph.
+	 * 
+	 * This method first samples all charges on the graph, searching for the
+	 * highest field magnitude. The magnitude is then used to calculate the
+	 * alpha value for each arrow.
+	 * 
+	 * @param graphics The graphics object to use to draw the arrows.
+	 */
 	@Override
 	public void draw(Graphics2D graphics)
 	{
-		ArrayList<Arrow2D> arrows = new ArrayList<>();
-		
-		Arrow2D currentArrow = null;
-		
-		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
-		{
-			currentArrow = (Arrow2D) e;
-			arrows.add(currentArrow);
-		}
-		
+		// Temporary variables for the charge loop
 		double maxAbsMagnitude = 0.0;
 		double localMax = 0.0;
-		
-		for(IGraphElement c : graph.getElementsOfType(Charge.class))
+
+		for (IGraphElement c : graph.getElementsOfType(Charge.class))
 		{
-			localMax = ((Charge)c).getFieldAtPoint(c.getX(), c.getY() + 100).getMagnitude();
-			
-			if(localMax > maxAbsMagnitude)
+			// Sample a point 100pixels (1cm) away from the charge
+			localMax = ((Charge) c).getFieldAtPoint(c.getX(), c.getY() + 100)
+					.getMagnitude();
+
+			// Is the sample greater than the previous max value?
+			if (localMax > maxAbsMagnitude)
 			{
 				maxAbsMagnitude = localMax;
 			}
 		}
-		
+
+		// Temporary variable for the arrow loop.
 		double alphaValue = 0;
-		
-		//Finally, draw the arrows.
-		for(Arrow2D arrow : arrows)
+
+		// Finally, draw the arrows.
+		for (IGraphElement arrow : graph.getElementsOfType(Arrow2D.class))
 		{
-			//Note that the alpha value is a fraction of the maximum magnitude present.
-			alphaValue = (Math.sqrt(arrow.getMagnitude()) / Math.sqrt(maxAbsMagnitude));
-			drawArrow(arrow, graphics, alphaValue);
+			// Note that the alpha value is a fraction of the maximum magnitude
+			// present.
+			// Casts are safe because getElementsOfType ensures only Arrow2Ds
+			// appear here.
+			alphaValue = (Math.sqrt(((Vec2D) arrow).getMagnitude())
+					/ Math.sqrt(maxAbsMagnitude));
+			drawArrow((Arrow2D) arrow, graphics, alphaValue);
 		}
-		
 	}
 
 	@Override
@@ -104,14 +106,16 @@ public class ArrowView extends ElementView<Arrow2D>
 	 */
 	private static void drawArrow(Arrow2D arrow, Graphics2D g, double alpha)
 	{
-		//Draw a rotated arrow.
-		if(arrow instanceof DraggableFieldArrow) 
+		// Draw a rotated arrow.
+		if (arrow instanceof DraggableFieldArrow)
 		{
-			GraphicsUtils.drawAlphaRotatedImage(draggableArrowImage, g, arrow.getX(), arrow.getY(), 1, arrow.getDirection());
+			GraphicsUtils.drawAlphaRotatedImage(draggableArrowImage, g,
+					arrow.getX(), arrow.getY(), 1, arrow.getDirection());
 		}
-		else if(arrow instanceof FieldArrow) 
+		else if (arrow instanceof FieldArrow)
 		{
-			GraphicsUtils.drawAlphaRotatedImage(arrowImage, g, arrow.getX(), arrow.getY(), alpha, arrow.getDirection());
+			GraphicsUtils.drawAlphaRotatedImage(arrowImage, g, arrow.getX(),
+					arrow.getY(), alpha, arrow.getDirection());
 		}
 	}
 

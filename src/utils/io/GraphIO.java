@@ -21,6 +21,7 @@ import java.util.Scanner;
 
 import model.Charge;
 import model.ChargeGraph2D;
+import model.DraggableFieldArrow;
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
@@ -89,6 +90,10 @@ public final class GraphIO
 						// magnitude.
 						graph.addElement(new FieldArrow(inputX, inputY, 1, 0));
 						break;
+					case 3: // DraggableArrow
+						graph.addElement(
+								new DraggableFieldArrow(inputX, inputY, 1, 0));
+						break;
 					default:
 						throw new GraphFileFormatException(
 								"Invalid element id in file.");
@@ -147,6 +152,12 @@ public final class GraphIO
 					fileOutput.print(element.getX() + " ");
 					fileOutput.print(element.getY() + " ");
 					fileOutput.println(((Charge) element).getMagnitude());
+				}
+				else if (element instanceof DraggableFieldArrow)
+				{
+					fileOutput.print(3 + " ");
+					fileOutput.print(element.getX() + " ");
+					fileOutput.println(element.getY());
 				}
 				else if (element instanceof FieldArrow)
 				{

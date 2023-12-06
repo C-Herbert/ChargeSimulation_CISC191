@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import utils.Vec2D;
 
 /**
@@ -15,10 +12,6 @@ import utils.Vec2D;
 
 public class ChargeGraph2D extends Graph2D
 {
-	// A ChargeGraph2D has many charges
-	//TODO: Remove. Redundant after changes to Graph2D.
-	ArrayList<Charge> chargeList;
-
 	/**
 	 * Creates a new ChargeGraph2D.
 	 * 
@@ -28,44 +21,6 @@ public class ChargeGraph2D extends Graph2D
 	public ChargeGraph2D(int width, int height)
 	{
 		super(width, height);
-		this.chargeList = new ArrayList<Charge>();
-	}
-
-	@Override
-	public void addElement(IGraphElement element)
-	{
-		// Perform add operation like parent class
-		super.addElement(element);
-
-		// Ensure chargeList stays up to date with main element list
-		if (element instanceof Charge)
-		{
-			chargeList.add((Charge) element);
-		}
-	}
-
-	@Override
-	public boolean removeElement(IGraphElement element)
-	{
-		// Perform add operation like parent class
-		boolean output = super.removeElement(element);
-
-		// Ensure chargeList stays up to date with main element list
-		if (chargeList.contains(element))
-		{
-			chargeList.remove(element);
-		}
-
-		// Same output as parent
-		return output;
-	}
-
-	@Override
-	public void clearElements()
-	{
-		super.clearElements();
-		// Clear our charge list to keep data in sync
-		chargeList.clear();
 	}
 
 	/**
@@ -78,25 +33,48 @@ public class ChargeGraph2D extends Graph2D
 	public Vec2D getNetFieldAtPoint(double x, double y)
 	{
 		Vec2D netVector = new Vec2D(0, 0);
+		Charge currentCharge = null;
 
-		for (Charge c : chargeList)
+		for (IGraphElement c : this.getElementsOfType(Charge.class))
 		{
-			netVector.add(c.getFieldAtPoint(x, y));
+			// Cast is safe because getElementsOfType ensures only Charges will
+			// appear here.
+			currentCharge = (Charge) c;
+			
+			// Only add a charge's influence if its magnitude is not zero.
+			if (currentCharge.getMagnitude() != 0)
+			{
+				netVector.add(currentCharge.getFieldAtPoint(x, y));
+			}
 		}
 
 		return netVector;
 	}
 
+	/**
+	 * Updates the state of all FieldArrows present on this ChargeGraph. This
+	 * involves calculating the magnitude and direction of the net electric
+	 * field at each arrow's position.
+	 */
 	public void updateFieldArrows()
 	{
+		// Declare temporary variables for the loop
 		Vec2D localField = null;
+		double localMag = 0;
+		double localDirection = 0;
 
+		// Iterate through all arrows on the graph and update their magnitude
+		// and direction.
 		for (IGraphElement arrow : getElementsOfType(FieldArrow.class))
 		{
 			localField = getNetFieldAtPoint(arrow.getX(), arrow.getY());
+			localMag = localField.getMagnitude();
+			localDirection = localField.getDirection();
 
-			((FieldArrow) arrow).setMagnitude(localField.getMagnitude());
-			((FieldArrow) arrow).setDirection(localField.getDirection());
+			// Casting is safe here because getElementsOfType ensures only
+			// FieldArrows will appear.
+			((FieldArrow) arrow).setMagnitude(localMag);
+			((FieldArrow) arrow).setDirection(localDirection);
 		}
 	}
 }

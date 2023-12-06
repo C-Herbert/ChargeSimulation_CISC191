@@ -9,6 +9,9 @@ package utils;
  * @author Charlie Herbert
  */
 
+// References:
+// https://en.wikipedia.org/wiki/Dot_product
+
 public class Vec2D
 {
 	// 2D Vectors have an x component
@@ -59,23 +62,6 @@ public class Vec2D
 	}
 
 	/**
-	 * Sets the magnitude of this vector, maintaining its current direction.
-	 * 
-	 * @param newMagnitude The magnitude to assign to this vector.
-	 * @return a reference to this vector.
-	 */
-	public Vec2D setMagnitude(double newMagnitude)
-	{
-		double currentMagnitude = getMagnitude();
-
-		xComp = (xComp / currentMagnitude) * newMagnitude;
-		yComp = (yComp / currentMagnitude) * newMagnitude;
-
-		// Return this in case we want to chain operations
-		return this;
-	}
-
-	/**
 	 * Gets direction of this vector, measured in radians.
 	 * 
 	 * @return the double representation of this vector's direction, measured
@@ -86,18 +72,42 @@ public class Vec2D
 		return Math.atan2(yComp, xComp);
 	}
 
-	// TODO: add tests
+	/**
+	 * Sets the magnitude of this vector, maintaining its current direction. A
+	 * magnitude less than or equal to zero cannot be assigned to a vector.
+	 * 
+	 * @param newMagnitude The magnitude to assign to this vector.
+	 * @return a reference to this vector.
+	 */
+	public Vec2D setMagnitude(double newMagnitude)
+	{
+		// If the newMagnitude is less than or equal to zero, don't assign it.
+		if (newMagnitude <= 0) return this;
+
+		double currentMagnitude = getMagnitude();
+
+		xComp = (xComp / currentMagnitude) * newMagnitude;
+		yComp = (yComp / currentMagnitude) * newMagnitude;
+
+		// Return this in case we want to chain operations
+		return this;
+	}
+
 	/**
 	 * Changes the direction of this vector while maintaining its magnitude.
 	 * 
 	 * @param radians New direction of the vector, measured from the positive
 	 *                x-axis.
+	 * @return a reference to this vector.
 	 */
-	public void setDirection(double radians)
+	public Vec2D setDirection(double radians)
 	{
 		double mag = getMagnitude();
 		this.xComp = mag * Math.cos(radians);
 		this.yComp = mag * Math.sin(radians);
+
+		// Return this in case we want to chain operations
+		return this;
 	}
 
 	/**
@@ -125,9 +135,6 @@ public class Vec2D
 		return (this.xComp * other.xComp) + (this.yComp * other.yComp);
 	}
 
-	//
-	// Reference: https://en.wikipedia.org/wiki/Dot_product
-	// TODO: add more tests
 	/**
 	 * Calculates the angle between vectors using the dot product.
 	 * 
@@ -139,7 +146,6 @@ public class Vec2D
 		double absoluteAngle = Math.acos(this.dotProduct(other)
 				/ (this.getMagnitude() * other.getMagnitude()));
 
-		// TODO: double check sign/angle stuff
 		if (this.yComp < other.yComp)
 		{
 			// If angle exceeds 180 degrees, assign the appropriate sign
