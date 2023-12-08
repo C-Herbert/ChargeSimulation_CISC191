@@ -23,8 +23,13 @@ import assets.ProgramAssets;
 
 public class ToolboxView extends JPanel
 {
+
+	// Element Buttons
 	private JButton createChargeButton = new JButton("Add Charge");
 	private JButton createArrowButton = new JButton("Add Arrow");
+
+	// Tool Buttons
+	private JButton potentiometerButton = new JButton("Potentiometer");
 
 	public ToolboxView()
 	{
@@ -33,14 +38,18 @@ public class ToolboxView extends JPanel
 
 		JLabel headerLabel = new JLabel("Toolbox:");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		createChargeButton.setIcon(new ImageIcon(ProgramAssets.getAsset("positive_charge")));
-		createArrowButton.setIcon(new ImageIcon(ProgramAssets.getAsset("green_arrow")));
-		
-		this.add(headerLabel);
 
+		createChargeButton.setIcon(
+				new ImageIcon(ProgramAssets.getAsset("add_charge_icon")));
+		createArrowButton
+				.setIcon(new ImageIcon(ProgramAssets.getAsset("green_arrow")));
+		potentiometerButton.setIcon(
+				new ImageIcon(ProgramAssets.getAsset("potentiometer")));
+
+		this.add(headerLabel);
 		this.add(createChargeButton);
 		this.add(createArrowButton);
+		this.add(potentiometerButton);
 	}
 
 	public void addCreateChargeListener(ActionListener l)

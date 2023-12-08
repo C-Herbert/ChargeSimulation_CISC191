@@ -1,9 +1,13 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+
+import javax.swing.KeyStroke;
+
+import controller.actions.DeleteElementAction;
 import controller.listeners.AddArrowListener;
 import controller.listeners.AddChargeListener;
 import controller.listeners.ArrowLayoutListener;
-import controller.listeners.DeleteElementListener;
 import controller.listeners.EditChargeListener;
 import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
@@ -70,8 +74,7 @@ public class ProgramController
 		programView.getToolbar().addHelpPanelListener(new HelpPanelListener());
 		
 		//Delete listener
-		programView.addGraphKeyCommandListener(new DeleteElementListener(programGraph, programView));
-		programView.getFrame().addKeyListener(new DeleteElementListener(programGraph, programView));
+		programView.addGraphKeyBinding(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete_element", new DeleteElementAction(programGraph, programView));
 		
 		// Setup a basic field arrow pattern.
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);

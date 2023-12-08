@@ -19,7 +19,8 @@ public class HelpPanelListener implements ActionListener
 			+ " 1. Add elements from the toolbox on the right.\n"
 			+ " 2. Drag elements around the graph.\n"
 			+ " 3. Right click on charges to open an editor panel.\n"
-			+ " 4. Delete elements _TODO_\n"
+			+ " 4. Delete elements by pressing \"DELETE\" on a graph element.\n"
+			+ "     Charges can also be delete by setting their magnitude to zero.\n"
 			+ " 5. Save/Load graphs with the upper toolbar buttons.";
 
 	@Override

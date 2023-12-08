@@ -31,6 +31,12 @@ public class ProgramAssets
 	public static final String ARROW_FILEPATH = "src/assets/arrow.png";
 	public static final String GREEN_ARROW_FILEPATH = "src/assets/green_arrow.png";
 
+	// Tool Images
+	public static final String POTENTIOMETER_FILEPATH = "src/assets/potentiometer.png";
+
+	// UI Images
+	public static final String ADD_CHARGE_FILEPATH = "src/assets/add_charge_icon.png";
+
 	// Static initializer to setup asset map.
 	static
 	{
@@ -41,6 +47,12 @@ public class ProgramAssets
 		// Arrows
 		addEntry("field_arrow", ARROW_FILEPATH);
 		addEntry("green_arrow", GREEN_ARROW_FILEPATH);
+
+		// Tools
+		addEntry("potentiometer", POTENTIOMETER_FILEPATH);
+		
+		// UI
+		addEntry("add_charge_icon", ADD_CHARGE_FILEPATH);
 	}
 
 	/**

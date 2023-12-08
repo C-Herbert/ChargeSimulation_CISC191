@@ -1,16 +1,15 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import model.ChargeGraph2D;
 
@@ -24,6 +23,8 @@ import model.ChargeGraph2D;
  */
 
 // TODO: Java Java Java citation
+// References:
+// https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html
 
 public class ProgramView
 {
@@ -153,12 +154,18 @@ public class ProgramView
 	}
 
 	/**
-	 * Adds a key command listener to this view's associated graph.
+	 * Adds a key binding to this view's associated graph. Note that binding
+	 * created through this function are always active.
 	 * 
-	 * @param listener The listener to add.
+	 * @param input      The KeyStroke to bind the action to.
+	 * @param actionName The internal name of the action.
+	 * @param action     The action to execute when the binding is triggered.
 	 */
-	public void addGraphKeyCommandListener(KeyListener listener)
+	public void addGraphKeyBinding(KeyStroke input, String actionName,
+			Action action)
 	{
-		graphView.addKeyListener(listener);
+		graphView.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(input,
+				actionName);
+		graphView.getActionMap().put(actionName, action);
 	}
 }
