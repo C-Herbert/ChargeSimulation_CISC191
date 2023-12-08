@@ -4,8 +4,8 @@ public class RectangleBound extends Bound
 {
 	// Saving half values so bounds check doesn't have to divide each time.
 	// Dimension values are in pixels.
-	private int halfWidth;
-	private int halfHeight;
+	protected int halfWidth;
+	protected int halfHeight;
 
 	public RectangleBound(int width, int height)
 	{

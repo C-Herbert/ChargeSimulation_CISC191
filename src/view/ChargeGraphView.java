@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import model.ChargeGraph2D;
 import model.IGraphElement;
 import view.elements.ElementView;
+import view.elements.PotentiometerView;
 import view.elements.ArrowView;
 import view.elements.ChargeView;
 
@@ -51,6 +52,8 @@ public class ChargeGraphView extends JPanel
 		addView(new ArrowView(chargeGraph, -100));
 		// Add a charge view
 		addView(new ChargeView(chargeGraph, 0));
+		// Add a potentiometer view
+		addView(new PotentiometerView(chargeGraph, 100));
 
 		setSize(graphReference.getWidth(), graphReference.getHeight());
 		setBackground(Color.black);

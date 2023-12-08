@@ -7,6 +7,7 @@ import javax.swing.KeyStroke;
 import controller.actions.DeleteElementAction;
 import controller.listeners.AddArrowListener;
 import controller.listeners.AddChargeListener;
+import controller.listeners.AddPotentiometerListener;
 import controller.listeners.ArrowLayoutListener;
 import controller.listeners.EditChargeListener;
 import controller.listeners.ElementDragListener;
@@ -69,13 +70,17 @@ public class ProgramController
 				new AddChargeListener(programGraph, programView));
 		programView.getToolbox().addCreateArrowListener(
 				new AddArrowListener(programGraph, programView));
+		programView.getToolbox().addPotentiometerListener(
+				new AddPotentiometerListener(programGraph, programView));
 
 		// Add Help Listener
 		programView.getToolbar().addHelpPanelListener(new HelpPanelListener());
-		
-		//Delete listener
-		programView.addGraphKeyBinding(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete_element", new DeleteElementAction(programGraph, programView));
-		
+
+		// Delete listener
+		programView.addGraphKeyBinding(
+				KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "delete_element",
+				new DeleteElementAction(programGraph, programView));
+
 		// Setup a basic field arrow pattern.
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
 		programView.repaintGraph();

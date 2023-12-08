@@ -60,7 +60,7 @@ public abstract class ElementView<T extends IGraphElement>
 	 * @param graphics Graphics2D object to be used for drawing the elements
 	 */
 	public abstract void drawElement(T graphElement, Graphics2D graphics);
-
+	
 	/**
 	 * Draws all elements of this view's graph field that match getDrawableType
 	 * using the provided graphics.

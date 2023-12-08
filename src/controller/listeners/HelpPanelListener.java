@@ -21,7 +21,9 @@ public class HelpPanelListener implements ActionListener
 			+ " 3. Right click on charges to open an editor panel.\n"
 			+ " 4. Delete elements by pressing \"DELETE\" on a graph element.\n"
 			+ "     Charges can also be delete by setting their magnitude to zero.\n"
-			+ " 5. Save/Load graphs with the upper toolbar buttons.";
+			+ " 5. Adjust the field (white) arrow layout using the arrow layout\n"
+			+ "     button on the upper toolbar.\n"
+			+ " 6. Save/Load graphs with the upper toolbar buttons.";
 
 	@Override
 	public void actionPerformed(ActionEvent e)

@@ -8,6 +8,7 @@ import model.Charge;
 import model.ChargeGraph2D;
 import model.DraggableFieldArrow;
 import model.IGraphElement;
+import model.tools.PotentiometerGraphTool;
 import view.ProgramView;
 
 /**
@@ -24,7 +25,7 @@ public class ElementDragListener extends GraphMouseListener
 {
 	// All ElementDragListeners share a list of types that can be dragged.
 	private static final Class[] DRAGGABLE_TYPES = { Charge.class,
-			DraggableFieldArrow.class };
+			DraggableFieldArrow.class, PotentiometerGraphTool.class };
 
 	// ElementDragListener tracks an IGraphElement.
 	private IGraphElement draggingElement = null;

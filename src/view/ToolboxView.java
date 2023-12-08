@@ -61,4 +61,9 @@ public class ToolboxView extends JPanel
 	{
 		createArrowButton.addActionListener(l);
 	}
+	
+	public void addPotentiometerListener(ActionListener l)
+	{
+		potentiometerButton.addActionListener(l);
+	}
 }
