@@ -1,13 +1,9 @@
 package view.elements;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
 import model.Graph2D;
 import model.IGraphElement;
-import view.ChargeGraphView;
 
 /**
  * Subclasses of ElementView allow a given IGraphElementType to be displayed on

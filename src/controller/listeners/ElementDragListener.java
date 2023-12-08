@@ -72,7 +72,6 @@ public class ElementDragListener extends GraphMouseListener
 				if (element.getClass().equals(c))
 				{
 					// Found a draggable element, start the thread.
-					System.out.println("Started drag");
 					draggingElement = element;
 					dragThread = new Thread(new DragElement());
 					dragThread.start();

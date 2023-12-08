@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
@@ -149,5 +150,15 @@ public class ProgramView
 	public void addGraphMouseListener(MouseListener listener)
 	{
 		graphView.addMouseListener(listener);
+	}
+
+	/**
+	 * Adds a key command listener to this view's associated graph.
+	 * 
+	 * @param listener The listener to add.
+	 */
+	public void addGraphKeyCommandListener(KeyListener listener)
+	{
+		graphView.addKeyListener(listener);
 	}
 }

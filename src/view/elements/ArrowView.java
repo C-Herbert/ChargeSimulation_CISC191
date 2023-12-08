@@ -27,7 +27,7 @@ public class ArrowView extends ElementView<Arrow2D>
 
 	private static BufferedImage draggableArrowImage = ProgramAssets
 			.getAsset("green_arrow");
-
+	
 	/**
 	 * Constructs a new FieldArrowView using the provided graph and assigns it
 	 * the passed sortOrder.
@@ -39,14 +39,14 @@ public class ArrowView extends ElementView<Arrow2D>
 	{
 		super(graph, sortOrder);
 	}
-
+	
 	@Override
 	// Not used by this view
 	public void drawElement(Arrow2D arrow, Graphics2D graphics)
 	{
 		drawArrow(arrow, graphics, 1);
 	}
-
+	
 	/**
 	 * Draws all Arrow2Ds that are contained in this view's associated graph.
 	 * 
@@ -97,7 +97,7 @@ public class ArrowView extends ElementView<Arrow2D>
 	{
 		return Arrow2D.class;
 	}
-
+	
 	/**
 	 * Draws a rotated arrow using the provided Graphics object
 	 * 

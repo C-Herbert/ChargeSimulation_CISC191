@@ -3,7 +3,8 @@ package controller;
 import controller.listeners.AddArrowListener;
 import controller.listeners.AddChargeListener;
 import controller.listeners.ArrowLayoutListener;
-import controller.listeners.ChargeEditListener;
+import controller.listeners.DeleteElementListener;
+import controller.listeners.EditChargeListener;
 import controller.listeners.ElementDragListener;
 import controller.listeners.FileOpenListener;
 import controller.listeners.FileSaveListener;
@@ -47,7 +48,7 @@ public class ProgramController
 		programView.addGraphMouseListener(
 				new ElementDragListener(programGraph, programView));
 		programView.addGraphMouseListener(
-				new ChargeEditListener(programGraph, programView));
+				new EditChargeListener(programGraph, programView));
 
 		// Add IO listeners
 		programView.getToolbar().addFileOpenListener(
@@ -67,7 +68,11 @@ public class ProgramController
 
 		// Add Help Listener
 		programView.getToolbar().addHelpPanelListener(new HelpPanelListener());
-
+		
+		//Delete listener
+		programView.addGraphKeyCommandListener(new DeleteElementListener(programGraph, programView));
+		programView.getFrame().addKeyListener(new DeleteElementListener(programGraph, programView));
+		
 		// Setup a basic field arrow pattern.
 		ArrowPatterns.createRectangularPattern(programGraph, 0.7);
 		programView.repaintGraph();

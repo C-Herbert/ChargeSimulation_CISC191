@@ -18,7 +18,7 @@ import view.submenus.ChargeEditorFrame;
  * @author Charlie Herbert
  * @version 1.0
  */
-public class ChargeEditListener extends GraphMouseListener
+public class EditChargeListener extends GraphMouseListener
 {
 	// ChargeEditListeners have a frame for collecting input.
 	private ChargeEditorFrame inputFrame = new ChargeEditorFrame(
@@ -35,7 +35,7 @@ public class ChargeEditListener extends GraphMouseListener
 	 * @param graph The graph to assign to this listener.
 	 * @param view  The view to assign to this listener.
 	 */
-	public ChargeEditListener(ChargeGraph2D graph, ProgramView view)
+	public EditChargeListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
 
@@ -59,6 +59,7 @@ public class ChargeEditListener extends GraphMouseListener
 		{
 			if (element instanceof Charge)
 			{
+				// If we found a charge, load its info and show the input frame.
 				targetedElement = (Charge) element;
 				inputFrame.loadChargeInfo(targetedElement);
 				inputFrame.setLocation(e.getXOnScreen(), e.getYOnScreen());
@@ -99,6 +100,9 @@ public class ChargeEditListener extends GraphMouseListener
 
 	}
 
+	/**
+	 * Internal class for handling inputs on the editor frame.
+	 */
 	private class EditorInputListener implements ActionListener
 	{
 		@Override
@@ -106,21 +110,38 @@ public class ChargeEditListener extends GraphMouseListener
 		{
 			if (e.getSource().equals(inputFrame.getConfirmButton()))
 			{
+				// User pressed the confirm button.
+
+				// Check that we actually have a target element.
 				if (targetedElement == null) return;
 
-				// TODO: Validation to prevent out of bounds.
-				targetedElement.setX(inputFrame.getXInput());
-				targetedElement.setY(inputFrame.getYInput());
-				targetedElement.setMagnitude(inputFrame.getMagnitudeInput());
+				if (inputFrame.getMagnitudeInput() == 0)
+				{
+					// We interpret a zero magnitude as a request to delete the
+					// charge.
+					graph.removeElement(targetedElement);
+				}
+				else
+				{
+					// Otherwise, edit the charge as usual.
+					// TODO: Validation to prevent out of bounds.
+					targetedElement.setX(inputFrame.getXInput());
+					targetedElement.setY(inputFrame.getYInput());
+					targetedElement
+							.setMagnitude(inputFrame.getMagnitudeInput());
+				}
 
+				// Update UI
 				graph.updateFieldArrows();
 				view.repaintGraph();
 
+				// Clear the targeted element and hide the frame.
 				targetedElement = null;
 				inputFrame.setVisible(false);
 			}
 			else if (e.getSource().equals(inputFrame.getCancelButton()))
 			{
+				// User pressed the cancel button, hide the input frame.
 				targetedElement = null;
 				inputFrame.setVisible(false);
 			}

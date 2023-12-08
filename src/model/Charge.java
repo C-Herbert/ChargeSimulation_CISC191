@@ -1,7 +1,5 @@
 package model;
 
-import java.io.Serializable;
-
 import model.bounds.Bound;
 import model.bounds.RectangleBound;
 import utils.Vec2D;
