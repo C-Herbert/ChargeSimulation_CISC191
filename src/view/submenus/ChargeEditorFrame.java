@@ -12,24 +12,39 @@ import javax.swing.JTextField;
 
 import model.Charge;
 
+/**
+ * The ChargeEditorFrame is a subclass of JFrame used to gather user inputs for
+ * editing or creating Charge objects.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0.
+ */
+
 public class ChargeEditorFrame extends JFrame
 {
-	private JPanel creationDialogPanel = new JPanel();
+	// ChargeEditorFrame is serializable, thus it needs a UID.
+	private static final long serialVersionUID = -1505621340036308990L;
 
+	// ChargeEditorFrame has a variety of Swing components for display fields to
+	// the user.
+	private JPanel creationDialogPanel = new JPanel();
 	private JPanel inputPanel = new JPanel();
 	private JTextField xPositionField = new JTextField(15);
 	private JTextField yPositionField = new JTextField(15);
 	private JTextField magnitudeField = new JTextField(15);
-
 	private JButton cancelButton = new JButton("Cancel");
 	private JButton confirmButton = new JButton("Confirm");
 
+	/**
+	 * Creates a new ChargeEditorFrame with the specified title.
+	 * 
+	 * @param title The title to assign to the frame.
+	 */
 	public ChargeEditorFrame(String title)
 	{
 		super(title);
 
-		creationDialogPanel.setLayout(new BorderLayout());
-
+		// Setup the fields for gathering user input.
 		inputPanel.setLayout(new GridLayout(0, 2));
 		inputPanel.add(new JLabel("X Position: "));
 		inputPanel.add(xPositionField);
@@ -40,13 +55,18 @@ public class ChargeEditorFrame extends JFrame
 		inputPanel.add(new JLabel("Magnitude: "));
 		inputPanel.add(magnitudeField);
 		magnitudeField.setText("100");
+
+		// Setup the main panel.
+		creationDialogPanel.setLayout(new BorderLayout());
 		creationDialogPanel.add(inputPanel, BorderLayout.CENTER);
 
+		// Setup the decision panel.
 		JPanel decisionPanel = new JPanel();
 		decisionPanel.add(confirmButton);
 		decisionPanel.add(cancelButton);
 		creationDialogPanel.add(decisionPanel, BorderLayout.SOUTH);
 
+		// Prepare this frame for display.
 		this.add(creationDialogPanel);
 		this.setAlwaysOnTop(true);
 		this.pack();

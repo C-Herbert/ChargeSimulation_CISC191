@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
- * FileSaveListener is an ActionListener responsible for displaying the help
+ * HelpPanelListener is an ActionListener responsible for displaying the help
  * menu.
  * 
  * @author Charlie Herbert
@@ -20,7 +20,7 @@ public class HelpPanelListener implements ActionListener
 			+ " 2. Drag elements around the graph.\n"
 			+ " 3. Right click on charges to open an editor panel.\n"
 			+ " 4. Delete elements by pressing \"DELETE\" on a graph element.\n"
-			+ "     Charges can also be delete by setting their magnitude to zero.\n"
+			+ "     Charges can also be deleted by setting their magnitude to zero.\n"
 			+ " 5. Adjust the field (white) arrow layout using the arrow layout\n"
 			+ "     button on the upper toolbar.\n"
 			+ " 6. Save/Load graphs with the upper toolbar buttons.";

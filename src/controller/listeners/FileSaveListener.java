@@ -1,14 +1,14 @@
 package controller.listeners;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import model.ChargeGraph2D;
-import model.Graph2D;
 import utils.io.GraphIO;
 import view.ProgramView;
 
@@ -16,12 +16,14 @@ import view.ProgramView;
  * FileSaveListener is a GraphActionListener responsible for handling saving
  * files to the system from the program.
  * 
+ * References:
+ * “JFileChooser.” Oracle Java Documentation, 4 2023,
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html.
+ * Accessed 2 Nov. 2023.
+ * 
  * @author Charlie Herbert
  * @version 1.0
  */
-
-// References:
-// https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html
 
 public class FileSaveListener extends GraphActionListener
 {
@@ -40,18 +42,28 @@ public class FileSaveListener extends GraphActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		// Prompt the user to select a file and hold their response in a
+		// variable
 		int response = view.getFileChooser().showSaveDialog(null);
 
 		if (response == JFileChooser.APPROVE_OPTION)
 		{
+			// Declare a variable to hold the file selected by the user.
 			File f = view.getFileChooser().getSelectedFile();
-			// TODO: Better error handling
 			try
 			{
+				// Attempt to write the current graph to the file.
 				GraphIO.writeGraphToFile(f, graph);
+			}
+			catch (FileNotFoundException e1)
+			{
+				// User selected an invalid file, warn them.
+				JOptionPane.showMessageDialog(null, "That file doesn't exist!",
+						"Warning", JOptionPane.WARNING_MESSAGE);
 			}
 			catch (IOException e1)
 			{
+				// Misc exception, print stack trace.
 				e1.printStackTrace();
 			}
 		}

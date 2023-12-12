@@ -16,14 +16,20 @@ import view.ProgramView;
  * element drag inputs on a graph.
  * 
  * References:
- * https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
+ * 1. “Lesson: Concurrency.” Oracle Java Documentation,
+ * https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html.
+ * Accessed 15 Nov. 2023.
  * 
  * @author Charlie Herbert
  * @version 1.0
  */
+
 public class ElementDragListener extends GraphMouseListener
 {
 	// All ElementDragListeners share a list of types that can be dragged.
+	// This array is only used to check types within this class, so I think the
+	// suppression is okay.
+	@SuppressWarnings("rawtypes")
 	private static final Class[] DRAGGABLE_TYPES = { Charge.class,
 			DraggableFieldArrow.class, PotentiometerGraphTool.class };
 

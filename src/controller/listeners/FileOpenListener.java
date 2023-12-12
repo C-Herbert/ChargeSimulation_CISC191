@@ -18,12 +18,14 @@ import view.ProgramView;
  * FileOpenListener is a GraphActionListener responsible for handling loading
  * files into the program.
  * 
+ * References:
+ * “JFileChooser.” Oracle Java Documentation, 4 2023,
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html.
+ * Accessed 2 Nov. 2023.
+ * 
  * @author Charlie Herbert
  * @version 1.0
  */
-
-// References:
-// https://docs.oracle.com/javase/8/docs/api/javax/swing/JFileChooser.html
 
 public class FileOpenListener extends GraphActionListener
 {
@@ -37,7 +39,6 @@ public class FileOpenListener extends GraphActionListener
 	public FileOpenListener(ChargeGraph2D graph, ProgramView view)
 	{
 		super(graph, view);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -57,6 +58,7 @@ public class FileOpenListener extends GraphActionListener
 				return;
 			}
 
+			// Declare a variable to hold the file selected by the user.
 			File f = view.getFileChooser().getSelectedFile();
 
 			try
@@ -64,7 +66,6 @@ public class FileOpenListener extends GraphActionListener
 				Graph2D fileGraph = GraphIO.readGraphFromFile(f);
 
 				// Update testGraph with the file graph.
-				// TODO: load size
 				graph.clearElements();
 				graph.addElements(fileGraph.getElements());
 

@@ -5,12 +5,13 @@ package utils;
  * 2D vector values have an x and y component, used to
  * represent the overall magnitude of the vector.
  * 
+ * References:
+ * 1. Contributors to Wikimedia projects. “Dot Product.” Wikipedia, Wikimedia
+ * Foundation, Inc., 12 2002, https://en.wikipedia.org/wiki/Dot_product.
+ * 
  * @version 1.0
  * @author Charlie Herbert
  */
-
-// References:
-// https://en.wikipedia.org/wiki/Dot_product
 
 public class Vec2D
 {

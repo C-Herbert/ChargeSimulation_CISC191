@@ -8,7 +8,7 @@ import view.ProgramView;
 
 /**
  * AddArrowListener is a GraphActionListener responsible for handling
- * adding/creating draggable arrows to the graph.
+ * arrow creation for the graph.
  * 
  * @author Charlie Herbert
  * @version 1.0
@@ -30,8 +30,9 @@ public class AddArrowListener extends GraphActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		// Add a new draggable field arrow.
 		graph.addElement(new DraggableFieldArrow(100, 100, 0, 1));
-
+		// Update the graph.
 		graph.updateFieldArrows();
 		view.repaintGraph();
 	}

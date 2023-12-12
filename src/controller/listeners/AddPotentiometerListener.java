@@ -3,7 +3,6 @@ package controller.listeners;
 import java.awt.event.ActionEvent;
 
 import model.ChargeGraph2D;
-import model.DraggableFieldArrow;
 import model.tools.PotentiometerGraphTool;
 import view.ProgramView;
 
@@ -32,8 +31,9 @@ public class AddPotentiometerListener extends GraphActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		// Add the potentiometer tool to the graph.
 		graph.addElement(new PotentiometerGraphTool(200, 200));
+		// Update the graph display. No need to update arrows.
 		view.repaintGraph();
 	}
-
 }

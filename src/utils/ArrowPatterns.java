@@ -1,7 +1,5 @@
 package utils;
 
-import java.util.Iterator;
-
 import model.FieldArrow;
 import model.Graph2D;
 import model.IGraphElement;
@@ -78,11 +76,11 @@ public final class ArrowPatterns
 		// Calculate pattern parameters
 		double graphXCenter = graph.getWidth() / 2;
 		double graphYCenter = graph.getHeight() / 2;
-		
+
 		int minRadius = (graph.getWidth() > graph.getHeight() ? graph.getWidth()
 				: graph.getHeight()) / 2;
 		double radialInterval = (minRadius / (ARROW_SIZE * density)) * 4;
-		
+
 		// Temporary loop variables
 		double xPos = 0.0;
 		double yPos = 0.0;
@@ -91,7 +89,8 @@ public final class ArrowPatterns
 		// Add the arrows
 		for (int radius = 0; radius < minRadius; radius += radialInterval)
 		{
-			int arrowCount = (int) ((2 * Math.PI * radius * density) / ARROW_SIZE);
+			int arrowCount = (int) ((2 * Math.PI * radius * density)
+					/ ARROW_SIZE);
 			double angleInterval = (2 * Math.PI) / arrowCount;
 
 			for (int i = 0; i < arrowCount; ++i)
@@ -118,5 +117,13 @@ public final class ArrowPatterns
 		{
 			graph.removeElement(fArrow);
 		}
+	}
+
+	/**
+	 * Private constructor prevents instantiation of the ArrowPatterns class.
+	 */
+	private ArrowPatterns()
+	{
+		// Does nothing.
 	}
 }

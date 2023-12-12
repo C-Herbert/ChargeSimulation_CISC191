@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.Action;
@@ -18,13 +17,15 @@ import model.ChargeGraph2D;
  * program. All controller/view interactions should be done through an instance
  * of this class.
  * 
+ * References:
+ * 1. Morelli, Ralph. Java, Java, Java. 3rd ed., Prentice Hall, 2006.
+ * 2. “How to Use Key Bindings.” Oracle Java Documentation,
+ * https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html.
+ * Accessed 8 Dec. 2023.
+ * 
  * @author Charlie Herbert
- * @version 1.0
+ * @version 1.0a
  */
-
-// TODO: Java Java Java citation
-// References:
-// https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html
 
 public class ProgramView
 {

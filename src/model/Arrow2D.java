@@ -1,7 +1,5 @@
 package model;
 
-import java.io.Serializable;
-
 import model.bounds.Bound;
 import model.bounds.RectangleBound;
 import utils.Vec2D;
@@ -14,17 +12,19 @@ import utils.Vec2D;
  * @author Charlie Herbert
  */
 
-// TODO: maybe abstract?
 public class Arrow2D extends Vec2D implements IGraphElement
 {
 	// Arrows have an x position
 	private double xPos;
 	// Arrows have a y position
 	private double yPos;
+	// Arrows have a RectangleBound for user interaction.
+	private static final RectangleBound ARROW_BOUNDS = new RectangleBound(64,
+			64);
 
 	/**
 	 * Constructs a new Arrow2D object with the given position and component
-	 * arguments
+	 * arguments.
 	 * 
 	 * @param xPos the x position of this arrow on the graph
 	 * @param yPos the y position of this arrow on the graph
@@ -38,36 +38,6 @@ public class Arrow2D extends Vec2D implements IGraphElement
 		this.yPos = yPos;
 	}
 
-	@Override
-	public double getX()
-	{
-		return this.xPos;
-	}
-
-	@Override
-	public double getY()
-	{
-		return this.yPos;
-	}
-
-	/**
-	 * Sets the x position of this charge.
-	 */
-	@Override
-	public void setX(double newX)
-	{
-		this.xPos = newX;
-	}
-
-	/**
-	 * Sets the y position of this charge.
-	 */
-	@Override
-	public void setY(double newY)
-	{
-		this.yPos = newY;
-	}
-	
 	/**
 	 * Sets the direction of this arrow to point towards a given point on the
 	 * graph.
@@ -85,7 +55,45 @@ public class Arrow2D extends Vec2D implements IGraphElement
 		setDirection(targetVector.angleBetween(new Vec2D(1, 0)));
 	}
 
-	private static final RectangleBound ARROW_BOUNDS = new RectangleBound(64, 64);
+	/**
+	 * Gets the x position of this arrow.
+	 * 
+	 * @return x position of this arrow.
+	 */
+	@Override
+	public double getX()
+	{
+		return this.xPos;
+	}
+
+	/**
+	 * Gets the y position of this arrow.
+	 * 
+	 * @return y position of this arrow.
+	 */
+	@Override
+	public double getY()
+	{
+		return this.yPos;
+	}
+
+	/**
+	 * Sets the x position of this arrow.
+	 */
+	@Override
+	public void setX(double newX)
+	{
+		this.xPos = newX;
+	}
+
+	/**
+	 * Sets the y position of this arrow.
+	 */
+	@Override
+	public void setY(double newY)
+	{
+		this.yPos = newY;
+	}
 
 	@Override
 	public Bound getInteractionBounds()

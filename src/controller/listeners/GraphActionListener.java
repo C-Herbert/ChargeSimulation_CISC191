@@ -3,7 +3,6 @@ package controller.listeners;
 import java.awt.event.ActionListener;
 
 import model.ChargeGraph2D;
-import model.Graph2D;
 import view.ProgramView;
 
 /**

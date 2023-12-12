@@ -7,10 +7,11 @@ import utils.Vec2D;
 /**
  * Data representation of an electric charge.
  * 
+ * References:
+ * 1. Morelli, Ralph. Java, Java, Java. 3rd ed., Prentice Hall, 2006.
+ * 
  * @version 1.0
  * @author Charlie Herbert
- * 
- *         References: Java, Java, Java 3rd Edition, Chapter 11
  */
 
 public class Charge implements IGraphElement

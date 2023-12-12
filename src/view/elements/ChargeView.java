@@ -2,15 +2,9 @@ package view.elements;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import assets.ProgramAssets;
 import model.Charge;
 import model.Graph2D;
-import model.IGraphElement;
 
 /**
  * The ChargeView class is an ElementView responsible for drawing all Charges on

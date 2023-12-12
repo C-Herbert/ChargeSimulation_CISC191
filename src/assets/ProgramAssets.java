@@ -11,16 +11,21 @@ import javax.imageio.ImageIO;
 /**
  * The ProgramAssets class is responsible for loading all image assets built
  * into the program. Assets should be loaded in its static initializer, and
- * referenced using the getAsset function.
+ * referenced using the static getAsset function.
+ * 
+ * References:
+ * 1. “Reading/Loading an Image.” Oracle Java Documentation,
+ * https://docs.oracle.com/javase/tutorial/2d/images/loadimage.html. Accessed 17
+ * Nov. 2023.
  * 
  * @author Charlie Herbert
  * @version 1.0
  */
 
-// References:
-// https://docs.oracle.com/javase/tutorial/2d/images/loadimage.html
-public class ProgramAssets
+public final class ProgramAssets
 {
+	// The ProgramAssets class has a map of BufferedImage assets bound to string
+	// identifiers.
 	private static HashMap<String, BufferedImage> imgAssets = new HashMap<>();
 
 	// Charge Images
@@ -50,7 +55,7 @@ public class ProgramAssets
 
 		// Tools
 		addEntry("potentiometer", POTENTIOMETER_FILEPATH);
-		
+
 		// UI
 		addEntry("add_charge_icon", ADD_CHARGE_FILEPATH);
 	}
@@ -97,4 +102,11 @@ public class ProgramAssets
 		return imgAssets.get(key);
 	}
 
+	/**
+	 * Private constructor prevents instantiation of the ProgramAssets class.
+	 */
+	private ProgramAssets()
+	{
+		// Does nothing.
+	}
 }

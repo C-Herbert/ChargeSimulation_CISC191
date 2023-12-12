@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
@@ -12,17 +9,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
 import assets.ProgramAssets;
 
-// References:
-// https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html
-// https://docs.oracle.com/javase/8/docs/api/javax/swing/BoxLayout.html
+/**
+ * ToolboxView is a subclass of JPanel used by the program view to display
+ * various IGraphElement creation options to the user.
+ * 
+ * References:
+ * 1. “A Visual Guide to Layout Managers.” Oracle Java Documentation,
+ * https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html. Accessed
+ * 10 Nov. 2023.
+ * 2. “BoxLayout.” Oracle Java Documentation,
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/BoxLayout.html.
+ * Accessed 10 Nov. 2023.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 
 public class ToolboxView extends JPanel
 {
+	// ToolboxView is serializable, thus it needs a UID.
+	private static final long serialVersionUID = -8444689130484954000L;
 
 	// Element Buttons
 	private JButton createChargeButton = new JButton("Add Charge");
@@ -31,6 +39,9 @@ public class ToolboxView extends JPanel
 	// Tool Buttons
 	private JButton potentiometerButton = new JButton("Potentiometer");
 
+	/**
+	 * Creates a new ToolboxView and sets up all of its menu components.
+	 */
 	public ToolboxView()
 	{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -52,16 +63,31 @@ public class ToolboxView extends JPanel
 		this.add(potentiometerButton);
 	}
 
+	/**
+	 * Adds an action listener to this view's associated create charge button.
+	 * 
+	 * @param l The listener to add.
+	 */
 	public void addCreateChargeListener(ActionListener l)
 	{
 		createChargeButton.addActionListener(l);
 	}
 
+	/**
+	 * Adds an action listener to this view's associated create arrow button.
+	 * 
+	 * @param l The listener to add.
+	 */
 	public void addCreateArrowListener(ActionListener l)
 	{
 		createArrowButton.addActionListener(l);
 	}
-	
+
+	/**
+	 * Adds an action listener to this view's associated potentiometer button.
+	 * 
+	 * @param l The listener to add.
+	 */
 	public void addPotentiometerListener(ActionListener l)
 	{
 		potentiometerButton.addActionListener(l);

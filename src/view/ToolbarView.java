@@ -7,8 +7,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * ToolbarView is a subclass of JPanel used by the program view to display
+ * various program options to the user.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 public class ToolbarView extends JPanel
 {
+	// ToolbarView is serializable, thus it needs a UID.
+	private static final long serialVersionUID = -7854610468117286834L;
 	// ToolbarView has buttons to control file io.
 	private JButton fileSaveButton;
 	private JButton fileOpenButton;
@@ -18,7 +27,10 @@ public class ToolbarView extends JPanel
 
 	// ToolbarView has a button to open the help menu.
 	private JButton helpButton;
-	
+
+	/**
+	 * Creates a new ToolbarView and sets up all of its menu components.
+	 */
 	public ToolbarView()
 	{
 		// Setup panel's layout
@@ -37,7 +49,7 @@ public class ToolbarView extends JPanel
 
 		arrowPatternButton = new JButton("Arrow Layout");
 		add(arrowPatternButton);
-		
+
 		helpButton = new JButton("Help");
 		add(helpButton);
 
@@ -64,7 +76,7 @@ public class ToolbarView extends JPanel
 	{
 		fileOpenButton.addActionListener(listener);
 	}
-	
+
 	/**
 	 * Adds an action listener to this view's associated arrow layout button.
 	 * 
@@ -74,7 +86,7 @@ public class ToolbarView extends JPanel
 	{
 		arrowPatternButton.addActionListener(listener);
 	}
-	
+
 	/**
 	 * Adds an action listener to this view's associated save button.
 	 * 

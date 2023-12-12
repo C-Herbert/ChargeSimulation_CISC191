@@ -1,19 +1,10 @@
 package utils.io;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,14 +20,11 @@ import model.IGraphElement;
 /**
  * The GraphIO class is used to write Graph2D data to a text file.
  * 
- * Work in progress, expect significant changes to file formatting.
+ * References:
+ * 1. Morelli, Ralph. Java, Java, Java. 3rd ed., Prentice Hall, 2006.
  * 
  * @version 1.0
  * @author Charlie Herbert
- * 
- *         References: Java, Java, Java 3rd Edition, Chapter 11
- * 
- *         https://docs.oracle.com/javase/8/docs/technotes/guides/serialization/examples/custom/CustomDataExample.java
  */
 public final class GraphIO
 {
@@ -77,20 +65,24 @@ public final class GraphIO
 				inputX = fileInput.nextDouble();
 				inputY = fileInput.nextDouble();
 
+				// Gather additional data depending on object type.
 				switch (inputID)
 				{
-					case 1: // Charge
+					// Charge
+					case 1:
 						// If we're reading a charge, there should be another
 						// double available.
 						graph.addElement(new Charge(inputX, inputY,
 								fileInput.nextDouble()));
 						break;
-					case 2: // Arrow
+					// Arrow
+					case 2:
 						// If we're reading an arrow, we can ignore the
 						// magnitude.
 						graph.addElement(new FieldArrow(inputX, inputY, 1, 0));
 						break;
-					case 3: // DraggableArrow
+					// DraggableArrow
+					case 3:
 						graph.addElement(
 								new DraggableFieldArrow(inputX, inputY, 1, 0));
 						break;
@@ -106,7 +98,7 @@ public final class GraphIO
 		}
 		catch (FileNotFoundException e)
 		{
-			// Rethrow.
+			// Could not find the file, re-throw.
 			throw e;
 		}
 		catch (InputMismatchException e)
@@ -167,10 +159,18 @@ public final class GraphIO
 				}
 			}
 		}
+		catch (FileNotFoundException e)
+		{
+			// Could not find the file, re-throw.
+			throw e;
+		}
 	}
 
-	// Shouldn't be making objects of GraphIO.
+	/**
+	 * Private constructor prevents instantiation of the GraphIO class.
+	 */
 	private GraphIO()
 	{
+		// Does nothing.
 	}
 }

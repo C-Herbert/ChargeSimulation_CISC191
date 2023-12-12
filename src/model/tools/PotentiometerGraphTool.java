@@ -12,15 +12,21 @@ import model.bounds.RectangleBound;
  * PotentiometerGraphTool is used to represent a potentiometer instance on a
  * Graph2D.
  * 
+ * References:
+ * 1. Nave, Rod. “Electric Potential for Different Charge Geometries.”
+ * HyperPhysics,
+ * http://hyperphysics.phy-astr.gsu.edu/hbase/electric/potpoi.html. Accessed 8
+ * Dec. 2023.
+ * 
  * @author Charlie Herbert
  * @version 1.0
  */
 
-// References:
-// http://hyperphysics.phy-astr.gsu.edu/hbase/electric/potpoi.html
-
 public class PotentiometerGraphTool implements IGraphElement
 {
+	// Coulomb's constant, see references.
+	private static final double kConst = 8.987552 * Math.pow(10, 9);
+
 	// Potentiometers have an x and y position.
 	protected double xPos, yPos;
 
@@ -40,17 +46,18 @@ public class PotentiometerGraphTool implements IGraphElement
 		this.yPos = y;
 	}
 
-	// Coulomb's constant, see references.
-	private static final double kConst = 8.987552 * Math.pow(10, 9);
-
 	/**
 	 * Returns a voltage reading based on the passed list of charges.
 	 * 
-	 * @param charges
-	 * @return
+	 * @param charges The list of charges to consider when calculating the
+	 *                voltage at the tool's location.
+	 * @return a double representation of the voltage at the potentiometer's
+	 *         location.
 	 */
 	public double getReading(List<Charge> charges)
 	{
+		// Declare a variable to hold the voltage at the potentiometer's
+		// location.
 		double readVoltage = 0;
 
 		// Temporary loop variable
@@ -69,6 +76,8 @@ public class PotentiometerGraphTool implements IGraphElement
 
 		return readVoltage;
 	}
+
+	// Basic implementation of functions required by IGraphElement:
 
 	@Override
 	public double getX()

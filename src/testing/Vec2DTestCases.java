@@ -6,6 +6,16 @@ import org.junit.Test;
 
 import utils.Vec2D;
 
+/**
+ * Vec2DTestCases is used to test the Vec2D implementation.
+ * 
+ * References:
+ * “JUnit 4.13.2 API.” Javadoc.Io,
+ * https://javadoc.io/doc/junit/junit/latest/index.html. Accessed 8 Oct. 2023.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 public class Vec2DTestCases
 {
 	// Used when comparing doubles, since floating-point math isn't always
@@ -13,7 +23,7 @@ public class Vec2DTestCases
 	private static final double DOUBLE_CALC_PRECISION = 0.0000001;
 
 	// Reference for double test cases:
-	// https://javadoc.io/doc/junit/junit/latest/index.html
+	//
 	@Test
 	public void UnitVectorTest()
 	{
@@ -28,7 +38,5 @@ public class Vec2DTestCases
 		Vec2D vec3 = new Vec2D(-1, 0);
 		assertEquals(Math.PI, vec2.angleBetween(vec3), DOUBLE_CALC_PRECISION);
 	}
-
-	// TODO: More Test Cases
 
 }

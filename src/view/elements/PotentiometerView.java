@@ -12,9 +12,25 @@ import model.Graph2D;
 import model.IGraphElement;
 import model.tools.PotentiometerGraphTool;
 
+/**
+ * The PotentiometerView class is an ElementView responsible for drawing all
+ * PotentiometerGraphTools on a graph using a provided Graphics object.
+ * 
+ * @author Charlie Herbert
+ * @version 1.0
+ */
 public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 {
+	// PotentiometerView has a font used for text display.
+	private static final Font TEXT_FONT = new Font("Helvetica", Font.PLAIN, 24);
 
+	/**
+	 * Constructs a new PotentiometerView using the provided graph and assigns
+	 * it the passed sortOrder.
+	 * 
+	 * @param graph     the graph to associate this view with.
+	 * @param sortOrder the sortOrder to assign to this view.
+	 */
 	public PotentiometerView(Graph2D graph, int sortOrder)
 	{
 		super(graph, sortOrder);
@@ -26,8 +42,12 @@ public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 		return PotentiometerGraphTool.class;
 	}
 
-	private static final Font TEXT_FONT = new Font("Helvetica", Font.PLAIN, 24);
-
+	/**
+	 * Draws a potentiometer on a graph using the provided Graphics2D object.
+	 * 
+	 * @param tool     The potentiometer to draw.
+	 * @param graphics The Graphics2D object to use when drawing.
+	 */
 	@Override
 	public void drawElement(PotentiometerGraphTool tool, Graphics2D graphics)
 	{
@@ -45,12 +65,13 @@ public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 			charges.add((Charge) e);
 		}
 
+		// Get the voltage reading.
 		double reading = tool.getReading(charges);
 
+		// Draw the voltage display.
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(TEXT_FONT);
-		graphics.drawString(String.format("%f V", reading), (int) tool.getX(), (int) tool.getY());
-
+		graphics.drawString(String.format("%f V", reading), (int) tool.getX(),
+				(int) tool.getY());
 	}
-
 }

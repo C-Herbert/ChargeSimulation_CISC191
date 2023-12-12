@@ -15,22 +15,26 @@ import view.elements.PotentiometerView;
 import view.elements.ArrowView;
 import view.elements.ChargeView;
 
-/*
- * References (TODO: Cleanup)
- * Using Graphics2D for a custom component:
- * https://docs.oracle.com/javase/tutorial/uiswing/components/jcomponent.html
- * https://www.oracle.com/java/technologies/painting.html
- */
-
 /**
- * The ChargeGraphView class will be used to draw and maintain a view model
- * for the ChargeGraph2D class. Currently, its only used for testing.
+ * The ChargeGraphView class is used to draw and maintain a view model
+ * for the ChargeGraph2D class. It is also responsible for gathering all
+ * interactables at a point on the graph.
+ * 
+ * References:
+ * 1. “The JComponent Class.” Oracle Java Docs,
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/jcomponent.html.
+ * Accessed 8 Oct. 2023.
+ * 2. “Painting in AWT and Swing.” Oracle,
+ * https://www.oracle.com/java/technologies/painting.html. Accessed 8 Oct. 2023.
  * 
  * @version 1.0
  * @author Charlie Herbert
  */
 public class ChargeGraphView extends JPanel
 {
+	// ChargeGraphView is serializable, thus it needs a UID.
+	private static final long serialVersionUID = -540329034920186511L;
+	
 	// ChargeGraphView has a ChargeGraph2D
 	private ChargeGraph2D graphReference;
 	// ChargeGraphView has many ElementViews
@@ -60,6 +64,13 @@ public class ChargeGraphView extends JPanel
 		setPreferredSize(getSize());
 	}
 
+	/**
+	 * Adds an ElementView to this graph object in order to display certain
+	 * subclasses of IGraphElement.
+	 * 
+	 * @param view The ElementView to add to the graph.
+	 * @return true if the view could be added, false otherwise.
+	 */
 	private boolean addView(ElementView<?> view)
 	{
 		// Check that parameter is not null

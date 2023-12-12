@@ -9,13 +9,16 @@ import model.IGraphElement;
  * Subclasses of ElementView allow a given IGraphElementType to be displayed on
  * a Graph.
  * 
+ * References:
+ * 1. Contributors to Wikimedia projects. “Model–View–Controller.” Wikipedia,
+ * Wikimedia Foundation, Inc., 2003,
+ * https://en.wikipedia.org/wiki/Model-view-controller.
+ * 2. Peterlic, Ana. “Type Parameter vs Wildcard in Java Generics.” Baeldung, 28
+ * Dec. 2022, https://www.baeldung.com/java-generics-type-parameter-vs-wildcard.
+ * 
  * @version 1.1
  * @author Charlie Herbert
  */
-
-// References
-// https://en.wikipedia.org/wiki/Model-view-controller
-// https://www.baeldung.com/java-generics-type-parameter-vs-wildcard
 
 // Generic allows subclasses to work on only specific types of graph elements
 public abstract class ElementView<T extends IGraphElement>
@@ -60,7 +63,7 @@ public abstract class ElementView<T extends IGraphElement>
 	 * @param graphics Graphics2D object to be used for drawing the elements
 	 */
 	public abstract void drawElement(T graphElement, Graphics2D graphics);
-	
+
 	/**
 	 * Draws all elements of this view's graph field that match getDrawableType
 	 * using the provided graphics.
@@ -99,7 +102,7 @@ public abstract class ElementView<T extends IGraphElement>
 				interactables.add(e);
 			}
 		}
-		
+
 		return interactables;
 	}
 }

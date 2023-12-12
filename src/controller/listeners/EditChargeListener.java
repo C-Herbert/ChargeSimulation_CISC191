@@ -76,28 +76,24 @@ public class EditChargeListener extends GraphMouseListener
 	public void mousePressed(MouseEvent e)
 	{
 		// Unused by this listener.
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
 		// Unused by this listener.
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
 		// Unused by this listener.
-
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
 		// Unused by this listener.
-
 	}
 
 	/**

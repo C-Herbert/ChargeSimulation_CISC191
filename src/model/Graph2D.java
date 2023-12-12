@@ -1,10 +1,7 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -17,7 +14,7 @@ import java.util.Map.Entry;
  * @author Charlie Herbert
  */
 
-public class Graph2D implements Serializable
+public class Graph2D
 {
 	// Graph2Ds have a width and height
 	protected int width, height;
@@ -46,7 +43,7 @@ public class Graph2D implements Serializable
 	{
 		return width;
 	}
-	
+
 	/**
 	 * Gets this Graph2D object's height field
 	 * 
@@ -157,7 +154,8 @@ public class Graph2D implements Serializable
 		// Iterate through all sub-lists of graphElements.
 		for (Class<? extends IGraphElement> c : graphElements.keySet())
 		{
-			// Check if the sub-list's type matches or is a superclass of the type parameter.
+			// Check if the sub-list's type matches or is a superclass of the
+			// type parameter.
 			if (type.isAssignableFrom(c))
 			{
 				// If so, add the sub-list's elements to our matching list

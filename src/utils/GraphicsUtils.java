@@ -9,13 +9,15 @@ import java.awt.image.WritableRaster;
  * The GraphicsUtils class contains a variety of helper functions for drawing
  * images.
  * 
+ * References:
+ * 1. “Graphics2D .” Oracle Java Documentation, 2023,
+ * https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-.
+ * 2. Foster, Alan. “Java: Rotating Images.” Stack Overflow, 2011,
+ * https://stackoverflow.com/questions/8639567/java-rotating-images.
+ * 
  * @author Charlie Herbert
  * @version 1.0
  */
-
-// References:
-// https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-
-// https://stackoverflow.com/questions/8639567/java-rotating-images
 
 public final class GraphicsUtils
 {
@@ -67,10 +69,7 @@ public final class GraphicsUtils
 		// Create Graphics2D so we can manipulate the image
 		Graphics2D newGraphics = newImage.createGraphics();
 
-		// Draw the base image and rotate it
-		// https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html#rotate-double-
-		// Also:
-		// https://stackoverflow.com/questions/8639567/java-rotating-images
+		// Draw the base image and rotate it. (See references)
 		newGraphics.rotate(rotation, newImage.getWidth() / 2,
 				newImage.getHeight() / 2);
 		newGraphics.drawImage(baseImage, null, 0, 0);
@@ -87,8 +86,11 @@ public final class GraphicsUtils
 		g.drawImage(newImage, null, xCenter, yCenter);
 	}
 
-	// Should not be making instances of GraphicsUtils.
+	/**
+	 * Private constructor prevents instantiation of the GraphicsUtils class.
+	 */
 	private GraphicsUtils()
 	{
+		// Does nothing.
 	}
 }

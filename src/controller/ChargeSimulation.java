@@ -10,8 +10,14 @@ package controller;
 
 public class ChargeSimulation
 {
+	/**
+	 * Creates a new ProgramController to start the program.
+	 * 
+	 * @param args An array of strings used to set the program's arguments.
+	 *             Unused.
+	 */
 	public static void main(String[] args)
 	{
-		ProgramController controller = new ProgramController(1000, 700);
+		new ProgramController(1000, 700);
 	}
 }

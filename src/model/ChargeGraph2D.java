@@ -40,7 +40,7 @@ public class ChargeGraph2D extends Graph2D
 			// Cast is safe because getElementsOfType ensures only Charges will
 			// appear here.
 			currentCharge = (Charge) c;
-			
+
 			// Only add a charge's influence if its magnitude is not zero.
 			if (currentCharge.getMagnitude() != 0)
 			{
