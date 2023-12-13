@@ -59,11 +59,11 @@ public class FileOpenListener extends GraphActionListener
 			}
 
 			// Declare a variable to hold the file selected by the user.
-			File f = view.getFileChooser().getSelectedFile();
+			File file = view.getFileChooser().getSelectedFile();
 
 			try
 			{
-				Graph2D fileGraph = GraphIO.readGraphFromFile(f);
+				Graph2D fileGraph = GraphIO.readGraphFromFile(file);
 
 				// Update testGraph with the file graph.
 				graph.clearElements();

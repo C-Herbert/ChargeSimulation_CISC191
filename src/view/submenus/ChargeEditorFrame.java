@@ -46,15 +46,15 @@ public class ChargeEditorFrame extends JFrame
 
 		// Setup the fields for gathering user input.
 		inputPanel.setLayout(new GridLayout(0, 2));
-		inputPanel.add(new JLabel("X Position: "));
+		inputPanel.add(new JLabel("X Position: [Pixels]"));
 		inputPanel.add(xPositionField);
 		xPositionField.setText("100");
-		inputPanel.add(new JLabel("Y Position: "));
+		inputPanel.add(new JLabel("Y Position: [Pixels]"));
 		inputPanel.add(yPositionField);
 		yPositionField.setText("100");
-		inputPanel.add(new JLabel("Magnitude: "));
+		inputPanel.add(new JLabel("Magnitude: [Coulombs]"));
 		inputPanel.add(magnitudeField);
-		magnitudeField.setText("100");
+		magnitudeField.setText("1E-12");
 
 		// Setup the main panel.
 		creationDialogPanel.setLayout(new BorderLayout());

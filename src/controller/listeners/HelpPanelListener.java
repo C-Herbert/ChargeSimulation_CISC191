@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import model.Charge;
+
 /**
  * HelpPanelListener is an ActionListener responsible for displaying the help
  * menu.
@@ -23,7 +25,9 @@ public class HelpPanelListener implements ActionListener
 			+ "     Charges can also be deleted by setting their magnitude to zero.\n"
 			+ " 5. Adjust the field (white) arrow layout using the arrow layout\n"
 			+ "     button on the upper toolbar.\n"
-			+ " 6. Save/Load graphs with the upper toolbar buttons.";
+			+ " 6. Save/Load graphs with the upper toolbar buttons.\n"
+			+ "\nAdditional Info:\n"
+			+ "Pixels To Meters Conversion Factor: " + Charge.CHARGE_PIXELS_TO_METERS + " pixels/m";
 
 	@Override
 	public void actionPerformed(ActionEvent e)

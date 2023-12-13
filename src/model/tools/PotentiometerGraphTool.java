@@ -65,12 +65,14 @@ public class PotentiometerGraphTool implements IGraphElement
 
 		for (Charge c : charges)
 		{
+			// Calculate the distance between the charge and the potentiometer.
 			distance = Math.sqrt(Math.pow(this.getX() - c.getX(), 2)
 					+ Math.pow(this.getY() - c.getY(), 2));
-
-			// 100pixels = 1cm
-			distance /= Math.pow(10, 4);
-
+			
+			// Use the same scaling as the charge class.
+			distance /= Charge.CHARGE_PIXELS_TO_METERS;
+			
+			// Add the voltage, per the superposition principle.
 			readVoltage += kConst * (c.getMagnitude() / distance);
 		}
 

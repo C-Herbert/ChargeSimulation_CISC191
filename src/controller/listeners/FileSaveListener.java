@@ -49,11 +49,12 @@ public class FileSaveListener extends GraphActionListener
 		if (response == JFileChooser.APPROVE_OPTION)
 		{
 			// Declare a variable to hold the file selected by the user.
-			File f = view.getFileChooser().getSelectedFile();
+			File file = view.getFileChooser().getSelectedFile();
+			
 			try
 			{
 				// Attempt to write the current graph to the file.
-				GraphIO.writeGraphToFile(f, graph);
+				GraphIO.writeGraphToFile(file, graph);
 			}
 			catch (FileNotFoundException e1)
 			{

@@ -65,7 +65,7 @@ public class ArrowView extends ElementView<Arrow2D>
 
 		for (IGraphElement c : graph.getElementsOfType(Charge.class))
 		{
-			// Sample a point 100pixels (1cm) away from the charge
+			// Sample a point 100pixels away from the charge
 			localMax = ((Charge) c).getFieldAtPoint(c.getX(), c.getY() + 100)
 					.getMagnitude();
 

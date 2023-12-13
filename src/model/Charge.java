@@ -22,6 +22,10 @@ public class Charge implements IGraphElement
 	private double magnitude;
 	// Charges have an interaction boundary
 	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
+	// Charges share a conversion factor for pixels to meters, used by various
+	// calculations.
+	// Current factor is 10^4pixels = 1m (10pixels = 1 centimeter)
+	public static final double CHARGE_PIXELS_TO_METERS = Math.pow(10, 4);
 
 	/**
 	 * Creates a new charge object with x, y, and magnitude values.
@@ -49,9 +53,15 @@ public class Charge implements IGraphElement
 	{
 		// Calculate the delta x/y between this charge and the point being
 		// considered.
-		// Use a scale of 100pixels = 1cm
-		double dX = (pointX - x) / Math.pow(10, 4);
-		double dY = (pointY - y) / Math.pow(10, 4);
+		double dX = (pointX - x) / CHARGE_PIXELS_TO_METERS;
+		double dY = (pointY - y) / CHARGE_PIXELS_TO_METERS;
+
+		if (dX == 0.0 && dY == 0.0)
+		{
+			// If there is no distance, return a unit vector as the calculation
+			// cannot be completed.
+			return new Vec2D(0, 1);
+		}
 
 		// If our magnitude is less than zero, we need to flip the direction
 		// vectors. (positive = repel, negative = attract)

@@ -20,7 +20,7 @@ public class Graph2D
 	protected int width, height;
 	// Graph2Ds have many unique graph elements
 	protected HashMap<Class<? extends IGraphElement>, List<IGraphElement>> graphElements;
-
+	
 	/**
 	 * Creates a new Graph2D with an empty element list
 	 * 
