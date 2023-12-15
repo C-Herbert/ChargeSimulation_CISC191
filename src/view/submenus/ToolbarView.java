@@ -1,4 +1,4 @@
-package view;
+package view.submenus;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -18,14 +18,26 @@ public class ToolbarView extends JPanel
 {
 	// ToolbarView is serializable, thus it needs a UID.
 	private static final long serialVersionUID = -7854610468117286834L;
-	// ToolbarView has buttons to control file io.
+
+	/**
+	 * ToolbarView has a JButton field for the button used to open the file
+	 * output menu.
+	 */
 	private JButton fileSaveButton;
+	/**
+	 * ToolbarView has a JButton field for the button used to open the file
+	 * input menu.
+	 */
 	private JButton fileOpenButton;
-
-	// ToolbarView has a button to open the arrow pattern menu.
+	/**
+	 * ToolbarView has a JButton field for the button used to open the arrow
+	 * pattern menu.
+	 */
 	private JButton arrowPatternButton;
-
-	// ToolbarView has a button to open the help menu.
+	/**
+	 * ToolbarView has a JButton field for the button used to open the help
+	 * menu.
+	 */
 	private JButton helpButton;
 
 	/**

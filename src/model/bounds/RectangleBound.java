@@ -10,8 +10,12 @@ package model.bounds;
  */
 public class RectangleBound extends Bound
 {
-	// Saving half values so bounds check doesn't have to divide each time.
-	// Dimension values are in pixels.
+	/**
+	 * RectangleBounds have a width and height.
+	 * 
+	 * The program saves half values so the bounds check doesn't have to divide
+	 * during every check. Dimension values are in pixels.
+	 */
 	protected int halfWidth, halfHeight;
 
 	/**
@@ -27,6 +31,16 @@ public class RectangleBound extends Bound
 		this.halfHeight = height / 2;
 	}
 
+	/**
+	 * Checks if a point is within the given bounds. Note that Bound does not
+	 * possess a location. Thus, the isPointInBounds function should only be
+	 * used with coordinates relative to the component possessing the bounds.
+	 * 
+	 * @param x the x position of the point to check.
+	 * @param y the y position of the point to check.
+	 * @return true if the point defined by x and y is contained within this
+	 *         bounds, false otherwise.
+	 */
 	@Override
 	public boolean isPointInBounds(double x, double y)
 	{

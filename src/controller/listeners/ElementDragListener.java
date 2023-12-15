@@ -23,19 +23,24 @@ import view.ProgramView;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public class ElementDragListener extends GraphMouseListener
 {
-	// All ElementDragListeners share a list of types that can be dragged.
+	/**
+	 * All ElementDragListeners share a list of types that can be dragged.
+	 */
 	// This array is only used to check types within this class, so I think the
 	// suppression is okay.
 	@SuppressWarnings("rawtypes")
 	private static final Class[] DRAGGABLE_TYPES = { Charge.class,
 			DraggableFieldArrow.class, PotentiometerGraphTool.class };
 
-	// ElementDragListener tracks an IGraphElement.
+	/**
+	 * ElementDragListener tracks an IGraphElement.
+	 */
 	private IGraphElement draggingElement = null;
-	// ElementDragListener has a thread for updating the element's position.
+	/**
+	 * ElementDragListener has a thread for updating the element's position.
+	 */
 	private Thread dragThread;
 
 	/**
@@ -50,12 +55,23 @@ public class ElementDragListener extends GraphMouseListener
 		super(graph, view);
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * Invoked when the mouse is pressed. Attempts to start dragging the first
+	 * IGraphElement under the mouse pointer.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
@@ -90,6 +106,12 @@ public class ElementDragListener extends GraphMouseListener
 		}
 	}
 
+	/**
+	 * Invoked when the mouse is released. Ends any current drag action and
+	 * clears the draggingElement field.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
@@ -105,23 +127,48 @@ public class ElementDragListener extends GraphMouseListener
 		draggingElement = null;
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * DragElement is an internal class of ElementDragListener for
+	 * handling the drag action execution. It is a runnable that continuously
+	 * updates the position of the draggingElement.
+	 * 
+	 * @author Charlie Herbert
+	 * @version 1.0
+	 */
 	private class DragElement implements Runnable
 	{
-		// Declare outside run to prevent repeated memory allocations.
+		/**
+		 * DragElement has a Point to keep track of the mouse's position.
+		 * Declared outside run to prevent repeated memory allocations.
+		 */
 		Point lastPoint = null;
 
+		/**
+		 * Starts the DragElement's execution. Attempts to continuously drag the
+		 * draggingElement along with the mouse.
+		 */
 		@Override
 		public void run()
 		{
@@ -156,7 +203,6 @@ public class ElementDragListener extends GraphMouseListener
 					}
 					else
 					{
-						// TODO: exception?
 						return;
 					}
 				}
@@ -177,5 +223,4 @@ public class ElementDragListener extends GraphMouseListener
 			}
 		}
 	}
-
 }

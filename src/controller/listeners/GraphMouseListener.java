@@ -15,9 +15,13 @@ import view.ProgramView;
  */
 public abstract class GraphMouseListener implements MouseListener
 {
-	// GraphActionListener has a graph.
+	/**
+	 * GraphActionListener has an associated graph field.
+	 */
 	protected ChargeGraph2D graph;
-	// GraphActionListener has a program view.
+	/**
+	 * GraphActionListener has an associated program view field.
+	 */
 	protected ProgramView view;
 
 	/**

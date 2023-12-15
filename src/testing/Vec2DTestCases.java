@@ -18,12 +18,15 @@ import utils.Vec2D;
  */
 public class Vec2DTestCases
 {
-	// Used when comparing doubles, since floating-point math isn't always
-	// perfectly precise
+	/**
+	 * Used when comparing doubles, since floating-point math isn't always
+	 * perfectly precise.
+	 */
 	private static final double DOUBLE_CALC_PRECISION = 0.0000001;
 
-	// Reference for double test cases:
-	//
+	/**
+	 * Tests the angle between unit vectors.
+	 */
 	@Test
 	public void UnitVectorTest()
 	{

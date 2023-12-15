@@ -12,13 +12,12 @@ package utils;
  * @version 1.0
  * @author Charlie Herbert
  */
-
 public class Vec2D
 {
-	// 2D Vectors have an x component
-	private double xComp;
-	// 2D Vectors have a y component
-	private double yComp;
+	/**
+	 * 2D Vectors have x and y components.
+	 */
+	private double xComp, yComp;
 
 	/**
 	 * Creates a new Vec2D using the provided component values.

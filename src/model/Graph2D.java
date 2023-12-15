@@ -16,11 +16,19 @@ import java.util.Map.Entry;
 
 public class Graph2D
 {
-	// Graph2Ds have a width and height
+	/**
+	 * Graph2Ds have a width and height. These values are only used to initalize
+	 * the size of the graph, elements can be added beyond these bounds.
+	 */
 	protected int width, height;
-	// Graph2Ds have many unique graph elements
-	protected HashMap<Class<? extends IGraphElement>, List<IGraphElement>> graphElements;
-	
+	/**
+	 * Graph2Ds have many unique graph elements. These elements are organized
+	 * into a map of lists by their types. Each key of the HashMap is dedicated
+	 * to one subclass of IGraphElement, and new keys are added as necessary by
+	 * the addElement() function.
+	 */
+	protected HashMap<Class<? extends IGraphElement>, ArrayList<IGraphElement>> graphElements;
+
 	/**
 	 * Creates a new Graph2D with an empty element list
 	 * 
@@ -129,8 +137,10 @@ public class Graph2D
 	 */
 	public List<IGraphElement> getElements()
 	{
+		// Create a new list to prevent unwanted modifications to the HashMap.
 		List<IGraphElement> totalElements = new ArrayList<IGraphElement>();
 
+		// Add all the elements to it.
 		for (List<IGraphElement> list : graphElements.values())
 		{
 			totalElements.addAll(list);
@@ -142,6 +152,7 @@ public class Graph2D
 	/**
 	 * Gets all elements contained by this graph that are of a specific type.
 	 * 
+	 * @param type The type of the elements that should be gathered.
 	 * @return A list of elements matching the type parameter that are managed
 	 *         by this graph.
 	 */
@@ -181,6 +192,7 @@ public class Graph2D
 	 */
 	public void addElements(List<IGraphElement> elements)
 	{
+		// Add all the elements in the list parameter.
 		for (IGraphElement element : elements)
 		{
 			addElement(element);
@@ -188,11 +200,12 @@ public class Graph2D
 	}
 
 	/**
-	 * Prints the elements of this graph in a readable format.
+	 * Prints the elements of this graph in a readable format. Primarily used
+	 * for debugging.
 	 */
 	public void printElements()
 	{
-		for (Entry<Class<? extends IGraphElement>, List<IGraphElement>> entry : graphElements
+		for (Entry<Class<? extends IGraphElement>, ArrayList<IGraphElement>> entry : graphElements
 				.entrySet())
 		{
 			System.out.print(

@@ -21,10 +21,14 @@ import utils.Vec2D;
  */
 public class ArrowView extends ElementView<Arrow2D>
 {
-	// Static fields for arrow images.
+	/**
+	 * ArrowView has a static field for the default arrow image.
+	 */
 	private static BufferedImage arrowImage = ProgramAssets
 			.getAsset("field_arrow");
-
+	/**
+	 * ArrowView has a static field for the draggable arrow image.
+	 */
 	private static BufferedImage draggableArrowImage = ProgramAssets
 			.getAsset("green_arrow");
 
@@ -40,9 +44,13 @@ public class ArrowView extends ElementView<Arrow2D>
 		super(graph, sortOrder);
 	}
 
+	/**
+	 * DrawElement is unused by the ArrowView class. Instead, it overrides the
+	 * default implementation of the draw function in order to calculate the
+	 * opacity to apply to each arrow.
+	 */
 	@Override
-	// Not used by this view
-	public void drawElement(Arrow2D arrow, Graphics2D graphics)
+	protected void drawElement(Arrow2D arrow, Graphics2D graphics)
 	{
 		drawArrow(arrow, graphics, 1);
 	}
@@ -113,6 +121,12 @@ public class ArrowView extends ElementView<Arrow2D>
 		}
 	}
 
+	/**
+	 * Gets the class type that can be draw by this view.
+	 * 
+	 * @return The class of the IGraphElement subclass that can be drawn by this
+	 *         view.
+	 */
 	@Override
 	public Class<Arrow2D> getDrawableType()
 	{

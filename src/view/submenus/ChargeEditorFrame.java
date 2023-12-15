@@ -19,20 +19,35 @@ import model.Charge;
  * @author Charlie Herbert
  * @version 1.0.
  */
-
 public class ChargeEditorFrame extends JFrame
 {
 	// ChargeEditorFrame is serializable, thus it needs a UID.
 	private static final long serialVersionUID = -1505621340036308990L;
 
-	// ChargeEditorFrame has a variety of Swing components for display fields to
-	// the user.
-	private JPanel creationDialogPanel = new JPanel();
-	private JPanel inputPanel = new JPanel();
+	/**
+	 * ChargeEditorFrame has a text field that allows the user to enter an x
+	 * position.
+	 */
 	private JTextField xPositionField = new JTextField(15);
+	/**
+	 * ChargeEditorFrame has a text field that allows the user to enter a y
+	 * position.
+	 */
 	private JTextField yPositionField = new JTextField(15);
+	/**
+	 * ChargeEditorFrame has a text field that allows the user to enter a
+	 * magnitude.
+	 */
 	private JTextField magnitudeField = new JTextField(15);
+	/**
+	 * ChargeEditorFrame has a JButton field that is used to cancel charge
+	 * creation.
+	 */
 	private JButton cancelButton = new JButton("Cancel");
+	/**
+	 * ChargeEditorFrame has a JButton field that is used to confirm charge
+	 * creation.
+	 */
 	private JButton confirmButton = new JButton("Confirm");
 
 	/**
@@ -43,6 +58,10 @@ public class ChargeEditorFrame extends JFrame
 	public ChargeEditorFrame(String title)
 	{
 		super(title);
+
+		// Create panels for the input fields and confirm options.
+		JPanel creationDialogPanel = new JPanel();
+		JPanel inputPanel = new JPanel();
 
 		// Setup the fields for gathering user input.
 		inputPanel.setLayout(new GridLayout(0, 2));

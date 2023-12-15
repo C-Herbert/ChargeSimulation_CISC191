@@ -3,8 +3,6 @@ package controller.listeners;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -24,7 +22,6 @@ import view.ProgramView;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public class FileSaveListener extends GraphActionListener
 {
 	/**
@@ -39,6 +36,12 @@ public class FileSaveListener extends GraphActionListener
 		super(graph, view);
 	}
 
+	/**
+	 * Invoked when an action occurs. Saves the graph to a file selected by the
+	 * user.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -50,7 +53,7 @@ public class FileSaveListener extends GraphActionListener
 		{
 			// Declare a variable to hold the file selected by the user.
 			File file = view.getFileChooser().getSelectedFile();
-			
+
 			try
 			{
 				// Attempt to write the current graph to the file.
@@ -61,11 +64,6 @@ public class FileSaveListener extends GraphActionListener
 				// User selected an invalid file, warn them.
 				JOptionPane.showMessageDialog(null, "That file doesn't exist!",
 						"Warning", JOptionPane.WARNING_MESSAGE);
-			}
-			catch (IOException e1)
-			{
-				// Misc exception, print stack trace.
-				e1.printStackTrace();
 			}
 		}
 	}

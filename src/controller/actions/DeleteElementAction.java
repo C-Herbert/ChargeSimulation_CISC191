@@ -15,7 +15,6 @@ import view.ProgramView;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 @SuppressWarnings("serial")
 public class DeleteElementAction extends GraphAction
 {
@@ -31,6 +30,12 @@ public class DeleteElementAction extends GraphAction
 		super(graph, view);
 	}
 
+	/**
+	 * Invoked when an action occurs. Attempts to delete an IGraphElement under
+	 * the mouse pointer.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{

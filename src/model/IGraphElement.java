@@ -32,11 +32,15 @@ public interface IGraphElement
 
 	/**
 	 * Sets the x position of this graph element.
+	 * 
+	 * @param newX The x value to assign to the element.
 	 */
 	void setX(double newX);
 
 	/**
-	 * Sets the x position of this graph element.
+	 * Sets the y position of this graph element.
+	 * 
+	 * @param newY The y value to assign to the element.
 	 */
 	void setY(double newY);
 

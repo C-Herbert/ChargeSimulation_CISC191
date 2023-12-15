@@ -21,7 +21,9 @@ import model.tools.PotentiometerGraphTool;
  */
 public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 {
-	// PotentiometerView has a font used for text display.
+	/**
+	 * PotentiometerView has a font used for text display.
+	 */
 	private static final Font TEXT_FONT = new Font("Helvetica", Font.PLAIN, 24);
 
 	/**
@@ -36,6 +38,11 @@ public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 		super(graph, sortOrder);
 	}
 
+	/**
+	 * Gets the subclasses of IGraphElement that can be drawn by this view
+	 * 
+	 * @return The potentiometer class.
+	 */
 	@Override
 	public Class<? extends IGraphElement> getDrawableType()
 	{
@@ -49,7 +56,7 @@ public class PotentiometerView extends ElementView<PotentiometerGraphTool>
 	 * @param graphics The Graphics2D object to use when drawing.
 	 */
 	@Override
-	public void drawElement(PotentiometerGraphTool tool, Graphics2D graphics)
+	protected void drawElement(PotentiometerGraphTool tool, Graphics2D graphics)
 	{
 		// Draw the base potentiometer image.
 		graphics.drawImage(ProgramAssets.getAsset("potentiometer"), null,

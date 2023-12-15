@@ -19,16 +19,25 @@ import model.IGraphElement;
  * @version 1.1
  * @author Charlie Herbert
  */
-
 // Generic allows subclasses to work on only specific types of graph elements
 public abstract class ElementView<T extends IGraphElement>
 {
+	/**
+	 * ElementViews have an associated graph. The view will draw any draw-able
+	 * elements, as defined by the getDrawableType() function, contained by this
+	 * graph.
+	 */
 	protected Graph2D graph;
+	/**
+	 * ElementViews have an integer sort order used to determine when the view
+	 * should be drawn during the GraphView's repaint process.
+	 */
 	protected int sortOrder;
 
 	/**
 	 * Creates a new element view with an initialized sort order.
 	 * 
+	 * @param graph     The graph to associate this view with.
 	 * @param sortOrder The sorting order of this view object.
 	 */
 	public ElementView(Graph2D graph, int sortOrder)
@@ -50,19 +59,19 @@ public abstract class ElementView<T extends IGraphElement>
 	}
 
 	/**
-	 * Checks if a type of IGraphElement can be drawn by this view.
+	 * Gets the subclasses of IGraphElement that can be drawn by this view
 	 * 
-	 * @param type Type to check.
-	 * @return true if the type can be drawn, false otherwise.
+	 * @return The class object of the type that can be drawn by this view.
 	 */
 	public abstract Class<? extends IGraphElement> getDrawableType();
 
 	/**
 	 * Draws an element using the provided graphics
 	 * 
-	 * @param graphics Graphics2D object to be used for drawing the elements
+	 * @param graphElement The element to draw.
+	 * @param graphics     Graphics2D object to be used for drawing the elements
 	 */
-	public abstract void drawElement(T graphElement, Graphics2D graphics);
+	protected abstract void drawElement(T graphElement, Graphics2D graphics);
 
 	/**
 	 * Draws all elements of this view's graph field that match getDrawableType
@@ -91,18 +100,23 @@ public abstract class ElementView<T extends IGraphElement>
 	 */
 	public ArrayList<IGraphElement> getInteractablesAtPoint(double x, double y)
 	{
+		// Declare a list to hold all interactables we find.
 		ArrayList<IGraphElement> interactables = new ArrayList<IGraphElement>();
 
+		// Iterate through all elements on the graph and find those with a
+		// boundary that contains the given point.
 		for (IGraphElement e : graph.getElementsOfType(getDrawableType()))
 		{
 			// Remember, x and y must be relative to the element itself.
 			if (e.getInteractionBounds().isPointInBounds(x - e.getX(),
 					y - e.getY()))
 			{
+				// Add the element if it contains the point.
 				interactables.add(e);
 			}
 		}
 
+		// Return the list we've compiled.
 		return interactables;
 	}
 }

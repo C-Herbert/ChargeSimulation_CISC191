@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import model.ChargeGraph2D;
+import view.submenus.ToolbarView;
+import view.submenus.ToolboxView;
 
 /**
  * The ProgramView class is responsible for managing all view components of the
@@ -26,16 +28,37 @@ import model.ChargeGraph2D;
  * @author Charlie Herbert
  * @version 1.0a
  */
-
 public class ProgramView
 {
-	// ProgramView has a frame to hold the UI
+	/**
+	 * ProgramView has a toolbox.
+	 */
+	private final ToolboxView toolbox;
+	/**
+	 * ProgramView has a toolbar.
+	 */
+	private final ToolbarView toolbar;
+	/**
+	 * ProgramView has a GraphView.
+	 */
+	private ChargeGraphView graphView;
+	/**
+	 * ProgramView has a frame to hold the UI.
+	 */
 	private JFrame mainFrame;
-	// ProgramView has a panel to hold the model display
+	/**
+	 * ProgramView has a panel to hold all of its UI elements.
+	 */
 	private JPanel mainPanel;
-	// ProgramView shares a file selector
+	/**
+	 * ProgramView shares a file selector for all of its IO functions.
+	 */
 	private JFileChooser fileChooser;
 
+	/**
+	 * Creates a new ProgramView object. Initializes all UI elements necessary
+	 * for the program, however a graph still must be assigned.
+	 */
 	public ProgramView()
 	{
 		// Initialize fields
@@ -73,9 +96,6 @@ public class ProgramView
 		return mainFrame;
 	}
 
-	// ProgramView has a toolbar
-	private ToolbarView toolbar;
-
 	/**
 	 * Gets the ToolbarView associated with this ProgramView.
 	 * 
@@ -86,9 +106,6 @@ public class ProgramView
 		return toolbar;
 	}
 
-	// ProgramView has a toolbox
-	private ToolboxView toolbox;
-
 	/**
 	 * Gets the ToolboxView associated with this ProgramView.
 	 * 
@@ -98,9 +115,6 @@ public class ProgramView
 	{
 		return toolbox;
 	}
-
-	// ProgramView has a GraphView
-	private ChargeGraphView graphView;
 
 	/**
 	 * Gets the graph view managed by this program.

@@ -16,15 +16,23 @@ import utils.Vec2D;
 
 public class Charge implements IGraphElement
 {
-	// Charges have an x and y position
+	/**
+	 * Charges have an x and y position.
+	 */
 	private double x, y;
-	// Charges have a magnitude
+	/**
+	 * Charges have a magnitude.
+	 */
 	private double magnitude;
-	// Charges have an interaction boundary
+	/**
+	 * Charges have an interaction boundary.
+	 */
 	private static final RectangleBound BOUNDS = new RectangleBound(64, 64);
-	// Charges share a conversion factor for pixels to meters, used by various
-	// calculations.
-	// Current factor is 10^4pixels = 1m (10pixels = 1 centimeter)
+	/**
+	 * Charges store their x and y position in units of pixels. To convert from
+	 * pixels to meters for calculations, this constant should be used. Current
+	 * factor is 10^4pixels = 1m (10pixels = 1 centimeter)
+	 */
 	public static final double CHARGE_PIXELS_TO_METERS = Math.pow(10, 4);
 
 	/**
@@ -115,6 +123,8 @@ public class Charge implements IGraphElement
 
 	/**
 	 * Sets the x position of this charge.
+	 * 
+	 * @param newX The x value to assign to this charge.
 	 */
 	@Override
 	public void setX(double newX)
@@ -124,6 +134,8 @@ public class Charge implements IGraphElement
 
 	/**
 	 * Sets the y position of this charge.
+	 * 
+	 * @param newY The y value to assign to this charge.
 	 */
 	@Override
 	public void setY(double newY)
@@ -133,12 +145,19 @@ public class Charge implements IGraphElement
 
 	/**
 	 * Sets the magnitude of this charge.
+	 * 
+	 * @param newMag The magnitude to assign to the charge.
 	 */
 	public void setMagnitude(double newMag)
 	{
 		this.magnitude = newMag;
 	}
 
+	/**
+	 * Gets the interaction boundary for this charge.
+	 * 
+	 * @return The Bound object that defines this element's boundaries.
+	 */
 	@Override
 	public Bound getInteractionBounds()
 	{

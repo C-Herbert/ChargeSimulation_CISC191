@@ -33,12 +33,13 @@ public final class GraphIO
 	 * data.
 	 * 
 	 * @param file The file to read, should be a text file.
-	 * @return The ChargeGraph2D that was read from the file parameter
-	 * @throws
-	 * @throws FileNotFoundException
+	 * @return The ChargeGraph2D that was read from the file parameter.
+	 * @throws GraphFileFormatException If the passed file is not a properly
+	 *                                  formatted graph file.
+	 * @throws FileNotFoundException    If the passed file does not exist.
 	 */
 	public static ChargeGraph2D readGraphFromFile(File file)
-			throws GraphFileFormatException, IOException
+			throws GraphFileFormatException, FileNotFoundException
 	{
 		// Open a new Scanner
 		try (Scanner fileInput = new Scanner(new FileInputStream(file)))
@@ -117,10 +118,10 @@ public final class GraphIO
 	 * 
 	 * @param file  The file to write data to.
 	 * @param graph The graph data to write to the file parameter.
-	 * @throws IOException
+	 * @throws FileNotFoundException If the passed file does not exist.
 	 */
 	public static void writeGraphToFile(File file, Graph2D graph)
-			throws IOException
+			throws FileNotFoundException
 	{
 		// Gather the graph's elements.
 		List<IGraphElement> elements = graph.getElements();

@@ -34,11 +34,18 @@ public class ChargeGraphView extends JPanel
 {
 	// ChargeGraphView is serializable, thus it needs a UID.
 	private static final long serialVersionUID = -540329034920186511L;
-	
-	// ChargeGraphView has a ChargeGraph2D
+
+	/**
+	 * ChargeGraphView has a ChargeGraph2D field, which is used to access the
+	 * graph's data.
+	 */
 	private ChargeGraph2D graphReference;
-	// ChargeGraphView has many ElementViews
-	private List<ElementView<?>> views;
+
+	/**
+	 * ChargeGraphView has a list of ElementViews in order to draw each type of
+	 * element on the graph.
+	 */
+	private ArrayList<ElementView<?>> views;
 
 	/**
 	 * Creates a new ChargeBoardField using the provided ChargeGraph2D object.
@@ -101,6 +108,12 @@ public class ChargeGraphView extends JPanel
 		}
 	}
 
+	/**
+	 * Draws the ChargeGraphView. See the JPanel class's paint function for more
+	 * details.
+	 * 
+	 * @param g The graphics to use for drawing this panel.
+	 */
 	@Override
 	public void paint(Graphics g)
 	{

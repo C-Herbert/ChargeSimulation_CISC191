@@ -28,10 +28,14 @@ import view.ProgramView;
  */
 public class ProgramController
 {
-	// ProgramController manages a graph
-	ChargeGraph2D programGraph;
-	// ProgramController manages a view
-	ProgramView programView;
+	/**
+	 * ProgramController manages a graph.
+	 */
+	private ChargeGraph2D programGraph;
+	/**
+	 * ProgramController manages a view.
+	 */
+	private ProgramView programView;
 
 	/**
 	 * Constructs a new ProgramController with an empty graph using the
@@ -70,7 +74,7 @@ public class ProgramController
 				new AddChargeListener(programGraph, programView));
 		programView.getToolbox().addCreateArrowListener(
 				new AddArrowListener(programGraph, programView));
-		programView.getToolbox().addPotentiometerListener(
+		programView.getToolbox().addCreatePotentiometerListener(
 				new AddPotentiometerListener(programGraph, programView));
 
 		// Add Help Listener

@@ -13,7 +13,6 @@ import view.ProgramView;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public class AddArrowListener extends GraphActionListener
 {
 	/**
@@ -27,6 +26,12 @@ public class AddArrowListener extends GraphActionListener
 		super(graph, view);
 	}
 
+	/**
+	 * Invoked when an action occurs. Adds a draggable field arrow to this
+	 * listener's graph.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{

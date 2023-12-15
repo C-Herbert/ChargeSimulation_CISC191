@@ -23,22 +23,29 @@ import javax.imageio.ImageIO;
 
 public final class ProgramAssets
 {
-	// The ProgramAssets class has a map of BufferedImage assets bound to string
-	// identifiers.
+	/**
+	 * The ProgramAssets class has a map of BufferedImage assets bound to string
+	 * identifiers.
+	 */
 	private static HashMap<String, BufferedImage> imgAssets = new HashMap<>();
 
-	// Charge Images
-	public static final String POSITIVE_CHARGE_FILEPATH = "src/assets/positive_charge.png";
-	public static final String NEGATIVE_CHARGE_FILEPATH = "src/assets/negative_charge.png";
-
-	// Arrow Images
-	public static final String ARROW_FILEPATH = "src/assets/arrow.png";
-	public static final String GREEN_ARROW_FILEPATH = "src/assets/green_arrow.png";
-
-	// Tool Images
+	/**
+	 * Filepaths used for charge images
+	 */
+	public static final String POSITIVE_CHARGE_FILEPATH = "src/assets/positive_charge.png",
+			NEGATIVE_CHARGE_FILEPATH = "src/assets/negative_charge.png";
+	/**
+	 * Filepaths used for arrow images
+	 */
+	public static final String ARROW_FILEPATH = "src/assets/arrow.png",
+			GREEN_ARROW_FILEPATH = "src/assets/green_arrow.png";
+	/**
+	 * Filepaths used for tool images
+	 */
 	public static final String POTENTIOMETER_FILEPATH = "src/assets/potentiometer.png";
-
-	// UI Images
+	/**
+	 * Filepaths used for UI images
+	 */
 	public static final String ADD_CHARGE_FILEPATH = "src/assets/add_charge_icon.png";
 
 	// Static initializer to setup asset map.

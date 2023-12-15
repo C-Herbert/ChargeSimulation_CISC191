@@ -7,7 +7,6 @@ package model.bounds;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public abstract class Bound
 {
 	/**

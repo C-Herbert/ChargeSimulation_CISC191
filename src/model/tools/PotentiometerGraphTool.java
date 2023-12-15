@@ -21,16 +21,21 @@ import model.bounds.RectangleBound;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public class PotentiometerGraphTool implements IGraphElement
 {
-	// Coulomb's constant, see references.
+	/**
+	 * Coulomb's constant, see references.
+	 */
 	private static final double kConst = 8.987552 * Math.pow(10, 9);
 
-	// Potentiometers have an x and y position.
+	/**
+	 * Potentiometers have an x and y position.
+	 */
 	protected double xPos, yPos;
 
-	// Potentiometers have an interaction boundary
+	/**
+	 * Potentiometers have an interaction boundary
+	 */
 	private static final RectangleBound BOUNDS = new OffsetRectangleBound(64,
 			64, 32, 32);
 
@@ -68,10 +73,10 @@ public class PotentiometerGraphTool implements IGraphElement
 			// Calculate the distance between the charge and the potentiometer.
 			distance = Math.sqrt(Math.pow(this.getX() - c.getX(), 2)
 					+ Math.pow(this.getY() - c.getY(), 2));
-			
+
 			// Use the same scaling as the charge class.
 			distance /= Charge.CHARGE_PIXELS_TO_METERS;
-			
+
 			// Add the voltage, per the superposition principle.
 			readVoltage += kConst * (c.getMagnitude() / distance);
 		}
@@ -79,32 +84,55 @@ public class PotentiometerGraphTool implements IGraphElement
 		return readVoltage;
 	}
 
-	// Basic implementation of functions required by IGraphElement:
-
+	/**
+	 * Gets the x position of this potentiometer.
+	 * 
+	 * @return The x position of this potentiometer.
+	 */
 	@Override
 	public double getX()
 	{
 		return xPos;
 	}
 
+	/**
+	 * Gets the y position of this potentiometer.
+	 * 
+	 * @return The y position of this potentiometer.
+	 */
 	@Override
 	public double getY()
 	{
 		return yPos;
 	}
 
+	/**
+	 * Sets the x position of this potentiometer.
+	 * 
+	 * @param newX The x position to assign to the potentiometer.
+	 */
 	@Override
 	public void setX(double newX)
 	{
 		this.xPos = newX;
 	}
 
+	/**
+	 * Sets the y position of this potentiometer.
+	 * 
+	 * @param newY The y position to assign to the potentiometer.
+	 */
 	@Override
 	public void setY(double newY)
 	{
 		this.yPos = newY;
 	}
 
+	/**
+	 * Gets the Bounds associated with this potentiometer.
+	 * 
+	 * @return The interaction Bounds of this potentiometer.
+	 */
 	@Override
 	public Bound getInteractionBounds()
 	{

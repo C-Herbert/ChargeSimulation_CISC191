@@ -18,8 +18,10 @@ import view.submenus.ChargeEditorFrame;
  */
 public class AddChargeListener extends GraphActionListener
 {
-	// AddChargeListener has a ChargeEditorFrame, which is used to gather user
-	// input.
+	/**
+	 * AddChargeListener has a ChargeEditorFrame, which is used to gather user
+	 * input.
+	 */
 	ChargeEditorFrame chargeFrame;
 
 	/**
@@ -39,6 +41,12 @@ public class AddChargeListener extends GraphActionListener
 		chargeFrame.getCancelButton().addActionListener(this);
 	}
 
+	/**
+	 * Invoked when an action occurs. Adds a charge to this listener's graph
+	 * using the inputs provided in the chargeFrame's fields.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{

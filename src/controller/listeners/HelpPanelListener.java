@@ -16,7 +16,9 @@ import model.Charge;
  */
 public class HelpPanelListener implements ActionListener
 {
-	// String that holds all the help information
+	/**
+	 * HelpPanelListener has a string that holds all the help information
+	 */
 	private static final String HELP_STRING = "How to use this program:\n"
 			+ " 1. Add elements from the toolbox on the right.\n"
 			+ " 2. Drag elements around the graph.\n"
@@ -26,9 +28,14 @@ public class HelpPanelListener implements ActionListener
 			+ " 5. Adjust the field (white) arrow layout using the arrow layout\n"
 			+ "     button on the upper toolbar.\n"
 			+ " 6. Save/Load graphs with the upper toolbar buttons.\n"
-			+ "\nAdditional Info:\n"
-			+ "Pixels To Meters Conversion Factor: " + Charge.CHARGE_PIXELS_TO_METERS + " pixels/m";
+			+ "\nAdditional Info:\n" + "Pixels To Meters Conversion Factor: "
+			+ Charge.CHARGE_PIXELS_TO_METERS + " pixels/m";
 
+	/**
+	 * Invoked when an action occurs. Displays the help string in a JOptionPane.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{

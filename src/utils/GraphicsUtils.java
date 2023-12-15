@@ -18,7 +18,6 @@ import java.awt.image.WritableRaster;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public final class GraphicsUtils
 {
 	/**

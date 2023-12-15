@@ -11,10 +11,12 @@ import model.IGraphElement;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public final class ArrowPatterns
 {
-	// Constant to represent default size of field arrows.
+	/**
+	 * ArrowPatterns has a constant to represent the default image size of field
+	 * arrows.
+	 */
 	private static final int ARROW_SIZE = 64;
 
 	/**

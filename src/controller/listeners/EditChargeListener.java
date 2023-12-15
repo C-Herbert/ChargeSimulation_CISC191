@@ -20,12 +20,19 @@ import view.submenus.ChargeEditorFrame;
  */
 public class EditChargeListener extends GraphMouseListener
 {
-	// ChargeEditListeners have a frame for collecting input.
+	/**
+	 * ChargeEditListeners have a frame for collecting input.
+	 */
 	private ChargeEditorFrame inputFrame = new ChargeEditorFrame(
 			"Edit Charge Info");
-	// ChargeEditListeners have an EditorInputListener for collecting input.
+	/**
+	 * ChargeEditListeners have an EditorInputListener for collecting input.
+	 */
 	private EditorInputListener inputListener = new EditorInputListener();
-
+	/**
+	 * EditChargeListeners have a targeted charge that they perform edit
+	 * operations on.
+	 */
 	private Charge targetedElement;
 
 	/**
@@ -43,6 +50,12 @@ public class EditChargeListener extends GraphMouseListener
 		inputFrame.getCancelButton().addActionListener(inputListener);
 	}
 
+	/**
+	 * Invoked when the mouse is clicked. Attempts to edit the first charge
+	 * under the mouse pointer.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
@@ -72,24 +85,44 @@ public class EditChargeListener extends GraphMouseListener
 		inputFrame.setVisible(false);
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{
 		// Unused by this listener.
 	}
 
+	/**
+	 * Unused by this listener
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void mouseExited(MouseEvent e)
 	{
@@ -97,10 +130,15 @@ public class EditChargeListener extends GraphMouseListener
 	}
 
 	/**
-	 * Internal class for handling inputs on the editor frame.
+	 * EditorInputListener is an internal class of EditChargeListener for
+	 * handling inputs on the editor frame.
+	 * 
+	 * @author Charlie Herbert
+	 * @version 1.0
 	 */
 	private class EditorInputListener implements ActionListener
 	{
+
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{

@@ -9,7 +9,6 @@ import utils.Vec2D;
  * @version 1.0
  * @author Charlie Herbert
  */
-
 public class ChargeGraph2D extends Graph2D
 {
 	/**

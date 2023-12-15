@@ -11,14 +11,15 @@ import utils.Vec2D;
  * @version 1.0
  * @author Charlie Herbert
  */
-
 public class Arrow2D extends Vec2D implements IGraphElement
 {
-	// Arrows have an x position
-	private double xPos;
-	// Arrows have a y position
-	private double yPos;
-	// Arrows have a RectangleBound for user interaction.
+	/**
+	 * Arrows have an x and y position
+	 */
+	private double xPos, yPos;
+	/**
+	 * Arrows have a RectangleBound for user interaction.
+	 */
 	private static final RectangleBound ARROW_BOUNDS = new RectangleBound(64,
 			64);
 
@@ -58,7 +59,7 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	/**
 	 * Gets the x position of this arrow.
 	 * 
-	 * @return x position of this arrow.
+	 * @return The x position of this arrow.
 	 */
 	@Override
 	public double getX()
@@ -69,7 +70,7 @@ public class Arrow2D extends Vec2D implements IGraphElement
 	/**
 	 * Gets the y position of this arrow.
 	 * 
-	 * @return y position of this arrow.
+	 * @return The y position of this arrow.
 	 */
 	@Override
 	public double getY()
@@ -79,6 +80,8 @@ public class Arrow2D extends Vec2D implements IGraphElement
 
 	/**
 	 * Sets the x position of this arrow.
+	 * 
+	 * @param newX the x position to assign to this arrow.
 	 */
 	@Override
 	public void setX(double newX)
@@ -88,6 +91,8 @@ public class Arrow2D extends Vec2D implements IGraphElement
 
 	/**
 	 * Sets the y position of this arrow.
+	 * 
+	 * @param newY the y position to assign to this arrow.
 	 */
 	@Override
 	public void setY(double newY)
@@ -95,6 +100,11 @@ public class Arrow2D extends Vec2D implements IGraphElement
 		this.yPos = newY;
 	}
 
+	/**
+	 * Gets the Bounds associated with this arrow.
+	 * 
+	 * @return The interaction Bounds of this arrow.
+	 */
 	@Override
 	public Bound getInteractionBounds()
 	{

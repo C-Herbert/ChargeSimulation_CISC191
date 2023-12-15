@@ -1,4 +1,4 @@
-package view;
+package view.submenus;
 
 import java.awt.event.ActionListener;
 
@@ -13,7 +13,8 @@ import assets.ProgramAssets;
 
 /**
  * ToolboxView is a subclass of JPanel used by the program view to display
- * various IGraphElement creation options to the user.
+ * various IGraphElement creation options to the user. It is used as the
+ * vertical, right-side panel of the program.
  * 
  * References:
  * 1. “A Visual Guide to Layout Managers.” Oracle Java Documentation,
@@ -26,18 +27,26 @@ import assets.ProgramAssets;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 public class ToolboxView extends JPanel
 {
 	// ToolboxView is serializable, thus it needs a UID.
 	private static final long serialVersionUID = -8444689130484954000L;
 
-	// Element Buttons
+	/**
+	 * ToolboxView has a JButton field for the button used to open the charge
+	 * creation menu.
+	 */
 	private JButton createChargeButton = new JButton("Add Charge");
+	/**
+	 * ToolboxView has a JButton field for the button used to add an arrow to
+	 * the graph.
+	 */
 	private JButton createArrowButton = new JButton("Add Arrow");
-
-	// Tool Buttons
-	private JButton potentiometerButton = new JButton("Potentiometer");
+	/**
+	 * ToolboxView has a JButton field for the button used to add a
+	 * potentiometer to the graph.
+	 */
+	private JButton createPotentiometerButton = new JButton("Potentiometer");
 
 	/**
 	 * Creates a new ToolboxView and sets up all of its menu components.
@@ -54,42 +63,43 @@ public class ToolboxView extends JPanel
 				new ImageIcon(ProgramAssets.getAsset("add_charge_icon")));
 		createArrowButton
 				.setIcon(new ImageIcon(ProgramAssets.getAsset("green_arrow")));
-		potentiometerButton.setIcon(
+		createPotentiometerButton.setIcon(
 				new ImageIcon(ProgramAssets.getAsset("potentiometer")));
 
 		this.add(headerLabel);
 		this.add(createChargeButton);
 		this.add(createArrowButton);
-		this.add(potentiometerButton);
+		this.add(createPotentiometerButton);
 	}
 
 	/**
 	 * Adds an action listener to this view's associated create charge button.
 	 * 
-	 * @param l The listener to add.
+	 * @param listener The listener to add.
 	 */
-	public void addCreateChargeListener(ActionListener l)
+	public void addCreateChargeListener(ActionListener listener)
 	{
-		createChargeButton.addActionListener(l);
+		createChargeButton.addActionListener(listener);
 	}
 
 	/**
 	 * Adds an action listener to this view's associated create arrow button.
 	 * 
-	 * @param l The listener to add.
+	 * @param listener The listener to add.
 	 */
-	public void addCreateArrowListener(ActionListener l)
+	public void addCreateArrowListener(ActionListener listener)
 	{
-		createArrowButton.addActionListener(l);
+		createArrowButton.addActionListener(listener);
 	}
 
 	/**
-	 * Adds an action listener to this view's associated potentiometer button.
+	 * Adds an action listener to this view's associated create potentiometer
+	 * button.
 	 * 
-	 * @param l The listener to add.
+	 * @param listener The listener to add.
 	 */
-	public void addPotentiometerListener(ActionListener l)
+	public void addCreatePotentiometerListener(ActionListener listener)
 	{
-		potentiometerButton.addActionListener(l);
+		createPotentiometerButton.addActionListener(listener);
 	}
 }

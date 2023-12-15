@@ -15,10 +15,14 @@ import model.Graph2D;
  */
 public class ChargeView extends ElementView<Charge>
 {
-	// Static field for positive charge image.
+	/**
+	 * ChargeView has a static field for the positive charge image.
+	 */
 	private static BufferedImage positiveChargeImage = ProgramAssets
 			.getAsset("positive_charge");
-	// Static field for positive charge image.
+	/**
+	 * ChargeView has a static field for the negative charge image.
+	 */
 	private static BufferedImage negativeChargeImage = ProgramAssets
 			.getAsset("negative_charge");
 
@@ -34,8 +38,14 @@ public class ChargeView extends ElementView<Charge>
 		super(graph, sortOrder);
 	}
 
+	/**
+	 * Draws a charge using the provided graphics
+	 * 
+	 * @param charge   The charge to draw.
+	 * @param graphics Graphics2D object to be used for drawing the elements
+	 */
 	@Override
-	public void drawElement(Charge charge, Graphics2D g)
+	protected void drawElement(Charge charge, Graphics2D g)
 	{
 		// Select the correct image for the charge's magnitude
 		BufferedImage baseImage = charge.getMagnitude() < 0
@@ -51,6 +61,11 @@ public class ChargeView extends ElementView<Charge>
 		g.drawImage(baseImage, null, xCenter, yCenter);
 	}
 
+	/**
+	 * Gets the subclasses of IGraphElement that can be drawn by this view
+	 * 
+	 * @return The class object of the type that can be drawn by this view.
+	 */
 	@Override
 	public Class<Charge> getDrawableType()
 	{

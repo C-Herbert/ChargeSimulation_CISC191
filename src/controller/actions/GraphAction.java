@@ -19,13 +19,18 @@ import view.ProgramView;
  * @author Charlie Herbert
  * @version 1.0
  */
-
 @SuppressWarnings("serial")
 public abstract class GraphAction extends AbstractAction
 {
-	// GraphActions have an associated graph.
+	/**
+	 * GraphActions have an associated graph field for manipulating the graph's
+	 * data.
+	 */
 	protected ChargeGraph2D graph;
-	// GraphActions have an associated view.
+
+	/**
+	 * GraphActions have an associated view field used to update the view.
+	 */
 	protected ProgramView view;
 
 	/**

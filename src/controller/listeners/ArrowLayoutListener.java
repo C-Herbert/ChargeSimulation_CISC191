@@ -82,6 +82,14 @@ public class ArrowLayoutListener extends GraphActionListener
 		inputFrame.pack();
 	}
 
+	/**
+	 * Invoked when an action occurs. Manages all the inputs for the arrow
+	 * layout panel. If the event was triggered by the rectangular or circular
+	 * pattern buttons, the appropriate arrow pattern is created on the graph.
+	 * If caused by any other JComponent, the event simply opens the menu.
+	 * 
+	 * @param e The event that prompted this listener.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
